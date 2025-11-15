@@ -1490,11 +1490,11 @@ PrefabInstance:
       objectReference: {fileID: 3675547366417981206}
     - target: {fileID: 3341744920248509682, guid: fb58f1ff45d472548a0515469319c644, type: 3}
       propertyPath: overworldLocation.x
-      value: 20
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 3341744920248509682, guid: fb58f1ff45d472548a0515469319c644, type: 3}
       propertyPath: overworldLocation.y
-      value: 10
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6964211479948795051, guid: fb58f1ff45d472548a0515469319c644, type: 3}
       propertyPath: m_Size.x
