@@ -80,7 +80,16 @@ public class OverworldCameraController : MonoBehaviour
 
     void Start()
     {
-        transform.position = ClampToBounds(transform.position, cam.orthographicSize);
+        var index = OverworldData.Instance.inprogressLevelIndex;
+        var prefabIndex = RegionManager.Instance.regionPrefabs.FindIndex(i => i.levelID == index);
+        if (prefabIndex >= 0 && prefabIndex < RegionManager.Instance.regionPrefabs.Count)
+        {
+            Vector2 loc = RegionManager.Instance.regionPrefabs[prefabIndex].regionPrefab.GetComponent<Region>().overworldLocation;
+            transform.position = ClampToBounds(loc, cam.orthographicSize);
+        } else
+        {
+            transform.position = ClampToBounds(transform.position, cam.orthographicSize);
+        }
     }
 
     void OnEnable()

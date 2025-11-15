@@ -20,13 +20,16 @@ public class RegionManager : MonoBehaviour
     public Dictionary<int, LevelProgression> stepLevelProgression = new();
 
     public List<int> unlockedRegionIndex = new();
-    //public int currentRegionIndex = 0;
-    public float revealDelay = 0.01f;
     private bool isReady = false;
     public float cameraLockOnDuration = 4.0f;
     public float cameraStayDuration = 2.0f;
     public float targetZoom;
     public float defaultZoom;
+
+    [Header("Reveal Settings")]
+    public float revealDelay = 0.01f;        // (old per-tile delay, you can ignore or remove)
+    public float maxDropDuration = 1.5f;     // total time for a region to finish dropping
+
 
     private async void Awake()
     {
@@ -121,9 +124,10 @@ public class RegionManager : MonoBehaviour
     private void DropRegion(LevelProgression region, bool instant = false)
     {
         if (region.regionPrefab == null) return;
+
         // Instantiate prefab temporarily
         Region tempRegion = Instantiate(region.regionPrefab, new Vector3(0, 100000.0f, 0), Quaternion.identity).GetComponent<Region>();
-        
+
         Tilemap regionMap = tempRegion.mainTilemap;
 
         if (!regionMap)
@@ -135,6 +139,7 @@ public class RegionManager : MonoBehaviour
         foreach (Transform t in tempRegion.levelContainer)
         {
             t.SetParent(null, false);
+            t.GetComponent<OverworldLevelController>().regionIndex = region.levelID;
             t.position += new Vector3(tempRegion.overworldLocation.x, tempRegion.overworldLocation.y);
             print(t);
         }
@@ -150,19 +155,25 @@ public class RegionManager : MonoBehaviour
             cells.Add((pos + new Vector3Int(tempRegion.overworldLocation.x, tempRegion.overworldLocation.y, 0), tile));
         }
 
-
         // Drop the tiles onto the main map with stagger
-        float delay = revealDelay;
-        if (instant)
+        if (instant || cells.Count == 0)
         {
             dropAnimator.PlaceTilesInstant(cells);
-        } else
+        }
+        else
         {
-            dropAnimator.PlaceTilesWithDropStagger(cells, delay);
+            // Make total reveal time ~ maxDropDuration, regardless of size
+            float perTileDelay = maxDropDuration / cells.Count;
+
+            // Optional: clamp to avoid insanely small/large delays
+            // perTileDelay = Mathf.Clamp(perTileDelay, 0.001f, 0.05f);
+
+            dropAnimator.PlaceTilesWithDropStagger(cells, perTileDelay);
         }
 
         Destroy(tempRegion.gameObject);
     }
+
 }
 
 [System.Serializable]

@@ -19,6 +19,7 @@ public class OverworldLevelController : MonoBehaviour
     public Level level;
     public bool unlockRegionUponCompletion = false;
     public List<int> unlockRegionIndex = new();
+    public int regionIndex = 0;
 
     private void Awake()
     {
@@ -101,6 +102,7 @@ public class OverworldLevelController : MonoBehaviour
         }
 
         GameMatchManager.SetLevel(level, unlockRegionUponCompletion, unlockRegionIndex);
+        OverworldData.Instance.inprogressLevelIndex = regionIndex;
         SceneTransitor.Instance.TransitionTo("Game Scene");
     }
 }

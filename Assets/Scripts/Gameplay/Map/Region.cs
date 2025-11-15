@@ -8,4 +8,12 @@ public class Region : MonoBehaviour
     public Vector2Int overworldLocation;
 
     public Transform levelContainer;
+
+    private void Initialize(int id)
+    {
+        foreach (Transform t in levelContainer)
+        {
+            t.GetComponent<OverworldLevelController>().regionIndex = id;
+        }
+    }
 }

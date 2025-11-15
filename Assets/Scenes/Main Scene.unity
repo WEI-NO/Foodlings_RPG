@@ -2931,7 +2931,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: -0.000061035156, y: 0}
-  m_SizeDelta: {x: 100, y: 484}
+  m_SizeDelta: {x: 0, y: 484}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &465626625
 MonoBehaviour:
@@ -123128,11 +123128,12 @@ MonoBehaviour:
   - regionPrefab: {fileID: 268822878049262605, guid: 6eac7d4cf10d3c74c8223d0a0dcd7009, type: 3}
     levelID: 4
   unlockedRegionIndex: 
-  revealDelay: 0.04
   cameraLockOnDuration: 2
   cameraStayDuration: 0.5
   targetZoom: 10
   defaultZoom: 6
+  revealDelay: 0.04
+  maxDropDuration: 1.5
 --- !u!114 &1297876542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124924,7 +124925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1518057375
 MonoBehaviour:
   m_ObjectHideFlags: 0
