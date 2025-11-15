@@ -145,17 +145,20 @@ public class OverworldCameraController : MonoBehaviour
         if (Input.GetKey(KeyCode.S)) moveDir.y -= 1f;
         if (Input.GetKey(KeyCode.A)) moveDir.x -= 1f;
         if (Input.GetKey(KeyCode.D)) moveDir.x += 1f;
-
-        if (IsPointerOverUI()) return; // <-- block WASD, drag/edge pan when pointer is over UI
-        // Mouse edge pan
-        if (enableMouseEdgeMovement)
+        
+        if (!IsPointerOverUI())
         {
-            Vector3 m = Input.mousePosition;
-            if (m.y >= Screen.height - edgeThreshold) moveDir.y += 1f;
-            if (m.y <= edgeThreshold) moveDir.y -= 1f;
-            if (m.x >= Screen.width - edgeThreshold) moveDir.x += 1f;
-            if (m.x <= edgeThreshold) moveDir.x -= 1f;
+            // Mouse edge pan
+            if (enableMouseEdgeMovement)
+            {
+                Vector3 m = Input.mousePosition;
+                if (m.y >= Screen.height - edgeThreshold) moveDir.y += 1f;
+                if (m.y <= edgeThreshold) moveDir.y -= 1f;
+                if (m.x >= Screen.width - edgeThreshold) moveDir.x += 1f;
+                if (m.x <= edgeThreshold) moveDir.x -= 1f;
+            }
         }
+
 
         if (moveDir != Vector3.zero)
         {
