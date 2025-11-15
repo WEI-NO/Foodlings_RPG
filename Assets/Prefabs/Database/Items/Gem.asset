@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0341f9085928764e9932f59bb489dd1, type: 3}
+  m_Name: Gem
+  m_EditorClassIdentifier: 
+  id: gem
+  displayName: Gem
+  icon: {fileID: 2033455349, guid: 201964c67ef9e5c4497a245fd9ff2cd2, type: 3}
+  maxStack: 999999
+  description: Premium currency used to summon foodlings
+  category: 0
+  noStackLimit: 1

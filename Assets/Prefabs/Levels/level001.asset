@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66d83d99d6ce48409c5586474f279dc, type: 3}
+  m_Name: level001
+  m_EditorClassIdentifier: 
+  charactersInLevel:
+  - tiny_chef
+  characterData: []
+  waves:
+  - startSeconds: 0
+    duration: 100
+    single: 0
+    characterIndex: 0
+    repeater: 1
+    spawnOnStart: 0
+    interval: 5
+    timePassed: 0
+  unstartedWaves: []
+  inprogressWaves: []
+  LevelName: Forest I
+  timePassed: 0
+  ready: 0
+  firstClearRewards:
+  - rewardID: toast_coin
+    quantity: 500
+    useQuantityRange: 0
+    quantityRange: {x: 0, y: 0}
+    rolled: 0
+  - rewardID: gem
+    quantity: 20
+    useQuantityRange: 0
+    quantityRange: {x: 0, y: 0}
+    rolled: 0
+  clearRewards:
+  - rewardID: toast_coin
+    quantity: 100
+    useQuantityRange: 0
+    quantityRange: {x: 0, y: 0}
+    rolled: 0

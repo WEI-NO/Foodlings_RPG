@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: FriendlyCharacter
+  m_EditorClassIdentifier: 
+  m_GroupName: FriendlyCharacter
+  m_GUID: 7aa9b335700ec9e4f8feb297c6a57ff1
+  m_SerializeEntries:
+  - m_GUID: bafa508b39cee21498148bdc3d040222
+    m_Address: Assets/Prefabs/Character Datas/TinyChef_Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Characters
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd9b47a4daedde6458da5271126838a7
+    m_Address: Assets/Prefabs/Character Datas/Toast_Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Characters
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 64f796676b94eab4c837885594b4b962, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 97fa0f8b7111a794cb1586aae74da9c8, type: 2}
+    - {fileID: 11400000, guid: 3a3b297dbc705db41bbed0a5b8021182, type: 2}

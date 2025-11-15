@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed6717b7e9704642b97b0e19427db40, type: 3}
+  m_Name: Upgrade_MaxMoneyCap
+  m_EditorClassIdentifier: 
+  id: maxmoneycap
+  Type: 0
+  Title: Bank Upgrade
+  Description: Increases the maximum amount of money during a round.
+  MaxLevel: 100
+  CostCurve:
+    type: 0
+    useNormalized: 0
+    baseValue: 50
+    scale: 25
+    exponent: 2
+    growth: 1.08
+    stepEvery: 5
+    stepAmount: 1
+    steepness: 10
+    midpoint: 0.5
+  ValueCurve:
+    type: 3
+    useNormalized: 0
+    baseValue: 0
+    scale: 1
+    exponent: 1
+    growth: 1.1
+    stepEvery: 1
+    stepAmount: 10
+    steepness: 10
+    midpoint: 0.5
