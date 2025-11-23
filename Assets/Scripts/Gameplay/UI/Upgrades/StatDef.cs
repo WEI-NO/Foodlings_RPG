@@ -2,7 +2,7 @@ using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 
-public enum StatType { MaxMoneyCap, MoneyIncomeRate, CharCooldown, CharCost }
+public enum BattleStatType { MaxMoneyCap, MoneyIncomeRate, CharCooldown, CharCost }
 
 
 [CreateAssetMenu(menuName = "Game/Stat")]
@@ -13,7 +13,7 @@ public class StatsDef : ScriptableObject
 
     public string Title;
     [TextArea] public string Description;
-    public StatType Type;
+    public BattleStatType Type;
 
     public float baseValue;
     public bool useInteger = false;

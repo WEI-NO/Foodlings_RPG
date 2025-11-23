@@ -14,62 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: toast
   displayName: Toast
-  rarity: 0
+  baseRank: 0
   faction: 0
-  summonCost: 30
+  summonCost: 1
   cooldownSec: 0.25
-  hp: 50
-  damage: 100
+  healthPoint: 100
+  physicalDamage: 10
+  magicDamage: 10
   attackRate: 1
-  moveSpeed: 150
+  moveSpeed: 200
   range: 0.5
+  physicalDefense: 1.5
+  magicDefense: 1.5
+  hpGrowth: 0.8
+  hpGrowthSteepness: 1.35
+  atkGrowth: 0.8
+  atkGrowthSteepness: 1.35
+  defGrowth: 0.8
+  defGrowthSteepness: 1.35
   unitPrefab: {fileID: 8283804360114963105, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
   unitSprite: {fileID: 21300000, guid: 1a860f95c58aa0f4182fcc5f78baee43, type: 3}
-  hpGrowth:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  attackGrowth:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  maxLevel: 100

@@ -8,7 +8,7 @@ public class UpgradeDef : ScriptableObject
     [SerializeField] private string id;    // MUST be unique & never change
     public string Id => id;
 
-    public StatType Type;
+    public BattleStatType Type;
     public string Title;
     [TextArea] public string Description;
 

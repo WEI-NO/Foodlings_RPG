@@ -74,10 +74,10 @@ public class CharacterUpgradePage : BaseUIPage
             characterIconImage.rectTransform.sizeDelta = SpriteExtra.DynamicDimension(data.unitSprite, characterIconSize);
 
             nameText.text = data.displayName;
-            healthPointText.text = $"{data.hp}";
-            attackText.text = $"{data.damage}";
+            healthPointText.text = $"{data.healthPoint}";
+            attackText.text = $"{data.physicalDamage}";
             attackSpeedText.text = $"{data.attackRate}";
-            defenseText.text = $"{data.defense}";
+            defenseText.text = $"{data.physicalDefense}";
             movementSpeedText.text = $"{data.moveSpeed}";
 
             equippedIcon.SetActive(displayedCharacter.inPartyIndex != -1);

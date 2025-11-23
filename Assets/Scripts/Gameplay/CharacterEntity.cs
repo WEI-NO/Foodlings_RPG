@@ -78,7 +78,7 @@ public class CharacterEntity : BaseEntity
 
     private void InitializeEntity()
     {
-        MaxHealth = characterData.hp;
+        MaxHealth = characterData.healthPoint;
         ResetHealth();
 
         attackCooldownTimer = 0.0f;
@@ -183,12 +183,12 @@ public class CharacterEntity : BaseEntity
         {
             if (targettingTower && targettedTower != null && towerInRange)
             {
-                targettedTower.Damage(characterData.damage);
+                targettedTower.Damage(characterData.physicalDamage);
                 Instantiate(hitEffect, (Vector2)targettedTower.transform.position + RandomOffset(), Quaternion.identity);
             }
         } else
         {
-            attackTarget.Damage(characterData.damage);
+            attackTarget.Damage(characterData.physicalDamage);
             Instantiate(hitEffect, (Vector2)attackTarget.transform.position + RandomOffset(), Quaternion.identity);
         }
     }

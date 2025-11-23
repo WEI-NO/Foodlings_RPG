@@ -11,7 +11,7 @@ public class CharacterDatabase : MonoBehaviour
 
     // Runtime indexes
     private readonly Dictionary<string, CharacterData> byId = new();
-    private readonly Dictionary<UnitRarity, List<CharacterData>> byRarity = new();
+    private readonly Dictionary<UnitRank, List<CharacterData>> byRarity = new();
     private readonly Dictionary<Faction, List<CharacterData>> byFaction = new();
 
     [Header("Addressables")]
@@ -59,8 +59,8 @@ public class CharacterDatabase : MonoBehaviour
 
             byId[u.id] = u;
 
-            if (!byRarity.TryGetValue(u.rarity, out var listR))
-                byRarity[u.rarity] = listR = new List<CharacterData>();
+            if (!byRarity.TryGetValue(u.baseRank, out var listR))
+                byRarity[u.baseRank] = listR = new List<CharacterData>();
             listR.Add(u);
 
             if (!byFaction.TryGetValue(u.faction, out var listF))
@@ -75,7 +75,7 @@ public class CharacterDatabase : MonoBehaviour
     public CharacterData GetById(string id) => byId.TryGetValue(id, out var u) ? u : null;
 
     // Fast queries
-    public IReadOnlyList<CharacterData> GetByRarity(UnitRarity r) =>
+    public IReadOnlyList<CharacterData> GetByRarity(UnitRank r) =>
         byRarity.TryGetValue(r, out var list) ? list : System.Array.Empty<CharacterData>();
 
     public IReadOnlyList<CharacterData> GetByFaction(Faction f) =>

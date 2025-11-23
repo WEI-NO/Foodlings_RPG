@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using UnityEngine;
 
@@ -18,6 +18,8 @@ public class CharacterInstance
     public Action<CharacterInstance, int> OnLevelUp;
     public Action<CharacterInstance, int> OnExpChange;
 
+    public UnitRank rank;
+
     public static int defaultExpGiven = 100;
 
     public bool ResetCharacter(CharacterData character)
@@ -34,6 +36,7 @@ public class CharacterInstance
         accumulatedExp = 0;
         favorited = false;
         inPartyIndex = -1;
+        rank = character.baseRank;
         return true;
     }
 
@@ -41,23 +44,47 @@ public class CharacterInstance
     public EquipmentInstance[] equipment = new EquipmentInstance[3];
 
     // ---- Derived stats (base * growth * gear, etc.) ----
-    public float HP =>
-        (baseData?.GetHP(level) ?? 0f) + EquipHP();
-
-    public float Damage =>
-        (baseData?.GetDamage(level) ?? 0f) + EquipDamage();
-
-    public float AttackRate =>
-        Mathf.Max(0.0001f, (baseData?.attackRate ?? 1f) * EquipAttackRateMul());
-
-    public float AttackCooldown => 1f / AttackRate;
+    public float GetStat(CharacterStatType type)
+    {
+        float r = baseData.GetRawStat(type, level);
+        switch (type)
+        {
+            case CharacterStatType.HP:
+                return r + EquipHP();
+            case CharacterStatType.PAtk:
+                return r + EquipPDamage();
+            case CharacterStatType.MAtk:
+                return r + EquipMDamage();
+            case CharacterStatType.PDef:
+                return r + EquipPDefense();
+            case CharacterStatType.MDef:
+                return r + EquipMDefense();
+            case CharacterStatType.AtkSpe:
+                return r * EquipAttackRateMul();
+            case CharacterStatType.Spe:
+                return r * EquipSpeedMul();
+            case CharacterStatType.CD:
+                return r * EquipCooldownReduction();
+            default:
+                return r;
+        }
+    }
 
     // ---- Example gear hooks (stub out or integrate your system) ----
     private float EquipHP() => equipment.Where(e => e != null).Sum(e => e.FlatHP);
-    private float EquipDamage() => equipment.Where(e => e != null).Sum(e => e.FlatDMG);
+    private float EquipPDamage() => equipment.Where(e => e != null).Sum(e => e.FlatPAtk);
+    private float EquipPDefense() => equipment.Where(e => e != null).Sum(e => e.FlatPDef);
+    private float EquipMDamage() => equipment.Where(e => e != null).Sum(e => e.FlatMAtk);
+    private float EquipMDefense() => equipment.Where(e => e != null).Sum(e => e.FlatMDef);
+    private float EquipSpeedMul()
+        => equipment.Where(e => e != null)
+                    .Aggregate(1f, (acc, e) => acc * (1f + e.SpeedMul));
+    private float EquipCooldownReduction()
+        => equipment.Where(e => e != null)
+                    .Aggregate(1f, (acc, e) => acc * (1f - e.CdReduction));
     private float EquipAttackRateMul()
-        => equipment.Where(e => e != null).Aggregate(1f, (acc, e) => acc * (1f + e.AttackRatePct));
-
+        => equipment.Where(e => e != null)
+                    .Aggregate(1f, (acc, e) => acc * (1f + e.AttackRateMul));
     public void GiveExp(int addExp)
     {
         if (addExp <= 0 || baseData == null) return;
@@ -132,6 +159,11 @@ public class EquipmentInstance
     public string equipId;
     public int level;
     public float FlatHP;
-    public float FlatDMG;
-    public float AttackRatePct; // e.g., 0.10 = +10%
+    public float FlatPAtk;
+    public float FlatMAtk;
+    public float FlatPDef;
+    public float FlatMDef;
+    public float SpeedMul;
+    public float CdReduction;
+    public float AttackRateMul; // e.g., 0.10 = +10%
 }
