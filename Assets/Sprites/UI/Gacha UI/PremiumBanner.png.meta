@@ -109,12 +109,12 @@ TextureImporter:
       name: PremiumBanner_0
       rect:
         serializedVersion: 2
-        x: 31
+        x: 30
         y: 143
-        width: 194
+        width: 196
         height: 98
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -127,55 +127,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: PremiumBanner_1
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 95
-        width: 66
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2dc087b035ec6a0a0800000000000000
-      internalID: -6870577325437088558
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PremiumBanner_2
-      rect:
-        serializedVersion: 2
-        x: 111
-        y: 95
-        width: 66
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 40d09f68cfcd07370800000000000000
-      internalID: 8318391488907644164
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1528b433c3717274db8576004449d2d2
     internalID: 0
     vertices: []
     indices: 

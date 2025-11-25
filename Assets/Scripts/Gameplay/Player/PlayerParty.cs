@@ -10,6 +10,7 @@ public class PlayerParty : MonoBehaviour
     public static int MaxCharacterInParty = 5;
 
     public List<string> Party = new List<string>();
+    public List<CharacterInstance> PartyInstance = new List<CharacterInstance>();
     public Task PreloadTask { get; private set; } = Task.CompletedTask;
     public Action<CharacterInstance, int> OnPartyChange;
 

@@ -92,8 +92,8 @@ public class CharacterUpgradePage : BaseUIPage
         if (instance == null) return;
 
         levelText.text = $"Lvl. {instance.level}";
-        expText.text = $"{instance.exp}/{instance.GetExpRequired()}";
-        expFillbar.fillAmount = (float)instance.exp / instance.GetExpRequired();
+        if (expText != null) expText.text = $"{instance.exp}/{instance.GetExpRequired()}";
+        if (expFillbar != null) expFillbar.fillAmount = (float)instance.exp / instance.GetExpRequired();
     }
 
     #region Fusion
@@ -143,6 +143,7 @@ public class CharacterUpgradePage : BaseUIPage
 
     private void ClearFusionSelection()
     {
+        if (fusionContent == null) return;
         for (int i = fusionContent.childCount - 1; i >= 0; i--)
         {
             var t = fusionContent.GetChild(i);

@@ -16,14 +16,14 @@ MonoBehaviour:
   displayName: Toast
   baseRank: 0
   faction: 0
-  summonCost: 1
-  cooldownSec: 0.25
+  summonCost: 30
+  cooldownSec: 3
   healthPoint: 100
   physicalDamage: 10
   magicDamage: 10
   attackRate: 1
-  moveSpeed: 200
-  range: 0.5
+  moveSpeed: 20
+  attackRange: 0.5
   physicalDefense: 1.5
   magicDefense: 1.5
   hpGrowth: 0.8

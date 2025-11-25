@@ -14,62 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: tiny_chef
   displayName: Tiny Chef
-  rarity: 0
+  baseRank: 0
   faction: 0
   summonCost: 150
   cooldownSec: 1
-  hp: 100
-  damage: 5
+  healthPoint: 75
+  physicalDamage: 5
+  magicDamage: 10
   attackRate: 2
   moveSpeed: 50
-  range: 0.5
+  attackRange: 0.45
+  physicalDefense: 1.5
+  magicDefense: 1.5
+  hpGrowth: 0.8
+  hpGrowthSteepness: 1.35
+  atkGrowth: 0.8
+  atkGrowthSteepness: 1.35
+  defGrowth: 0.8
+  defGrowthSteepness: 1.35
   unitPrefab: {fileID: 8283804360114963105, guid: 004e3e9aeee63734e9861f09278b7c8b, type: 3}
   unitSprite: {fileID: 21300000, guid: c65d19742d93bb04184aef34df1908c5, type: 3}
-  hpGrowth:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  attackGrowth:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  maxLevel: 30

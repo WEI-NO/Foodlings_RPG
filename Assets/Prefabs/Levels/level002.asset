@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactersInLevel:
   - tiny_chef
+  characterLevels: 01000000
   characterData: []
   waves:
   - startSeconds: 0
@@ -26,6 +27,23 @@ MonoBehaviour:
     timePassed: 0
   unstartedWaves: []
   inprogressWaves: []
-  LevelName: Forest II
+  LevelName: Forest Grove II
   timePassed: 0
   ready: 0
+  firstClearRewards:
+  - rewardID: toast_coin
+    quantity: 1250
+    useQuantityRange: 0
+    quantityRange: {x: 0, y: 0}
+    rolled: 0
+  - rewardID: gem
+    quantity: 30
+    useQuantityRange: 0
+    quantityRange: {x: 0, y: 0}
+    rolled: 0
+  clearRewards:
+  - rewardID: toast_coin
+    quantity: 400
+    useQuantityRange: 0
+    quantityRange: {x: 0, y: 0}
+    rolled: 0

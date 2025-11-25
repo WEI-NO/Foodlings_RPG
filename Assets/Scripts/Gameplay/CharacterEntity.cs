@@ -25,7 +25,7 @@ public class CharacterEntity : BaseEntity
 {
     private Animator anim;
 
-    public CharacterData characterData;
+    public CharacterInstance characterInstance;
     public Team team;
 
     [Header("Movement Settings")]
@@ -69,7 +69,7 @@ public class CharacterEntity : BaseEntity
         if (!rb) return;
         if (state == CharacterState.Advancing)
         {
-            rb.linearVelocityX = Time.fixedDeltaTime * characterData.moveSpeed * ((team == Team.Friendly) ? 1 : -1);
+            rb.linearVelocityX = Time.fixedDeltaTime * characterInstance.GetStat(CharacterStatType.Spe) * ((team == Team.Friendly) ? 1 : -1);
         } else
         {
             rb.linearVelocityX = 0;
@@ -78,7 +78,7 @@ public class CharacterEntity : BaseEntity
 
     private void InitializeEntity()
     {
-        MaxHealth = characterData.healthPoint;
+        MaxHealth = characterInstance.GetStat(CharacterStatType.HP);
         ResetHealth();
 
         attackCooldownTimer = 0.0f;
@@ -117,7 +117,7 @@ public class CharacterEntity : BaseEntity
             if (targettedTower != null)
             {
                 var distToTower = Mathf.Abs(targettedTower.GetXPosition() - transform.position.x);
-                if (distToTower <= characterData.range)
+                if (distToTower <= characterInstance.GetStat(CharacterStatType.AtkRng))
                 {
                     towerInRange = true;
                     SwitchState(CharacterState.Attacking);
@@ -141,7 +141,7 @@ public class CharacterEntity : BaseEntity
         towerInRange = false;
         var distance = Mathf.Abs(transform.position.x - enemy.transform.position.x);
 
-        if (distance <= characterData.range)
+        if (distance <= characterInstance.GetStat(CharacterStatType.AtkRng))
         {
             SwitchState(CharacterState.Attacking);
             attackTarget = enemy;
@@ -155,6 +155,11 @@ public class CharacterEntity : BaseEntity
     public void SetTeam(Team t)
     {
         this.team = t;
+    }
+
+    public void SetCharacterInstance(CharacterInstance instance)
+    {
+        characterInstance = instance;
     }
 
     private void AutoFlip()
@@ -172,7 +177,8 @@ public class CharacterEntity : BaseEntity
             if (attackCooldownTimer <= 0)
             {
                 anim.SetTrigger("Attack");
-                attackCooldownTimer = characterData.AttackCooldown();
+                //anim.SetFloat("AttackSpeed", characterInstance.GetStat(CharacterStatType.AtkSpe));
+                attackCooldownTimer = 1 / characterInstance.GetStat(CharacterStatType.AtkSpe);
             }
         }
     }
@@ -183,12 +189,12 @@ public class CharacterEntity : BaseEntity
         {
             if (targettingTower && targettedTower != null && towerInRange)
             {
-                targettedTower.Damage(characterData.physicalDamage);
+                targettedTower.Damage(characterInstance.GetStat(CharacterStatType.PAtk));
                 Instantiate(hitEffect, (Vector2)targettedTower.transform.position + RandomOffset(), Quaternion.identity);
             }
         } else
         {
-            attackTarget.Damage(characterData.physicalDamage);
+            attackTarget.Damage(characterInstance.GetStat(CharacterStatType.PAtk));
             Instantiate(hitEffect, (Vector2)attackTarget.transform.position + RandomOffset(), Quaternion.identity);
         }
     }

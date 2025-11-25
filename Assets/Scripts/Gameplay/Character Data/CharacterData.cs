@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public enum UnitRank { UnderCooked, HomeCooked, WellCooked, ChefCooked, PremiumCooked}
+public enum UnitRank { UnderCooked, HomeCooked, WellCooked, ChefCooked, PremiumCooked, Count}
 public enum Faction { Fruit, Veggie, Utensil, Breakfast }
 
-public enum CharacterStatType { HP, PAtk, MAtk, PDef, MDef, AtkSpe, Spe, CD }
+public enum CharacterStatType { HP, PAtk, MAtk, PDef, MDef, AtkRng, AtkSpe, Spe, CD }
 
 [CreateAssetMenu(menuName = "DB/Unit Data")]
 public class CharacterData : ScriptableObject
@@ -26,7 +26,7 @@ public class CharacterData : ScriptableObject
     public float magicDamage = 10f;
     public float attackRate = 1.0f;  // attacks per second at level 1
     public float moveSpeed = 3.5f;
-    public float range = 1.5f;
+    public float attackRange = 1.5f;
     public float physicalDefense = 1.5f;
     public float magicDefense = 1.5f;
 
@@ -72,6 +72,8 @@ public class CharacterData : ScriptableObject
                 return PolynomialCurve(magicDefense, defGrowth, defGrowthSteepness, level);
             case CharacterStatType.AtkSpe:
                 return attackRate;
+            case CharacterStatType.AtkRng:
+                return attackRange;
             case CharacterStatType.Spe:
                 return moveSpeed;
             case CharacterStatType.CD:

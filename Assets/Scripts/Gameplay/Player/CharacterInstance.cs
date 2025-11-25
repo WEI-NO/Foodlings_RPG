@@ -59,6 +59,8 @@ public class CharacterInstance
                 return r + EquipPDefense();
             case CharacterStatType.MDef:
                 return r + EquipMDefense();
+            case CharacterStatType.AtkRng:
+                return r * EquipRangeMul();
             case CharacterStatType.AtkSpe:
                 return r * EquipAttackRateMul();
             case CharacterStatType.Spe:
@@ -79,12 +81,21 @@ public class CharacterInstance
     private float EquipSpeedMul()
         => equipment.Where(e => e != null)
                     .Aggregate(1f, (acc, e) => acc * (1f + e.SpeedMul));
+    private float EquipRangeMul()
+        => equipment.Where(e => e != null)
+                    .Aggregate(1f, (acc, e) => acc * (1f + e.RangeMul));
     private float EquipCooldownReduction()
         => equipment.Where(e => e != null)
                     .Aggregate(1f, (acc, e) => acc * (1f - e.CdReduction));
     private float EquipAttackRateMul()
         => equipment.Where(e => e != null)
                     .Aggregate(1f, (acc, e) => acc * (1f + e.AttackRateMul));
+    
+    public void SetLevel(int level)
+    {
+        this.level = level;
+        OnLevelUp?.Invoke(this, level);
+    }
     public void GiveExp(int addExp)
     {
         if (addExp <= 0 || baseData == null) return;
@@ -164,6 +175,7 @@ public class EquipmentInstance
     public float FlatPDef;
     public float FlatMDef;
     public float SpeedMul;
+    public float RangeMul;
     public float CdReduction;
     public float AttackRateMul; // e.g., 0.10 = +10%
 }

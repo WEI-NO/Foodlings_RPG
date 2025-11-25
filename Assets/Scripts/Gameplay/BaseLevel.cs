@@ -7,7 +7,8 @@ using UnityEngine;
 public class Level : ScriptableObject
 {
     public List<string> charactersInLevel = new();
-    public List<CharacterData> characterData = new();
+    public List<int> characterLevels = new();
+    public List<CharacterInstance> characterData = new();
     public List<Wave> waves = new();
 
     public List<Wave> unstartedWaves = new();
@@ -35,15 +36,22 @@ public class Level : ScriptableObject
         }
 
         // Load Prefabs for characters
+        int i = 0;
         foreach (var id in charactersInLevel)
         {
             var data = CharacterDatabase.Instance.GetById(id);
             if (data == null)
             {
                 Debug.LogWarning($"Character: {id} not found");
+                i++;       
                 continue;
             }
-            characterData.Add(data);
+
+            CharacterInstance newInstance = new CharacterInstance();
+            newInstance.ResetCharacter(data);
+            newInstance.SetLevel(characterLevels[i]);
+            characterData.Add(newInstance);
+            i++;
         }
 
         ready = true;
@@ -74,11 +82,12 @@ public class Level : ScriptableObject
                 {
                     // Spawn For Enemy
                     Debug.Log("Spawning");
-                    var spawnedActor = Instantiate(characterData[wave.characterIndex].unitPrefab);
+                    var spawnedActor = Instantiate(characterData[wave.characterIndex].baseData.unitPrefab);
                     spawnedActor.transform.position = MapController.Instance.spawnedEnemyBase.GetSpawnPoint();
                     Debug.Log(MapController.Instance.spawnedEnemyBase.GetSpawnPoint());
                     var entity = spawnedActor.GetComponent<CharacterEntity>();
                     entity.SetTeam(Team.Hostile);
+                    entity.SetCharacterInstance(characterData[wave.characterIndex]);
                     CharacterContainer.Instance.RegisterUnit(entity);
                 }
             }

@@ -119,6 +119,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &162550219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 162550220}
+  - component: {fileID: 162550221}
+  m_Layer: 0
+  m_Name: Gacha System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &162550220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162550219}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1866280470}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &162550221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162550219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b49eaa72984bf41b0c554156690967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicPool: {fileID: 11400000, guid: bd69fd7d8110f65448a2e5a83138eafb, type: 2}
+  premiumPool: {fileID: 11400000, guid: 385b6ab6ea048a24abf32326451003f4, type: 2}
+  pulledCurrency: gem
+  currencyUsage: 960000002c010000
 --- !u!1 &404634253
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +460,7 @@ MonoBehaviour:
   defaultAddItem:
   - toast_coin
   - gem
-  defaultAddItemQuantity: e8030000c8000000
+  defaultAddItemQuantity: a0860100a0860100
 --- !u!1 &1424977754
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,6 +734,7 @@ Transform:
   - {fileID: 1129459529}
   - {fileID: 1424977755}
   - {fileID: 1227699927}
+  - {fileID: 162550220}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1866280471

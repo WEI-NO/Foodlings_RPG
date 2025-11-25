@@ -18,8 +18,8 @@ public class SummonButton : MonoBehaviour
 
 
     [Header("Summon Settings")]
-    public CharacterData assignedUnit;
-    private CharacterData lastAssignedUnit;
+    public CharacterInstance assignedUnit;
+    private CharacterInstance lastAssignedUnit;
 
     [Header("Cooldown")]
     public float cooldownTimer = 0.0f;
@@ -44,7 +44,7 @@ public class SummonButton : MonoBehaviour
 
         if (assignedUnit != null)
         {
-            if (GameMatchManager.Instance.HasMoney(assignedUnit.summonCost))
+            if (GameMatchManager.Instance.HasMoney(assignedUnit.baseData.summonCost))
             {
                 costText.color = AffordableColor;
             } else
@@ -65,22 +65,21 @@ public class SummonButton : MonoBehaviour
 
     public void AssignUnit(CharacterInstance unit)
     {
-
-        assignedUnit = unit == null ? null : unit.baseData;
+        assignedUnit = unit;
     }
 
     private void UpdateDisplay()
     {
-        bool state = assignedUnit != null;
+        bool state = assignedUnit != null && assignedUnit.baseData != null;
 
         buttonSprite.sprite = state ? enabledSprite : disabledSprite;
 
-        troopIcon.sprite = state ? assignedUnit.unitSprite : null;
+        troopIcon.sprite = state ? assignedUnit.baseData.unitSprite : null;
         troopIcon.gameObject.SetActive(state);
 
         if (state)
         {
-            costText.text = $"${assignedUnit.summonCost}";
+            costText.text = $"${assignedUnit.baseData.summonCost}";
         } else
         {
             costText.text = "";
@@ -95,21 +94,22 @@ public class SummonButton : MonoBehaviour
 
         if (cooldownTimer > 0) return;
 
-        if (!GameMatchManager.Instance.UseMoney(assignedUnit.summonCost))
+        if (!GameMatchManager.Instance.UseMoney(assignedUnit.baseData.summonCost))
         {
             return;
         }
 
-        var spawnedActor = Instantiate(assignedUnit.unitPrefab);
+        var spawnedActor = Instantiate(assignedUnit.baseData.unitPrefab);
         if (spawnedActor == null) return;
 
 
         spawnedActor.transform.position = MapController.Instance.spawnedPlayerBase.GetSpawnPoint();
         var entity = spawnedActor.GetComponent<CharacterEntity>();
         entity.SetTeam(Team.Friendly);
+        entity.SetCharacterInstance(assignedUnit);
         CharacterContainer.Instance.RegisterUnit(entity);
 
-        var cooldown = entity.characterData.cooldownSec;
+        var cooldown = entity.characterInstance.GetStat(CharacterStatType.CD);
         button.interactable = false;
         anim.SetFloat("CooldownMultiplier", 1.0f / cooldown);
         cooldownTimer = cooldown;
