@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: maxmoneycap
   Type: 0
-  Title: Bank Upgrade
+  Title: Saving Recipe
   Description: Increases the maximum amount of money during a round.
   MaxLevel: 100
   CostCurve:

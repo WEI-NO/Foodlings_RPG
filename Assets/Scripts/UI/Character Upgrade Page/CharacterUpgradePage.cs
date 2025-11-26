@@ -1,11 +1,8 @@
 using CustomLibrary.References;
 using CustomLibrary.SpriteExtra;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,24 +21,34 @@ public class CharacterUpgradePage : BaseUIPage
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI healthPointText;
-    public TextMeshProUGUI attackText;
+    public TextMeshProUGUI pAttackText;
+    public TextMeshProUGUI mAttackText;
     public TextMeshProUGUI attackSpeedText;
-    public TextMeshProUGUI defenseText;
+    public TextMeshProUGUI attackRangeText;
+    public TextMeshProUGUI pDefenseText;
+    public TextMeshProUGUI mDefenseText;
     public TextMeshProUGUI movementSpeedText;
+    public TextMeshProUGUI summonCost;
+    public TextMeshProUGUI summonCD;
     public GameObject equippedIcon;
     public TextMeshProUGUI fusionCostText;
 
     [Header("Fusion Settings")]
     public Transform fusionContent;
+    public int fusionCost = 0;
     public FuzeCharacterDisplay fuzeDisplayPrefab;
     public List<FuzeCharacterDisplay> displays;
-    public GameObject fusionEmptyIndicator;
     public List<CharacterInstance> selectedFusingUnit = new();
     public Action<CharacterInstance, bool> OnFusionChange;
+
+    [Header("Extra Settings")]
+    public CharacterDisplayFunction[] allFunctions = null;
 
     protected override void OnAwake()
     {
         Initializer.SetInstance(this);
+        allFunctions = GetComponentsInChildren<CharacterDisplayFunction>();
+        UpdateFusionCost();
     }
 
     protected override void OnStart()
@@ -51,6 +58,10 @@ public class CharacterUpgradePage : BaseUIPage
 
     protected override void OnContentEnabled()
     {
+        foreach (var func in allFunctions)
+        {
+            func.active = false;
+        }
         ClearFusionSelection();
     }
 
@@ -74,11 +85,16 @@ public class CharacterUpgradePage : BaseUIPage
             characterIconImage.rectTransform.sizeDelta = SpriteExtra.DynamicDimension(data.unitSprite, characterIconSize);
 
             nameText.text = data.displayName;
-            healthPointText.text = $"{data.healthPoint}";
-            attackText.text = $"{data.physicalDamage}";
-            attackSpeedText.text = $"{data.attackRate}";
-            defenseText.text = $"{data.physicalDefense}";
-            movementSpeedText.text = $"{data.moveSpeed}";
+            healthPointText.text = $"{displayedCharacter.GetStat(CharacterStatType.HP)}";
+            pAttackText.text = $"{displayedCharacter.GetStat(CharacterStatType.PAtk)}";
+            mAttackText.text = $"{displayedCharacter.GetStat(CharacterStatType.MAtk)}";
+            attackSpeedText.text = $"{displayedCharacter.GetStat(CharacterStatType.AtkSpe)}";
+            attackRangeText.text = $"{displayedCharacter.GetStat(CharacterStatType.AtkRng)}";
+            pDefenseText.text = $"{displayedCharacter.GetStat(CharacterStatType.PDef)}";
+            mDefenseText.text = $"{displayedCharacter.GetStat(CharacterStatType.MDef)}";
+            movementSpeedText.text = $"{displayedCharacter.GetStat(CharacterStatType.Spe)}";
+            summonCost.text = $"{data.summonCost}";
+            summonCD.text = $"{displayedCharacter.GetStat(CharacterStatType.CD)}";
 
             equippedIcon.SetActive(displayedCharacter.inPartyIndex != -1);
 
@@ -101,7 +117,6 @@ public class CharacterUpgradePage : BaseUIPage
     public void OnFusionSelectionChange(CharacterInstance instance, bool added)
     {
         bool notEmpty = selectedFusingUnit.Count > 0;
-        fusionEmptyIndicator.SetActive(!notEmpty);
 
         if (instance == null) return;
 
@@ -144,7 +159,7 @@ public class CharacterUpgradePage : BaseUIPage
     private void ClearFusionSelection()
     {
         if (fusionContent == null) return;
-        for (int i = fusionContent.childCount - 1; i >= 0; i--)
+        for (int i = fusionContent.childCount - 1; i > 0; i--)
         {
             var t = fusionContent.GetChild(i);
             if (t != null)
@@ -153,7 +168,7 @@ public class CharacterUpgradePage : BaseUIPage
             }
         }
         selectedFusingUnit = new();
-        fusionEmptyIndicator.SetActive(false);
+        UpdateFusionCost();
     }
 
     public bool IsDisplayedCharacter(CharacterInstance other)
@@ -170,20 +185,36 @@ public class CharacterUpgradePage : BaseUIPage
     {
         if (selectedFusingUnit.Count == 0) return;
 
+        if (!PlayerInventory.HasItem("toast_coin", fusionCost))
+        {
+            return;
+        }
+
         int exp = CalculatePendingExp();
         displayedCharacter.GiveExp(exp);
 
         foreach (var i in selectedFusingUnit)
         {
             PlayerCollection.Instance.RemoveCharacter(i.instanceId);
+            OnFusionChange?.Invoke(i, false);
         }
 
+        ShowCharacter();
         ClearFusionSelection();
     }
 
     private void UpdateFusionCost()
     {
-        fusionCostText.text = $"{CalculatePendingExp()}";
+        if (fusionCostText)
+        {
+            int totalCost = 0;
+            foreach (var i in selectedFusingUnit)
+            {
+                totalCost += CharacterData.FusionCost(i);
+            }
+            fusionCostText.text = $"{totalCost}";
+            fusionCost = totalCost;
+        }
     }
 
     public int CalculatePendingExp()

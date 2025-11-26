@@ -14,19 +14,96 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactersInLevel:
   - tiny_chef
-  characterLevels: 01000000
+  characterLevels: 03000000
   characterData: []
   waves:
-  - startSeconds: 0
-    duration: 100
+  - startSeconds: 3
     single: 0
+    burst: 1
+    burstAmount: 3
+    burstDelay: 0.25
+    characterIndex: 0
+    repeater: 0
+    spawnOnStart: 0
+    interval: 0
+    duration: 0
+    abort: 0
+    timePassed: 0
+  - startSeconds: 20
+    single: 0
+    burst: 1
+    burstAmount: 3
+    burstDelay: 0.25
+    characterIndex: 0
+    repeater: 0
+    spawnOnStart: 0
+    interval: 0
+    duration: 0
+    abort: 0
+    timePassed: 0
+  - startSeconds: 37
+    single: 0
+    burst: 1
+    burstAmount: 3
+    burstDelay: 0.25
+    characterIndex: 0
+    repeater: 0
+    spawnOnStart: 0
+    interval: 0
+    duration: 0
+    abort: 0
+    timePassed: 0
+  - startSeconds: 47
+    single: 0
+    burst: 1
+    burstAmount: 3
+    burstDelay: 0.25
+    characterIndex: 0
+    repeater: 0
+    spawnOnStart: 0
+    interval: 0
+    duration: 0
+    abort: 0
+    timePassed: 0
+  - startSeconds: 50
+    single: 0
+    burst: 0
+    burstAmount: 3
+    burstDelay: 0.25
     characterIndex: 0
     repeater: 1
     spawnOnStart: 0
     interval: 2
+    duration: 20
+    abort: 0
+    timePassed: 0
+  - startSeconds: 80
+    single: 0
+    burst: 0
+    burstAmount: 3
+    burstDelay: 0.25
+    characterIndex: 0
+    repeater: 1
+    spawnOnStart: 0
+    interval: 3
+    duration: 5
+    abort: 0
+    timePassed: 0
+  - startSeconds: 90
+    single: 0
+    burst: 0
+    burstAmount: 3
+    burstDelay: 0.25
+    characterIndex: 0
+    repeater: 1
+    spawnOnStart: 0
+    interval: 4
+    duration: 1000
+    abort: 0
     timePassed: 0
   unstartedWaves: []
   inprogressWaves: []
+  initialDelay: 5
   LevelName: Forest Grove II
   timePassed: 0
   ready: 0

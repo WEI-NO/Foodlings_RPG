@@ -50,26 +50,35 @@ public class CharacterInstance
         switch (type)
         {
             case CharacterStatType.HP:
-                return r + EquipHP();
+                r += EquipHP();
+                break;
             case CharacterStatType.PAtk:
-                return r + EquipPDamage();
+                r += EquipPDamage();
+                break;
             case CharacterStatType.MAtk:
-                return r + EquipMDamage();
+                r += EquipMDamage();
+                break;
             case CharacterStatType.PDef:
-                return r + EquipPDefense();
+                 r += EquipPDefense();
+                break;
             case CharacterStatType.MDef:
-                return r + EquipMDefense();
+                r += EquipMDefense();
+                break;
             case CharacterStatType.AtkRng:
-                return r * EquipRangeMul();
+                r *= EquipRangeMul();
+                break;
             case CharacterStatType.AtkSpe:
-                return r * EquipAttackRateMul();
+                r *= EquipAttackRateMul();
+                break;
             case CharacterStatType.Spe:
-                return r * EquipSpeedMul();
+                r *= EquipSpeedMul();
+                break;
             case CharacterStatType.CD:
-                return r * EquipCooldownReduction();
-            default:
-                return r;
+                r *= EquipCooldownReduction();
+                break;
         }
+        r = Mathf.Round(r * 10f) / 10f;
+        return r;
     }
 
     // ---- Example gear hooks (stub out or integrate your system) ----

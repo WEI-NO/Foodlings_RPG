@@ -12,6 +12,13 @@ public class SummonPanel : MonoBehaviour
     [Header("Components")]
     [SerializeField] public List<SummonButton> summonButtons = new();
 
+    public List<CharacterData> overrideSummonCharacter = new();
+    public List<int> overrideSummonCharacterLevel = new();
+
+    private List<CharacterInstance> temporaryCharacterInstance = new();
+
+    public bool overrideCharacters = false;
+
     private async void Start()
     {
         party = PlayerParty.Instance;
@@ -39,6 +46,26 @@ public class SummonPanel : MonoBehaviour
 
     private void Update()
     {
-        
+        if (overrideCharacters)
+        {
+            for (int i = summonButtons.Count - 1; i >= 0; i--)
+            {
+                summonButtons[i].AssignUnit(null);
+            }
+
+            temporaryCharacterInstance.Clear();
+
+            for (int i = 0; i < overrideSummonCharacter.Count; i++)
+            {
+                CharacterInstance instance = new CharacterInstance();
+                instance.ResetCharacter(overrideSummonCharacter[i]);
+                instance.SetLevel(overrideSummonCharacterLevel[i]);
+                temporaryCharacterInstance.Add(instance);
+                summonButtons[i].AssignUnit(instance);
+            }
+
+
+            overrideCharacters = false;
+        }
     }
 }

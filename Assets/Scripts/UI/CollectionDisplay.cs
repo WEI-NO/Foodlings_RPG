@@ -75,7 +75,8 @@ public class CollectionDisplay : MonoBehaviour
 
         if (displays.TryGetValue(instance.instanceId, out var display))
         {
-            Destroy(display.gameObject);
+            if (display != null)
+                Destroy(display.gameObject);
             displays.Remove(instance.instanceId);
         }
     }

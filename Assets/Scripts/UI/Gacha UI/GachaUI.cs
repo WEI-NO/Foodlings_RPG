@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GachaUI : BaseUIPage
 {
+    
     public CharacterObtainUIPage obtainUI;
 
     public void PullBasic_Single()
@@ -26,6 +27,9 @@ public class GachaUI : BaseUIPage
 
     private void PerformPull(GachaType type, int amount)
     {
+        int cost = GachaSystem.Instance.GetCost(type, amount);
+        if (!PlayerInventory.UseItem(GachaSystem.Instance.pulledCurrency, cost)) return;
+
         if (GachaSystem.Instance.RollCharacters(type, amount, out var datas))
         {
             foreach (var character in datas)

@@ -22,7 +22,7 @@ public class Tower : BaseEntity
     {
         var healthPercentage = CurrentHealth / MaxHealth;
 
-        healthText.text = $"{CurrentHealth} / {MaxHealth}";
+        healthText.text = $"{CurrentHealth:F0} / {MaxHealth}";
         healthFillBar.fillAmount = healthPercentage;
     }
 

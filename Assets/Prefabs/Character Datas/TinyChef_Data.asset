@@ -12,11 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a18723090138840a7bd8758bd9dea5, type: 3}
   m_Name: TinyChef_Data
   m_EditorClassIdentifier: 
+  debug_ShowMaxLevelStats: 1
+  debug_HP: 1162.5
+  debug_PAtk: 77.5
+  debug_MAtk: 155
+  debug_PDef: 23.25
+  debug_MDef: 23.25
+  debug_AtkRng: 0.45
+  debug_AtkSpe: 2
+  debug_Spe: 50
+  debug_CD: 1
   id: tiny_chef
   displayName: Tiny Chef
-  baseRank: 0
+  baseRank: 1
   faction: 0
-  summonCost: 150
+  summonCost: 75
   cooldownSec: 1
   healthPoint: 75
   physicalDamage: 5
@@ -26,12 +36,11 @@ MonoBehaviour:
   attackRange: 0.45
   physicalDefense: 1.5
   magicDefense: 1.5
-  hpGrowth: 0.8
-  hpGrowthSteepness: 1.35
-  atkGrowth: 0.8
-  atkGrowthSteepness: 1.35
-  defGrowth: 0.8
-  defGrowthSteepness: 1.35
+  growth: 1
+  growthSteepness: 0.5
+  knockbackDuration: 1.25
+  healthThreshold:
+  - 0.5
   unitPrefab: {fileID: 8283804360114963105, guid: 004e3e9aeee63734e9861f09278b7c8b, type: 3}
   unitSprite: {fileID: 21300000, guid: c65d19742d93bb04184aef34df1908c5, type: 3}
   maxLevel: 30

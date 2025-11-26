@@ -15948,6 +15948,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level Container
       objectReference: {fileID: 0}
+    - target: {fileID: 7893636967069508385, guid: fb58f1ff45d472548a0515469319c644, type: 3}
+      propertyPath: unlockRegionIndex.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7893636967069508385, guid: fb58f1ff45d472548a0515469319c644, type: 3}
+      propertyPath: 'unlockRegionIndex.Array.data[0]'
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8370974075203710877, guid: fb58f1ff45d472548a0515469319c644, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

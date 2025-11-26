@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.VisualScripting.FullSerializer;
@@ -14,9 +15,12 @@ public class Level : ScriptableObject
     public List<Wave> unstartedWaves = new();
     public List<Wave> inprogressWaves = new();
 
+    public float initialDelay = 5.0f;
+
     [Header("Level Settings")]
     public string LevelName;
     [SerializeField] private float timePassed;
+    
 
     public bool ready = false;
 
@@ -61,41 +65,45 @@ public class Level : ScriptableObject
     {
         if (!ready) return;
 
-        // Unstarted Waves
-        for (int i = unstartedWaves.Count - 1; i >= 0; i--)
+        if (timePassed >= initialDelay)
         {
-            var wave = unstartedWaves[i];
-            if (wave.startSeconds <= timePassed)
+            // Unstarted Waves
+            for (int i = unstartedWaves.Count - 1; i >= 0; i--)
             {
-                inprogressWaves.Add(wave);
-                unstartedWaves.RemoveAt(i);
+                var wave = unstartedWaves[i];
+                if (wave.startSeconds <= timePassed)
+                {
+                    inprogressWaves.Add(wave);
+                    unstartedWaves.RemoveAt(i);
+                }
+            }
+
+            // Inprogress Waves
+            for (int i = inprogressWaves.Count - 1; i >= 0; i--)
+            {
+                var wave = inprogressWaves[i];
+                if (wave.UpdateWave(dt))
+                {
+                    if (wave.characterIndex < characterData.Count)
+                    {
+                        // Spawn For Enemy
+                        Debug.Log("Spawning");
+                        var spawnedActor = Instantiate(characterData[wave.characterIndex].baseData.unitPrefab);
+                        spawnedActor.transform.position = MapController.Instance.spawnedEnemyBase.GetSpawnPoint();
+                        Debug.Log(MapController.Instance.spawnedEnemyBase.GetSpawnPoint());
+                        var entity = spawnedActor.GetComponent<CharacterEntity>();
+                        entity.SetTeam(Team.Hostile);
+                        entity.SetCharacterInstance(characterData[wave.characterIndex]);
+                        CharacterContainer.Instance.RegisterUnit(entity);
+                    }
+                }
+                if (wave.abort)
+                {
+                    inprogressWaves.RemoveAt(i);
+                }
             }
         }
 
-        // Inprogress Waves
-        for (int i = inprogressWaves.Count - 1; i >= 0 ; i--)
-        {
-            var wave = inprogressWaves[i];
-            if (wave.UpdateWave(dt))
-            {
-                if (wave.characterIndex < characterData.Count)
-                {
-                    // Spawn For Enemy
-                    Debug.Log("Spawning");
-                    var spawnedActor = Instantiate(characterData[wave.characterIndex].baseData.unitPrefab);
-                    spawnedActor.transform.position = MapController.Instance.spawnedEnemyBase.GetSpawnPoint();
-                    Debug.Log(MapController.Instance.spawnedEnemyBase.GetSpawnPoint());
-                    var entity = spawnedActor.GetComponent<CharacterEntity>();
-                    entity.SetTeam(Team.Hostile);
-                    entity.SetCharacterInstance(characterData[wave.characterIndex]);
-                    CharacterContainer.Instance.RegisterUnit(entity);
-                }
-            }
-            if (wave.startSeconds + wave.duration <= timePassed)
-            {
-                inprogressWaves.RemoveAt(i);
-            }
-        }
         timePassed += dt;
     }
 
@@ -107,8 +115,12 @@ public class Wave
 {
     [Header("Timeline Settings")]
     public float startSeconds;
-    public float duration;
     public bool single = false;
+
+    [Header("Burst Settings")]
+    public bool burst = false;
+    public int burstAmount = 2;
+    public float burstDelay = 0.5f;
 
     [Header("Spawn Settings")]
     public int characterIndex;
@@ -117,34 +129,90 @@ public class Wave
     public bool repeater = false;
     public bool spawnOnStart = true;
     public float interval = 5;
+    public float duration;
+
+    public bool abort = false;
+
     private int spawnedSoFar = 0;
 
     public float timePassed;
     
     public bool UpdateWave(float dt)
     {
+        if (abort) return false;
+        if (single)
+        {
+            return SingleUpdate(dt);
+        }
+
+        if (burst)
+        {
+            return BurstUpdate(dt);
+        }
+
         if (repeater)
         {
-            if (timePassed == 0 && spawnOnStart)
-            {
-                return true;
-            } else {
-                float threshold = (spawnedSoFar + 1) * interval;
-                if (timePassed >= threshold)
-                {
-                    spawnedSoFar++;
-                    return true;
-                }
-            }
-        } else
+            return RepeaterUpdate(dt);
+        }
+
+        timePassed += dt;
+        return false;
+    }
+
+    private bool SingleUpdate(float dt)
+    {
+        abort = true;
+        timePassed += dt;
+        return true;
+    }
+
+    private bool RepeaterUpdate(float dt)
+    {
+        if (timePassed >= duration)
         {
-            if (single)
+            abort = true;
+            return false;
+        }
+
+        if (timePassed == 0 && spawnOnStart)
+        {
+            timePassed += dt;
+            return true;
+        }
+        else
+        {
+            float threshold = (spawnedSoFar + 1) * interval;
+            if (timePassed >= threshold)
             {
+                timePassed += dt;
+                spawnedSoFar++;
                 return true;
             }
         }
+        timePassed += dt;
+        return false;
+    }
 
+    private bool BurstUpdate(float dt)
+    {
+        float threshold = (spawnedSoFar + 1) * burstDelay;
+
+        if (burstAmount <= spawnedSoFar)
+        {
+            abort = true;
             timePassed += dt;
+            return false;
+        }
+        
+        if (timePassed >= threshold)
+        {
+            timePassed += dt;
+            spawnedSoFar++;
+            return true;
+        }
+
+
+        timePassed += dt;
         return false;
     }
 

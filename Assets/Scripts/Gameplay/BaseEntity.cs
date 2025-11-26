@@ -17,12 +17,18 @@ public class BaseEntity : MonoBehaviour
     public void Damage(float damage)
     {
         CurrentHealth -= damage;
+        OnDamage_Internal(damage);
 
         if (CurrentHealth  <= 0)
         {
             OnDeath_Internal();
             CurrentHealth = 0;
         }
+    }
+
+    protected virtual void OnDamage_Internal(float damage)
+    {
+
     }
 
     protected void OnDeath_Internal()

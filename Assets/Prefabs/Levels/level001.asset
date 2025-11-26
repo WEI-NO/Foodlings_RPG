@@ -18,15 +18,56 @@ MonoBehaviour:
   characterData: []
   waves:
   - startSeconds: 0
-    duration: 100
     single: 0
+    burst: 0
+    burstAmount: 2
+    burstDelay: 0.5
+    characterIndex: 0
+    repeater: 1
+    spawnOnStart: 0
+    interval: 8
+    duration: 30
+    abort: 0
+    timePassed: 0
+  - startSeconds: 40
+    single: 0
+    burst: 0
+    burstAmount: 2
+    burstDelay: 0.5
+    characterIndex: 0
+    repeater: 1
+    spawnOnStart: 0
+    interval: 7
+    duration: 30
+    abort: 0
+    timePassed: 0
+  - startSeconds: 80
+    single: 0
+    burst: 0
+    burstAmount: 2
+    burstDelay: 0.5
     characterIndex: 0
     repeater: 1
     spawnOnStart: 0
     interval: 5
+    duration: 120
+    abort: 0
+    timePassed: 0
+  - startSeconds: 200
+    single: 0
+    burst: 0
+    burstAmount: 2
+    burstDelay: 0.5
+    characterIndex: 0
+    repeater: 1
+    spawnOnStart: 0
+    interval: 4
+    duration: 1000
+    abort: 0
     timePassed: 0
   unstartedWaves: []
   inprogressWaves: []
+  initialDelay: 5
   LevelName: Forest Grove I
   timePassed: 0
   ready: 0

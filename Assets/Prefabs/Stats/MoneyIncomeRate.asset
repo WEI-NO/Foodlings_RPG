@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11255361098fdc84c9ba2daef2e168b0, type: 3}
+  m_Name: MoneyIncomeRate
+  m_EditorClassIdentifier: 
+  id: moneyincomerate
+  Title: 
+  Description: Increases your money income.
+  Type: 1
+  baseValue: 7.5
+  useInteger: 0

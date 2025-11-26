@@ -1,4 +1,6 @@
+﻿using NUnit.Framework.Interfaces;
 using System;
+using System.Collections;
 using UnityEngine;
 
 public enum Team
@@ -18,37 +20,61 @@ public enum CharacterState
     None,
     Advancing,
     Attacking,
+    Knocked,
     Dying
 }
 
 public class CharacterEntity : BaseEntity
 {
+    // -----------------------
+    // Components & Identity
+    // -----------------------
     private Animator anim;
+    private Rigidbody2D rb;
 
     public CharacterInstance characterInstance;
     public Team team;
-
-    [Header("Movement Settings")]
-    private Rigidbody2D rb;
-    [SerializeField] private CharacterState state;
     public Orientation orientation;
 
+    [Header("State")]
+    [SerializeField] private CharacterState state;
+    public bool debug = false;
+
+    // -----------------------
+    // Combat
+    // -----------------------
     [Header("Combat Settings")]
     [SerializeField] private float attackCooldownTimer = 0;
     [SerializeField] private CharacterEntity attackTarget = null;
-    public bool debug = false;
     public bool targettingTower = false;
     public Tower targettedTower = null;
     public GameObject hitEffect;
     public bool towerInRange = false;
 
+    // -----------------------
+    // Health
+    // -----------------------
     [Header("Health")]
     public float currentHP;
+    public int knockbackIndex = 0;
 
+    // -----------------------
+    // Knockback
+    // -----------------------
+    [Header("Knockback Settings")]
+    private float knockbackDistance = 1.2f;   // how far the first bounce goes
+    private float knockbackHeight = 0.35f;    // how high the first bounce goes
+    private bool isKnockback = false;
+    private Coroutine knockbackRoutine;
+
+    // =======================
+    // Unity Lifecycle
+    // =======================
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        knockbackIndex = 0;
     }
 
     private void Start()
@@ -59,20 +85,73 @@ public class CharacterEntity : BaseEntity
 
     private void Update()
     {
-        BehaviorUpdate();
-        AutoAttack();
-        AnimationUpdate();
+        if (isKnockback)
+        {
+            HandleKnockbackUpdate();
+        }
+        else
+        {
+            HandleNormalUpdate();
+        }
     }
 
     private void FixedUpdate()
     {
         if (!rb) return;
+
+        if (isKnockback)
+        {
+            rb.linearVelocityX = 0f;
+            return;
+        }
+
+        HandleMovement();
+    }
+
+    // =======================
+    // Update Helpers
+    // =======================
+    private void HandleKnockbackUpdate()
+    {
+        SwitchState(CharacterState.Knocked);
+        AnimationUpdate();
+    }
+
+    private void HandleNormalUpdate()
+    {
+        BehaviorUpdate();
+        AutoAttack();
+        AnimationUpdate();
+    }
+
+    private void HandleMovement()
+    {
         if (state == CharacterState.Advancing)
         {
-            rb.linearVelocityX = Time.fixedDeltaTime * characterInstance.GetStat(CharacterStatType.Spe) * ((team == Team.Friendly) ? 1 : -1);
-        } else
+            rb.linearVelocityX =
+                Time.fixedDeltaTime *
+                characterInstance.GetStat(CharacterStatType.Spe) *
+                GetForwardDirection();
+        }
+        else
         {
             rb.linearVelocityX = 0;
+        }
+    }
+
+    // =======================
+    // Damage / Health
+    // =======================
+    protected override void OnDamage_Internal(float damage)
+    {
+        if (characterInstance.baseData.healthThreshold.Length <= knockbackIndex)
+            return;
+
+        float threshold = MaxHealth * characterInstance.baseData.healthThreshold[knockbackIndex];
+        if (CurrentHealth <= threshold)
+        {
+            StartKnockback(characterInstance.baseData.knockbackDuration);
+            knockbackIndex++;
         }
     }
 
@@ -84,17 +163,23 @@ public class CharacterEntity : BaseEntity
         attackCooldownTimer = 0.0f;
     }
 
-    void SwitchState(CharacterState state)
+    // =======================
+    // State & Animation
+    // =======================
+    private void SwitchState(CharacterState newState)
     {
-        this.state = state;
+        state = newState;
     }
 
-    void AnimationUpdate()
+    private void AnimationUpdate()
     {
         anim.SetBool("Running", state == CharacterState.Advancing);
     }
 
-    void BehaviorUpdate()
+    // =======================
+    // Behavior / AI
+    // =======================
+    private void BehaviorUpdate()
     {
         var container = CharacterContainer.Instance;
         if (container == null)
@@ -104,44 +189,100 @@ public class CharacterEntity : BaseEntity
             return;
         }
 
-        var enemy = container.GetFrontMost(team == Team.Friendly ? Team.Hostile : Team.Friendly); // Get Hostile if its friendly, vice versa
-        if (enemy == null)
+        if (state == CharacterState.Knocked)
         {
-            // Target Enemy Tower Instead
-            if (!targettingTower || !targettedTower)
-            {
-                targettingTower = true;
-                targettedTower = team == Team.Friendly ? MapController.Instance.spawnedEnemyBase : MapController.Instance.spawnedPlayerBase;
-            }
-
-            if (targettedTower != null)
-            {
-                var distToTower = Mathf.Abs(targettedTower.GetXPosition() - transform.position.x);
-                if (distToTower <= characterInstance.GetStat(CharacterStatType.AtkRng))
-                {
-                    towerInRange = true;
-                    SwitchState(CharacterState.Attacking);
-                    return;
-                }
-            }
-            if (attackCooldownTimer <= 0)
-            {
-                SwitchState(CharacterState.Advancing);
-            }
-            else
-            {
-                SwitchState(CharacterState.None);
-            }
-                attackTarget = null;
+            rb.linearVelocityX = 0;
             return;
         }
 
-        targettingTower = false;
-        targettedTower = null;
-        towerInRange = false;
-        var distance = Mathf.Abs(transform.position.x - enemy.transform.position.x);
+        var enemy = container.GetFrontMost(team == Team.Friendly ? Team.Hostile : Team.Friendly);
 
-        if (distance <= characterInstance.GetStat(CharacterStatType.AtkRng))
+        if (enemy == null)
+        {
+            HandleNoEnemy();
+        }
+        else
+        {
+            HandleEnemyPresent(enemy);
+        }
+    }
+
+    private void HandleNoEnemy()
+    {
+        // Target Enemy Tower Instead
+        if (!targettingTower || !targettedTower)
+        {
+            targettingTower = true;
+            targettedTower = team == Team.Friendly
+                ? MapController.Instance.spawnedEnemyBase
+                : MapController.Instance.spawnedPlayerBase;
+        }
+
+        if (targettedTower != null)
+        {
+            var distToTower = Mathf.Abs(targettedTower.GetXPosition() - transform.position.x);
+            if (distToTower <= characterInstance.GetStat(CharacterStatType.AtkRng))
+            {
+                towerInRange = true;
+                SwitchState(CharacterState.Attacking);
+                return;
+            }
+        }
+
+        if (attackCooldownTimer <= 0)
+        {
+            SwitchState(CharacterState.Advancing);
+        }
+        else
+        {
+            SwitchState(CharacterState.None);
+        }
+
+        attackTarget = null;
+    }
+
+    private void HandleEnemyPresent(CharacterEntity enemy)
+    {
+        targettingTower = false;
+        towerInRange = false;
+
+        var enemyDist = Mathf.Abs(transform.position.x - enemy.transform.position.x);
+
+        Tower myTower = (team == Team.Friendly)
+            ? MapController.Instance.spawnedEnemyBase
+            : MapController.Instance.spawnedPlayerBase;
+
+        // ============================
+        // NEW: If enemy is behind tower → ignore enemy, target tower instead
+        // ============================
+        if (IsEnemyBehindTower(enemy, myTower))
+        {
+            targettedTower = myTower;
+            attackTarget = null;
+
+            float distToTower = Mathf.Abs(myTower.GetXPosition() - transform.position.x);
+
+            if (distToTower <= characterInstance.GetStat(CharacterStatType.AtkRng))
+            {
+                SwitchState(CharacterState.Attacking);
+                towerInRange = true;
+                targettingTower = true;
+            }
+            else
+            {
+                SwitchState(CharacterState.Advancing);
+            }
+
+            return; // stop processing enemy
+        }
+
+        // ============================
+        // Normal enemy targeting logic
+        // ============================
+        targettingTower = false;
+        float attackRange = characterInstance.GetStat(CharacterStatType.AtkRng);
+
+        if (enemyDist <= attackRange)
         {
             SwitchState(CharacterState.Attacking);
             attackTarget = enemy;
@@ -152,34 +293,37 @@ public class CharacterEntity : BaseEntity
         }
     }
 
-    public void SetTeam(Team t)
-    {
-        this.team = t;
-    }
 
-    public void SetCharacterInstance(CharacterInstance instance)
-    {
+    // =======================
+    // Identity / Setup
+    // =======================
+    public void SetTeam(Team t) => team = t;
+
+    public void SetCharacterInstance(CharacterInstance instance) =>
         characterInstance = instance;
-    }
 
     private void AutoFlip()
     {
         orientation = team == Team.Friendly ? Orientation.Right : Orientation.Left;
-        transform.localRotation = Quaternion.Euler(new Vector3(transform.localRotation.x, team == Team.Friendly ? 0 : 180, transform.localRotation.z));
+
+        transform.localRotation = Quaternion.Euler(
+            new Vector3(
+                transform.localRotation.x,
+                team == Team.Friendly ? 0 : 180,
+                transform.localRotation.z));
     }
 
+    // =======================
+    // Combat
+    // =======================
     private void AutoAttack()
     {
         attackCooldownTimer -= Time.deltaTime;
 
-        if (state == CharacterState.Attacking)
+        if (state == CharacterState.Attacking && attackCooldownTimer <= 0)
         {
-            if (attackCooldownTimer <= 0)
-            {
-                anim.SetTrigger("Attack");
-                //anim.SetFloat("AttackSpeed", characterInstance.GetStat(CharacterStatType.AtkSpe));
-                attackCooldownTimer = 1 / characterInstance.GetStat(CharacterStatType.AtkSpe);
-            }
+            anim.SetTrigger("Attack");
+            attackCooldownTimer = 1 / characterInstance.GetStat(CharacterStatType.AtkSpe);
         }
     }
 
@@ -190,17 +334,161 @@ public class CharacterEntity : BaseEntity
             if (targettingTower && targettedTower != null && towerInRange)
             {
                 targettedTower.Damage(characterInstance.GetStat(CharacterStatType.PAtk));
-                Instantiate(hitEffect, (Vector2)targettedTower.transform.position + RandomOffset(), Quaternion.identity);
+                Instantiate(hitEffect,
+                    (Vector2)targettedTower.transform.position + RandomOffset(),
+                    Quaternion.identity);
             }
-        } else
+        }
+        else
         {
             attackTarget.Damage(characterInstance.GetStat(CharacterStatType.PAtk));
-            Instantiate(hitEffect, (Vector2)attackTarget.transform.position + RandomOffset(), Quaternion.identity);
+            Instantiate(hitEffect,
+                (Vector2)attackTarget.transform.position + RandomOffset(),
+                Quaternion.identity);
         }
     }
 
     public Vector2 RandomOffset()
     {
-        return new Vector2(UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f));
+        return new Vector2(
+            UnityEngine.Random.Range(-0.1f, 0.1f),
+            UnityEngine.Random.Range(-0.1f, 0.1f));
     }
+
+    // =======================
+    // Knockback (Public API)
+    // =======================
+    public void StartKnockback(float duration)
+    {
+        if (!gameObject.activeInHierarchy)
+            return;
+
+        if (knockbackRoutine != null)
+            StopCoroutine(knockbackRoutine);
+
+        knockbackRoutine = StartCoroutine(Knockback(duration));
+    }
+
+    // =======================
+    // Knockback (Coroutine)
+    // =======================
+    private IEnumerator Knockback(float duration)
+    {
+        isKnockback = true;
+        SwitchState(CharacterState.Knocked);
+
+        float dir = GetKnockbackDirection();
+        float distance = knockbackDistance;
+        float height = knockbackHeight;
+
+        float segmentDuration = duration / 2f;
+
+        for (int bounce = 0; bounce < 2; bounce++)
+        {
+            yield return KnockbackBounce(dir, segmentDuration, distance, height);
+
+            // Shrink bounce height and distance for lighter second bounce
+            distance *= 0.6f;
+            height *= 0.8f;
+        }
+
+        isKnockback = false;
+        knockbackRoutine = null;
+
+        // Resume AI
+        SwitchState(CharacterState.None);
+    }
+
+    private IEnumerator KnockbackBounce(float dir, float segmentDuration, float distance, float height)
+    {
+        float segmentSplit = segmentDuration * 0.95f;
+        float t = 0f;
+
+        float xStart = transform.position.x;
+        float yBase = transform.position.y;
+
+        // ---- OUTWARD MOVEMENT (with upward hop) ----
+        while (t < segmentSplit)
+        {
+            t += Time.deltaTime;
+            float alpha = Mathf.Clamp01(t / segmentDuration);
+
+            // Horizontal
+            float xOffset = Mathf.Lerp(0f, distance, alpha);
+            float newX = xStart + dir * xOffset;
+
+            // Vertical hop (parabola)
+            float verticalAlpha = alpha;
+            float yOffset = height * (1 - Mathf.Pow(2f * verticalAlpha - 1f, 2f));
+            float newY = yBase + yOffset;
+
+            transform.position = new Vector3(newX, newY, transform.position.z);
+            yield return null;
+        }
+
+        // ---- HOLD (return to ground) ----
+        t = 0f;
+        while (t < segmentDuration - segmentSplit)
+        {
+            t += Time.deltaTime;
+            transform.position = new Vector3(transform.position.x, yBase, transform.position.z);
+            yield return null;
+        }
+    }
+
+    // =======================
+    // Direction Helpers
+    // =======================
+    private float GetForwardDirection()
+    {
+        // Matches your previous logic:
+        // Friendly moves +X, Hostile moves -X
+        return (team == Team.Friendly) ? 1f : -1f;
+    }
+
+    private float GetKnockbackDirection()
+    {
+        // Knockback is opposite of forward
+        return -GetForwardDirection();
+    }
+
+    private bool IsEnemyBehindTower(CharacterEntity enemy, Tower tower)
+    {
+        if (enemy == null || tower == null)
+            return false;
+
+        float enemyX = enemy.transform.position.x;
+        float towerX = tower.GetXPosition();
+
+        // Friendly moves +X → tower is on right
+        // Hostile  moves -X → tower is on left
+        bool behind = (team == Team.Friendly)
+            ? enemyX > towerX        // enemy is to the right → behind tower
+            : enemyX < towerX;       // enemy is to the left → behind tower
+
+        return behind;
+    }
+
+    protected override void OnDeath()
+    {
+        if (knockbackRoutine != null)
+        {
+            StopCoroutine(knockbackRoutine);
+        }
+        knockbackRoutine = StartCoroutine(OnDeathKnock());
+    }
+
+    private IEnumerator OnDeathKnock()
+    {
+        yield return Knockback(characterInstance.baseData.knockbackDuration);
+
+        if (CharacterContainer.Instance != null && CharacterContainer.Instance.deathObject != null)
+        {
+            var ghost = Instantiate(CharacterContainer.Instance.deathObject);
+            ghost.transform.position = transform.position;
+        }
+
+        base.OnDeath();
+    }
+
 }

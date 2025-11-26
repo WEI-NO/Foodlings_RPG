@@ -45,6 +45,10 @@ public class GameMatchManager : MonoBehaviour
     [Header("Upgrade Cost Settings")]
     public float kMultiplier;
 
+    public List<Wave> InprogressWave = new();
+
+    public Level defaultLevel = null;
+
     public static void SetLevel(Level level, bool unlockUponCompletion = false, List<int> unlockRegion = null)
     {
         if (unlockUponCompletion)
@@ -92,6 +96,11 @@ public class GameMatchManager : MonoBehaviour
 
     private void Start()
     {
+        if (CurrentSelectedLevel == null)
+        {
+            CurrentSelectedLevel = defaultLevel;
+        }
+
         if (CurrentSelectedLevel)
         {
             currentLevel = Instantiate(CurrentSelectedLevel);
@@ -108,7 +117,10 @@ public class GameMatchManager : MonoBehaviour
         {
             gameTimer += Time.deltaTime;
             currentLevel.UpdateLevel(Time.deltaTime);
+
+            InprogressWave = currentLevel.inprogressWaves;
         }
+
 
         if (!started || Instance.GamePaused()) return;
 
@@ -208,7 +220,7 @@ public class GameMatchManager : MonoBehaviour
     private void ResetPlayerStats()
     {
         CurrentMoneyCap = (int)PlayerStats.Instance.GetValue("maxmoneycap");
-        CurrentMoneySpeed = BaseMoneySpeed;
+        CurrentMoneySpeed = (int)PlayerStats.Instance.GetValue("moneyincomerate");
         RoundMoney = 0;
         MoneyLevel = 1;
     }

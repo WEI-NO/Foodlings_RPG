@@ -201,7 +201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 7.847687}
+  m_AnchoredPosition: {x: 0, y: 7.8476562}
   m_SizeDelta: {x: 0, y: -84.7553}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &404634255
@@ -414,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Party: []
+  PartyInstance: []
 --- !u!114 &1227699929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,6 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   availableStats:
   - {fileID: 11400000, guid: 9a4e5b4940ecfd440a1f63a61948e2e5, type: 2}
+  - {fileID: 11400000, guid: 7d795f107d79f594382f254f89d0f035, type: 2}
 --- !u!114 &1227699930
 MonoBehaviour:
   m_ObjectHideFlags: 0

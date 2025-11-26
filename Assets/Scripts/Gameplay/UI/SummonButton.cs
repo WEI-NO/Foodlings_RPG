@@ -42,7 +42,7 @@ public class SummonButton : MonoBehaviour
             UpdateDisplay();
         }
 
-        if (assignedUnit != null)
+        if (assignedUnit != null && assignedUnit.baseData != null)
         {
             if (GameMatchManager.Instance.HasMoney(assignedUnit.baseData.summonCost))
             {

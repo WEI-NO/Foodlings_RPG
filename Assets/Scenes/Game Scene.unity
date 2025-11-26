@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ff4cde5befdfb42b54a639830b2974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathObject: {fileID: 1773651527843861586, guid: 356cd2663b2f8c746a51d8e124d6bc9d, type: 3}
 --- !u!1 &81825311
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +218,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   summonButtons: []
+  overrideSummonCharacter:
+  - {fileID: 11400000, guid: dd9b47a4daedde6458da5271126838a7, type: 2}
+  overrideSummonCharacterLevel: 01000000
+  overrideCharacters: 1
 --- !u!1 &103031204
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,7 +1263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 86.133255}
+  m_AnchoredPosition: {x: 0, y: 86.13324}
   m_SizeDelta: {x: 58, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &352611606
@@ -1679,7 +1684,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 86.133255}
+  m_AnchoredPosition: {x: 0, y: 86.13324}
   m_SizeDelta: {x: 58, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &730301205
@@ -1931,7 +1936,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &787547405
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3571,7 +3576,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -97.599976, y: 68.1}
+  m_AnchoredPosition: {x: -233.6283, y: 68.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1521936462
@@ -3947,7 +3952,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 424}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 428.2, y: 43.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617662957
 MonoBehaviour:
@@ -4762,11 +4767,13 @@ MonoBehaviour:
   MoneyLevel: 1
   MoneyCapCompoundPercentage: 0.3
   CurrentMoneyCap: 0
-  BaseMoneySpeed: 15
+  BaseMoneySpeed: 7.5
   MoneySpeedCompoundPercentage: 0.15
   CurrentMoneySpeed: 0
   RoundMoney: 0
   kMultiplier: 0.6
+  InprogressWave: []
+  defaultLevel: {fileID: 11400000, guid: c8b497623e2f9d244847d2506f0a6482, type: 2}
   currentLevel: {fileID: 0}
 --- !u!1 &2029130057
 GameObject:
@@ -5055,7 +5062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panSpeed: 5
-  edgeThreshold: 100
+  edgeThreshold: 35
   cameraYAnchor: -1.5
   automaticAdjustMinMaxX: 1
   minX: -10

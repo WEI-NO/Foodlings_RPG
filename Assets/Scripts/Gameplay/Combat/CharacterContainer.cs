@@ -10,6 +10,8 @@ public class CharacterContainer : MonoBehaviour
 
     private List<List<CharacterEntity>> AllCharacters = new();
 
+    public GameObject deathObject;
+
     private void Awake()
     {
         Initializer.SetInstance(this);
