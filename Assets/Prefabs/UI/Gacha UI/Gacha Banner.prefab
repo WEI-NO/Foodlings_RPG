@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4284367624
-  m_fontColor: {r: 0.029503385, g: 0.2639305, b: 0.3679245, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -655,8 +655,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4284367624
-  m_fontColor: {r: 0.029503385, g: 0.2639305, b: 0.3679245, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -751,8 +751,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -28.876032, y: 0.9}
-  m_SizeDelta: {x: 21, y: 18}
+  m_AnchoredPosition: {x: -28.02, y: 0.9}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &1396970883201175157
 CanvasRenderer:
@@ -782,7 +782,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2033455349, guid: 201964c67ef9e5c4497a245fd9ff2cd2, type: 3}
+  m_Sprite: {fileID: 1101090531684480366, guid: 118cb70517ba6894ca85feeb0de5d40a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -862,8 +862,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -28.876032, y: 0.9}
-  m_SizeDelta: {x: 21, y: 18}
+  m_AnchoredPosition: {x: -27.7, y: 0.9}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &3070943529911636812
 CanvasRenderer:
@@ -893,7 +893,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2033455349, guid: 201964c67ef9e5c4497a245fd9ff2cd2, type: 3}
+  m_Sprite: {fileID: 1101090531684480366, guid: 118cb70517ba6894ca85feeb0de5d40a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

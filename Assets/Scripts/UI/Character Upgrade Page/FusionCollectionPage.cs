@@ -24,7 +24,7 @@ public class FusionCollectionPage : BaseUIPage
         var l = PlayerCollection.Instance.GetSorted(CollectionSortMode.Level);
         foreach (var i in l)
         {
-            if (CharacterUpgradePage.Instance.IsDisplayedCharacter(i)) continue;
+            if (CharacterUpgradePage.Instance.IsDisplayedCharacter(i) || i.inPartyIndex <= -1) continue;
 
             AddDisplay(i);
         }
