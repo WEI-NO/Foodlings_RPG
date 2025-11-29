@@ -23,6 +23,7 @@ public class FusionFunction : CharacterDisplayFunction
     protected override void OnEnabled()
     {
         ClearDisplay();
+        active = false;
     }
 
     protected override void OnDisabled()

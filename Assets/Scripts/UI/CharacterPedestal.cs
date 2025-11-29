@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CharacterPedestal : BaseDraggableCharacterDisplay
@@ -105,5 +106,12 @@ public class CharacterPedestal : BaseDraggableCharacterDisplay
     {
         if (GhostObject.Instance == null) return;
         GhostObject.Instance.ChangeAlpha(alpha);
+    }
+
+    protected override void OnClickAction(PointerEventData eventData)
+    {
+        if (assignedInstance == null || assignedInstance.baseData == null) return;
+        CharacterUpgradePage.Instance.InitializeCharacter(assignedInstance);
+        CharacterUpgradePage.Instance.SetActive(true);
     }
 }
