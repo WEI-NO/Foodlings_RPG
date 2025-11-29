@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 1b6840ba10a37b545b01a9ced880c2c3
+guid: ec16dedc4ceb74f42bb4368ae9269c43
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1566233551305897974
-    second: CabinetUI_3_0
-  - first:
-      213: 5115520741761079757
-    second: CabinetUI_3_1
+      213: -1031101155492260103
+    second: OverworldPortal_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,67 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CabinetUI_3_0
+      name: OverworldPortal_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 75
-        width: 86
-        height: 53
+        x: 13
+        y: 12
+        width: 38
+        height: 48
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6f7f2ecdd116cb510800000000000000
-      internalID: 1566233551305897974
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CabinetUI_3_1
-      rect:
-        serializedVersion: 2
-        x: 6
-        y: 7
-        width: 27
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dc9dfcde20bfdf640800000000000000
-      internalID: 5115520741761079757
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CabinetUI_3_2
-      rect:
-        serializedVersion: 2
-        x: 38
-        y: 20
-        width: 42
-        height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 336542adfcd1abf4db46ed75fbb58932
-      internalID: -2051103042
+      spriteID: 9f6936b46fac0b1f0800000000000000
+      internalID: -1031101155492260103
       vertices: []
       indices: 
       edges: []
@@ -172,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fe7cf2acc4317b947a67426e0db9843a
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -182,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CabinetUI_3_0: 1566233551305897974
-      CabinetUI_3_1: 5115520741761079757
-      CabinetUI_3_2: -2051103042
+      OverworldPortal_0: -1031101155492260103
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,4 +1,5 @@
 using CustomLibrary.References;
+using CustomLibrary.Time;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,6 +33,8 @@ public class BattleUI_WinScreenSequence : MonoBehaviour
     public void StartSequence(List<RewardEntry> rewards)
     {
         StartCoroutine(Sequence(rewards));
+
+        timePassed.text = TimeFormatter.TimeToDisplay(GameMatchManager.Instance.gameTimer);
     }
 
     private IEnumerator Sequence(List<RewardEntry> rewards)

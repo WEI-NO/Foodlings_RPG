@@ -12,6 +12,7 @@ public class InventoryUI_Display : MonoBehaviour
     public Image icon;
     public TextMeshProUGUI quantityText;
     public TextMeshProUGUI rarityText;
+    public TextMeshProUGUI nameText;
 
     public float iconSize = 32;
 
@@ -29,16 +30,19 @@ public class InventoryUI_Display : MonoBehaviour
             icon.gameObject.SetActive(false);
             quantityText.gameObject.SetActive(false);
             rarityText.gameObject.SetActive(false);
+            nameText.gameObject.SetActive(false);
         } else
         {
             icon.gameObject.SetActive(true);
             quantityText.gameObject.SetActive(true);
             rarityText.gameObject.SetActive(true);
+            nameText.gameObject.SetActive(true);
 
             icon.sprite = itemInstance.def.Icon;
             var size = SpriteExtra.DynamicDimension(icon.sprite, iconSize);
             icon.rectTransform.sizeDelta = size;
             quantityText.text = $"x{itemInstance.quantity}";
+            nameText.text = $"{itemInstance.def.DisplayName}";
         }
     }
     

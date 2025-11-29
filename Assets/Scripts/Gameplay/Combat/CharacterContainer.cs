@@ -11,6 +11,8 @@ public class CharacterContainer : MonoBehaviour
     private List<List<CharacterEntity>> AllCharacters = new();
 
     public GameObject deathObject;
+    public int enemyKillCount = 0;
+    public int unitLostCount = 0;
 
     private void Awake()
     {
@@ -23,7 +25,10 @@ public class CharacterContainer : MonoBehaviour
         {
             AllCharacters.Add(new());
         }
-    }
+
+        enemyKillCount = 0;
+        unitLostCount = 0;
+}
 
     private void LateUpdate()
     {
@@ -62,6 +67,13 @@ public class CharacterContainer : MonoBehaviour
         if (list == null) return;
 
         list.Remove(entity);
+        if (entity.team == Team.Hostile)
+        {
+            enemyKillCount++;
+        } else
+        {
+            unitLostCount++;
+        }
     }
 
     private List<CharacterEntity> GetTeam(Team team)

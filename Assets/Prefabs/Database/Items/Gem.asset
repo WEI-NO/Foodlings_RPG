@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: gem
   displayName: Gem
-  icon: {fileID: 2033455349, guid: 201964c67ef9e5c4497a245fd9ff2cd2, type: 3}
+  icon: {fileID: 1101090531684480366, guid: 118cb70517ba6894ca85feeb0de5d40a, type: 3}
   maxStack: 999999
   description: Premium currency used to summon foodlings
   category: 0

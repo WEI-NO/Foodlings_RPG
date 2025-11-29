@@ -167,6 +167,7 @@ public class CharacterUpgradePage : BaseUIPage
                 Destroy(t.gameObject);
             }
         }
+        displays = new();
         selectedFusingUnit = new();
         UpdateFusionCost();
     }
@@ -185,7 +186,7 @@ public class CharacterUpgradePage : BaseUIPage
     {
         if (selectedFusingUnit.Count == 0) return;
 
-        if (!PlayerInventory.HasItem("toast_coin", fusionCost))
+        if (!PlayerInventory.UseItem("toast_coin", fusionCost))
         {
             return;
         }
@@ -223,7 +224,7 @@ public class CharacterUpgradePage : BaseUIPage
 
         foreach (var i in selectedFusingUnit)
         {
-            pendingExp += CharacterInstance.defaultExpGiven;
+            pendingExp += Mathf.RoundToInt(CharacterInstance.defaultExpGiven * CharacterData.RankFusionScale[(int)i.rank]);
             pendingExp += Mathf.RoundToInt(i.accumulatedExp * 0.9f);
         }
 

@@ -264,17 +264,61 @@ MonoBehaviour:
   MaxHealth: 0
   CurrentHealth: 0
   attackProjectile: {fileID: 0}
-  characterData: {fileID: 11400000, guid: dd9b47a4daedde6458da5271126838a7, type: 2}
+  characterInstance:
+    instanceId: 
+    baseData: {fileID: 0}
+    level: 1
+    exp: 0
+    accumulatedExp: 0
+    favorited: 0
+    inPartyIndex: -1
+    rank: 0
+    equipment:
+    - equipId: 
+      level: 0
+      FlatHP: 0
+      FlatPAtk: 0
+      FlatMAtk: 0
+      FlatPDef: 0
+      FlatMDef: 0
+      SpeedMul: 0
+      RangeMul: 0
+      CdReduction: 0
+      AttackRateMul: 0
+    - equipId: 
+      level: 0
+      FlatHP: 0
+      FlatPAtk: 0
+      FlatMAtk: 0
+      FlatPDef: 0
+      FlatMDef: 0
+      SpeedMul: 0
+      RangeMul: 0
+      CdReduction: 0
+      AttackRateMul: 0
+    - equipId: 
+      level: 0
+      FlatHP: 0
+      FlatPAtk: 0
+      FlatMAtk: 0
+      FlatPDef: 0
+      FlatMDef: 0
+      SpeedMul: 0
+      RangeMul: 0
+      CdReduction: 0
+      AttackRateMul: 0
   team: 1
-  state: 0
   orientation: 0
+  state: 0
+  debug: 0
   attackCooldownTimer: 0
   attackTarget: {fileID: 0}
-  debug: 0
   targettingTower: 0
   targettedTower: {fileID: 0}
   hitEffect: {fileID: 7068022459926432679, guid: 13cf343c78306aa4980c12dae312d397, type: 3}
+  towerInRange: 0
   currentHP: 0
+  knockbackIndex: 0
 --- !u!50 &6791652285148318673
 Rigidbody2D:
   serializedVersion: 5
@@ -332,7 +376,7 @@ Animator:
   m_GameObject: {fileID: 8283804360114963105}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ba3e96069e50a734b9e3dcd330ea8460, type: 2}
+  m_Controller: {fileID: 22100000, guid: 98bbbd5049717324687e648b20b961cc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -483,6 +483,7 @@ MonoBehaviour:
   icon: {fileID: 3928708277914718408}
   quantityText: {fileID: 4706816464347661611}
   rarityText: {fileID: 2101526740798514060}
+  nameText: {fileID: 1057193778436241144}
   iconSize: 32
 --- !u!114 &399983025336015714
 MonoBehaviour:

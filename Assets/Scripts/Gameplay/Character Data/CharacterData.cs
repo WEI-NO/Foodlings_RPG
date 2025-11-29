@@ -59,7 +59,7 @@ public class CharacterData : ScriptableObject
     public float Debug_CD => debug_CD;
 #endif
 
-    public static readonly float[] RankFusionBaseCost = new float[]
+    public static readonly float[] RankFusionScale = new float[]
     {
         1.0f, 2.5f, 3.5f, 4f, 5f
     };
@@ -150,7 +150,7 @@ public class CharacterData : ScriptableObject
     public static int FusionCost(CharacterInstance instance)
     {
         int cost = BaseFusionCost;
-        float addition = RankFusionBaseCost[(int)instance.rank] * Mathf.Pow(1 + instance.level, LevelFusionLevelConstant);
+        float addition = RankFusionScale[(int)instance.rank] * Mathf.Pow(1 + instance.level, LevelFusionLevelConstant);
 
         int realCost = cost + Mathf.RoundToInt(addition);
         return realCost;

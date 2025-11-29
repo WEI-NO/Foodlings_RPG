@@ -24,7 +24,7 @@ MonoBehaviour:
   debug_CD: 1
   id: tiny_chef
   displayName: Tiny Chef
-  baseRank: 1
+  baseRank: 4
   faction: 0
   summonCost: 75
   cooldownSec: 1

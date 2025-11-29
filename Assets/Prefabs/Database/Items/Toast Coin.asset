@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: toast_coin
   displayName: Toast Coin
-  icon: {fileID: 4036326585807662724, guid: 201964c67ef9e5c4497a245fd9ff2cd2, type: 3}
+  icon: {fileID: 392233518939393615, guid: 118cb70517ba6894ca85feeb0de5d40a, type: 3}
   maxStack: 999999
+  description: 
+  category: 0
   noStackLimit: 1

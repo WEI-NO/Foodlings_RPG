@@ -29,7 +29,7 @@ public class OverworldLevelController : MonoBehaviour
 
     private void Start()
     {
-        levelText.text = level.LevelName;
+        if (levelText) levelText.text = level.LevelName;
     }
 
     // ===== Helper =====
@@ -85,7 +85,9 @@ public class OverworldLevelController : MonoBehaviour
     private void OnMouseDown()
     {
         if (PointerOverUI()) return;
+        anim?.ResetTrigger("Release");
         anim?.SetTrigger("Click");
+
     }
 
 

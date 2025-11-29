@@ -221,7 +221,7 @@ MonoBehaviour:
   overrideSummonCharacter:
   - {fileID: 11400000, guid: dd9b47a4daedde6458da5271126838a7, type: 2}
   overrideSummonCharacterLevel: 01000000
-  overrideCharacters: 1
+  overrideCharacters: 0
 --- !u!1 &103031204
 GameObject:
   m_ObjectHideFlags: 0
