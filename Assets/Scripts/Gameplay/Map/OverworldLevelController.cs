@@ -25,11 +25,13 @@ public class OverworldLevelController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        var region = GetComponentInParent<Region>();
+        level = region != null ? region.assignedLevel : null;
     }
 
     private void Start()
     {
-        if (levelText) levelText.text = level.LevelName;
+        if (levelText && level) levelText.text = level.LevelName;
     }
 
     // ===== Helper =====

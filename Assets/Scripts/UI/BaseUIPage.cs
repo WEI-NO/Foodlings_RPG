@@ -64,7 +64,7 @@ public class BaseUIPage : MonoBehaviour
     public string closeTriggerName = "Close";
 
     // Disable content
-    public void DisableContent()
+    private void DisableContent()
     {
         if (UIContainerGameObject != null)
         {
@@ -87,7 +87,7 @@ public class BaseUIPage : MonoBehaviour
     protected virtual void OnContentDisabled() { }
 
     // Enables content
-    public void EnableContent()
+    private void EnableContent()
     {
         if (UIContainerGameObject != null)
         {

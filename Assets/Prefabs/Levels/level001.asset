@@ -18,52 +18,72 @@ MonoBehaviour:
   characterData: []
   waves:
   - startSeconds: 0
+    characterIndex: 0
     single: 0
     burst: 0
-    burstAmount: 2
-    burstDelay: 0.5
-    characterIndex: 0
     repeater: 1
-    spawnOnStart: 0
-    interval: 8
-    duration: 30
+    burstOptions:
+      amount: 0
+      delay: 0
+    repeaterOptions:
+      spawnOnStart: 1
+      interval: 0
+      duration: 15
+      useRandomInterval: 1
+      randomInterval: {x: 3, y: 5}
     abort: 0
+    spawnedSoFar: 0
     timePassed: 0
-  - startSeconds: 40
+  - startSeconds: 25
+    characterIndex: 0
     single: 0
     burst: 0
-    burstAmount: 2
-    burstDelay: 0.5
-    characterIndex: 0
     repeater: 1
-    spawnOnStart: 0
-    interval: 7
-    duration: 30
+    burstOptions:
+      amount: 0
+      delay: 0
+    repeaterOptions:
+      spawnOnStart: 1
+      interval: 0
+      duration: 20
+      useRandomInterval: 1
+      randomInterval: {x: 2, y: 5}
     abort: 0
+    spawnedSoFar: 0
     timePassed: 0
-  - startSeconds: 80
+  - startSeconds: 60
+    characterIndex: 0
     single: 0
     burst: 0
-    burstAmount: 2
-    burstDelay: 0.5
-    characterIndex: 0
     repeater: 1
-    spawnOnStart: 0
-    interval: 5
-    duration: 120
+    burstOptions:
+      amount: 0
+      delay: 0
+    repeaterOptions:
+      spawnOnStart: 1
+      interval: 0
+      duration: 30
+      useRandomInterval: 1
+      randomInterval: {x: 1, y: 5}
     abort: 0
+    spawnedSoFar: 0
     timePassed: 0
-  - startSeconds: 200
+  - startSeconds: 100
+    characterIndex: 0
     single: 0
     burst: 0
-    burstAmount: 2
-    burstDelay: 0.5
-    characterIndex: 0
     repeater: 1
-    spawnOnStart: 0
-    interval: 4
-    duration: 1000
+    burstOptions:
+      amount: 0
+      delay: 0
+    repeaterOptions:
+      spawnOnStart: 1
+      interval: 0
+      duration: 1000
+      useRandomInterval: 1
+      randomInterval: {x: 2, y: 6}
     abort: 0
+    spawnedSoFar: 0
     timePassed: 0
   unstartedWaves: []
   inprogressWaves: []

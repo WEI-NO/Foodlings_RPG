@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.VisualScripting.FullSerializer;
@@ -115,95 +114,125 @@ public class Wave
 {
     [Header("Timeline Settings")]
     public float startSeconds;
-    public bool single = false;
-
-    [Header("Burst Settings")]
-    public bool burst = false;
-    public int burstAmount = 2;
-    public float burstDelay = 0.5f;
 
     [Header("Spawn Settings")]
     public int characterIndex;
 
-    [Header("Repeater Settings")]
-    public bool repeater = false;
-    public bool spawnOnStart = true;
-    public float interval = 5;
-    public float duration;
+    [Header("Mode Toggles")]
+    public bool single;
+    public bool burst;
+    public bool repeater;
 
-    public bool abort = false;
+    [System.Serializable]
+    public struct BurstOptions
+    {
+        public int amount;
+        public float delay;
+    }
+    public BurstOptions burstOptions;
 
-    private int spawnedSoFar = 0;
+    [System.Serializable]
+    public struct RepeaterOptions
+    {
+        public bool spawnOnStart;
+        public float interval;
+        public float duration;
+        public bool useRandomInterval;
+        public Vector2 randomInterval;
+    }
+    public RepeaterOptions repeaterOptions;
+    private float repeaterRandomTimer = 0.0f;
+    private bool repeaterRandomSpawn = false;
 
-    public float timePassed;
-    
+
+    // Internal runtime fields (hidden in inspector)
+    [HideInInspector] public bool abort = false;
+    [HideInInspector] public int spawnedSoFar = 0;
+    [HideInInspector] public float timePassed = 0;
+
+    public Wave()
+    {
+        repeaterRandomTimer = 0.0f;
+    }
+
     public bool UpdateWave(float dt)
     {
         if (abort) return false;
-        if (single)
-        {
-            return SingleUpdate(dt);
-        }
 
-        if (burst)
-        {
-            return BurstUpdate(dt);
-        }
-
-        if (repeater)
-        {
-            return RepeaterUpdate(dt);
-        }
+        if (single) return SingleUpdate(dt);
+        if (burst) return BurstUpdate(dt);
+        if (repeater) return RepeaterUpdate(dt);
 
         timePassed += dt;
         return false;
     }
 
-    private bool SingleUpdate(float dt)
+    bool SingleUpdate(float dt)
     {
         abort = true;
         timePassed += dt;
         return true;
     }
 
-    private bool RepeaterUpdate(float dt)
+    bool RepeaterUpdate(float dt)
     {
-        if (timePassed >= duration)
+        Debug.Log(timePassed);
+        if (timePassed >= repeaterOptions.duration)
         {
             abort = true;
             return false;
         }
 
-        if (timePassed == 0 && spawnOnStart)
+        // Spawn On Start
+        if (timePassed == 0 && repeaterOptions.spawnOnStart)
         {
             timePassed += dt;
             return true;
         }
-        else
+
+        
+        float threshold = (spawnedSoFar + 1) * repeaterOptions.interval;
+
+        // Random Interval
+        if (repeaterOptions.useRandomInterval && !repeaterRandomSpawn)
         {
-            float threshold = (spawnedSoFar + 1) * interval;
-            if (timePassed >= threshold)
-            {
-                timePassed += dt;
-                spawnedSoFar++;
-                return true;
-            }
+            float randomInterval = Random.Range(repeaterOptions.randomInterval.x, repeaterOptions.randomInterval.y);
+            repeaterRandomTimer += randomInterval;
+            repeaterRandomSpawn = true;
+            Debug.Log("Random Threshold: " + repeaterRandomTimer + " | Current Interval: " + randomInterval);
         }
+
+        if (repeaterOptions.useRandomInterval && timePassed >= repeaterRandomTimer)
+        {
+            repeaterRandomSpawn = false;
+            timePassed += dt;
+            spawnedSoFar++;
+            return true;
+        }
+
+
+        if (timePassed >= threshold && !repeaterOptions.useRandomInterval)
+        {
+            timePassed += dt;
+            spawnedSoFar++;
+            return true;
+        }
+
         timePassed += dt;
         return false;
     }
 
-    private bool BurstUpdate(float dt)
+    bool BurstUpdate(float dt)
     {
-        float threshold = (spawnedSoFar + 1) * burstDelay;
+        float threshold = (spawnedSoFar + 1) * burstOptions.delay;
 
-        if (burstAmount <= spawnedSoFar)
+        if (spawnedSoFar >= burstOptions.amount)
         {
             abort = true;
             timePassed += dt;
             return false;
         }
-        
+
         if (timePassed >= threshold)
         {
             timePassed += dt;
@@ -211,11 +240,9 @@ public class Wave
             return true;
         }
 
-
         timePassed += dt;
         return false;
     }
-
 }
 
 [System.Serializable]

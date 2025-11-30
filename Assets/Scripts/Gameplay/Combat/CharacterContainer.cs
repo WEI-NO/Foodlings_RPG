@@ -81,6 +81,8 @@ public class CharacterContainer : MonoBehaviour
         var teamIndex = team.ToInt();
         if (teamIndex < 0 || teamIndex >= 2) return null;
 
+        if (teamIndex >= AllCharacters.Count) return null;
+
         return AllCharacters[teamIndex];
     }
 }

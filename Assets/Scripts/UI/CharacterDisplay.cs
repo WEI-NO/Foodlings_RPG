@@ -35,7 +35,7 @@ public class CharacterDisplay : BaseDraggableCharacterDisplay
         if (levelText) levelText.text = $"Lv. {assignedInstance.level}";
         if (nameText) nameText.text = assignedInstance.baseData.displayName;
 
-        if (summonCostText) summonCostText.text = $"$ {assignedInstance.baseData.summonCost}";
+        if (summonCostText) summonCostText.text = $"{assignedInstance.baseData.summonCost}";
 
         UpdateEquipSign();
         return true;

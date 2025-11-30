@@ -8,6 +8,7 @@ public class Region : MonoBehaviour
     public Vector2Int overworldLocation;
 
     public Transform levelContainer;
+    public Level assignedLevel;
 
     private void Initialize(int id)
     {
