@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a18723090138840a7bd8758bd9dea5, type: 3}
+  m_Name: Coconut_Data
+  m_EditorClassIdentifier: 
+  debug_ShowMaxLevelStats: 1
+  debug_HP: 3875
+  debug_PAtk: 77.5
+  debug_MAtk: 77.5
+  debug_PDef: 77.5
+  debug_MDef: 77.5
+  debug_AtkRng: 0.4
+  debug_AtkSpe: 0.3
+  debug_Spe: 20
+  debug_CD: 10
+  id: coconut
+  displayName: Coconut
+  baseRank: 0
+  trait:
+    primaryTrait: 4
+    secondaryTrait: 6
+  summonCost: 140
+  cooldownSec: 10
+  healthPoint: 250
+  physicalDamage: 5
+  magicDamage: 5
+  attackRate: 0.3
+  moveSpeed: 20
+  attackRange: 0.4
+  physicalDefense: 5
+  magicDefense: 5
+  growth: 1
+  growthSteepness: 0.5
+  knockbackDuration: 1.25
+  healthThreshold: []
+  unitPrefab: {fileID: 1333956205622021100, guid: 6c0043345c2c01b47b94a2c086b37600, type: 3}
+  unitSprite: {fileID: 3542127132570728493, guid: 3229132376d0eae47990b4c544a06231, type: 3}
+  maxLevel: 30

@@ -71,7 +71,7 @@ public class CharacterData : ScriptableObject
     public string id;
     public string displayName;
     public UnitRank baseRank;
-    public Faction faction;
+    public CharacterTrait trait;
 
     [Header("Economy")]
     public int summonCost;

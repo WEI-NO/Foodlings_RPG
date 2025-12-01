@@ -7,6 +7,7 @@ public class Tower : BaseEntity
     [Header("Spawn Position")]
     public Transform spawnPoint;
     public Vector2 yOffsetRange;
+    public int yOffsetSteps = 4;
 
     [Header("UI Display")]
     public TextMeshProUGUI healthText;
@@ -28,8 +29,15 @@ public class Tower : BaseEntity
 
     public Vector2 GetSpawnPoint()
     {
-        float randomYOffset = Random.Range(yOffsetRange.x, yOffsetRange.y);
-        return (Vector2)spawnPoint.position + new Vector2(0, randomYOffset);
+        int step = Random.Range(0, yOffsetSteps);
+        float range = yOffsetRange.y - yOffsetRange.x;
+        float stepAmount = range / yOffsetSteps;
+
+        float lowerBound = spawnPoint.position.y + yOffsetRange.x;
+        float yPosition = lowerBound + stepAmount * step;
+
+
+        return new Vector2(spawnPoint.position.x, yPosition);
     }
 
     public float GetXPosition()

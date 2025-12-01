@@ -18,14 +18,16 @@ MonoBehaviour:
   debug_MAtk: 155
   debug_PDef: 23.25
   debug_MDef: 23.25
-  debug_AtkRng: 0.45
+  debug_AtkRng: 0.5
   debug_AtkSpe: 0.8
   debug_Spe: 20
   debug_CD: 1
   id: tiny_chef
   displayName: Tiny Chef
   baseRank: 4
-  faction: 0
+  trait:
+    primaryTrait: 2
+    secondaryTrait: 0
   summonCost: 50
   cooldownSec: 1
   healthPoint: 80
@@ -33,7 +35,7 @@ MonoBehaviour:
   magicDamage: 10
   attackRate: 0.8
   moveSpeed: 20
-  attackRange: 0.45
+  attackRange: 0.5
   physicalDefense: 1.5
   magicDefense: 1.5
   growth: 1
@@ -41,6 +43,6 @@ MonoBehaviour:
   knockbackDuration: 1.25
   healthThreshold:
   - 0.5
-  unitPrefab: {fileID: 8283804360114963105, guid: 004e3e9aeee63734e9861f09278b7c8b, type: 3}
+  unitPrefab: {fileID: 5756161629207259482, guid: 8ceb0e682e214d34bb1d4de34430a956, type: 3}
   unitSprite: {fileID: 21300000, guid: c65d19742d93bb04184aef34df1908c5, type: 3}
   maxLevel: 30

@@ -18,14 +18,16 @@ MonoBehaviour:
   debug_MAtk: 124
   debug_PDef: 23.25
   debug_MDef: 23.25
-  debug_AtkRng: 0.5
+  debug_AtkRng: 0.8
   debug_AtkSpe: 0.6
   debug_Spe: 20
   debug_CD: 5
   id: toast
   displayName: Toast
   baseRank: 0
-  faction: 0
+  trait:
+    primaryTrait: 2
+    secondaryTrait: 0
   summonCost: 40
   cooldownSec: 5
   healthPoint: 100
@@ -33,7 +35,7 @@ MonoBehaviour:
   magicDamage: 8
   attackRate: 0.6
   moveSpeed: 20
-  attackRange: 0.5
+  attackRange: 0.8
   physicalDefense: 1.5
   magicDefense: 1.5
   growth: 1
@@ -41,6 +43,6 @@ MonoBehaviour:
   knockbackDuration: 1.25
   healthThreshold:
   - 0.5
-  unitPrefab: {fileID: 8283804360114963105, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
+  unitPrefab: {fileID: 4057219219921995394, guid: 72ed6e6c7560357418d3aef5500768e8, type: 3}
   unitSprite: {fileID: 21300000, guid: 1a860f95c58aa0f4182fcc5f78baee43, type: 3}
   maxLevel: 30

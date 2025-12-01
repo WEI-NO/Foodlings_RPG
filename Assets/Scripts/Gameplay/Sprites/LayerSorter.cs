@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -34,6 +35,14 @@ public class LayerSorter : MonoBehaviour
     [Tooltip("Local-space offset from this GameObject's transform used as the reference point when no pivotTransform is provided.")]
     [SerializeField] private Vector2 pivotLocalOffset = Vector2.zero;
 
+    [Header("One-Time Sorting")]
+    [Tooltip("If enabled, the sorting order is calculated once on Start (after an optional delay), then this component disables itself.")]
+    [SerializeField] private bool calculateOnceOnStart = false;
+
+    [Tooltip("Delay (in seconds) before the initial sorting is applied when 'Calculate Once On Start' is enabled.")]
+    [Min(0f)]
+    [SerializeField] private float initialSortDelay = 0f;
+
     [Header("Gizmo")]
     [SerializeField] private bool showPivotGizmo = true;
     [SerializeField] private float gizmoSize = 0.075f;
@@ -51,12 +60,42 @@ public class LayerSorter : MonoBehaviour
         if (targetRenderer == null) targetRenderer = GetComponent<SpriteRenderer>();
         yToOrderMultiplier = Mathf.Max(1, yToOrderMultiplier);
         gizmoSize = Mathf.Max(0.001f, gizmoSize);
+
+        // Still apply sorting in editor when values change
         ApplySorting();
+    }
+
+    private void Start()
+    {
+        // Only run this one-time logic in play mode
+        if (calculateOnceOnStart && Application.isPlaying)
+        {
+            StartCoroutine(DelayedInitialSort());
+        }
     }
 
     private void LateUpdate()
     {
+        // In normal mode, keep updating every frame
+        if (!calculateOnceOnStart)
+        {
+            ApplySorting();
+        }
+        // If calculateOnceOnStart == true, we let the coroutine handle the one-time sort
+    }
+
+    /// <summary>
+    /// Coroutine that waits for the configured delay, applies sorting once, then disables this component.
+    /// </summary>
+    private IEnumerator DelayedInitialSort()
+    {
+        if (initialSortDelay > 0f)
+            yield return new WaitForSeconds(initialSortDelay);
+
         ApplySorting();
+
+        // Disable this component so it no longer updates
+        enabled = false;
     }
 
     /// <summary>

@@ -164,6 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathObject: {fileID: 1773651527843861586, guid: 356cd2663b2f8c746a51d8e124d6bc9d, type: 3}
+  enemyKillCount: 0
+  unitLostCount: 0
 --- !u!1 &81825311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,7 +1562,7 @@ MonoBehaviour:
   groundYPosition: -2
   foregroundYPosition: -8
   extraGroundPerSide: 4
-  spawnY: -0.9
+  spawnY: -1.6
 --- !u!1 &615887129
 GameObject:
   m_ObjectHideFlags: 0

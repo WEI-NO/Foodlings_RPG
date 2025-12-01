@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 571877606718990225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.447, y: -0.624, z: 0}
+  m_LocalPosition: {x: 0.447, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -169,7 +169,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 1.6}
   m_SizeDelta: {x: 1, y: 0.1875}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1371771564924085858
@@ -527,7 +527,7 @@ MonoBehaviour:
   CurrentHealth: 0
   attackProjectile: {fileID: 0}
   spawnPoint: {fileID: 7284384880302660933}
-  yOffsetRange: {x: -0.1, y: 0.3}
+  yOffsetRange: {x: -0.4, y: 0}
   healthText: {fileID: 6224996542447675090}
   healthFillBar: {fileID: 4893680716805490583}
   team: 1

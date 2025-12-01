@@ -89,7 +89,7 @@ public class Level : ScriptableObject
                         Debug.Log("Spawning");
                         var spawnedActor = Instantiate(characterData[wave.characterIndex].baseData.unitPrefab);
                         spawnedActor.transform.position = MapController.Instance.spawnedEnemyBase.GetSpawnPoint();
-                        Debug.Log(MapController.Instance.spawnedEnemyBase.GetSpawnPoint());
+                        Debug.Log(spawnedActor.transform.position);
                         var entity = spawnedActor.GetComponent<CharacterEntity>();
                         entity.SetTeam(Team.Hostile);
                         entity.SetCharacterInstance(characterData[wave.characterIndex]);
@@ -176,7 +176,6 @@ public class Wave
 
     bool RepeaterUpdate(float dt)
     {
-        Debug.Log(timePassed);
         if (timePassed >= repeaterOptions.duration)
         {
             abort = true;
@@ -199,7 +198,6 @@ public class Wave
             float randomInterval = Random.Range(repeaterOptions.randomInterval.x, repeaterOptions.randomInterval.y);
             repeaterRandomTimer += randomInterval;
             repeaterRandomSpawn = true;
-            Debug.Log("Random Threshold: " + repeaterRandomTimer + " | Current Interval: " + randomInterval);
         }
 
         if (repeaterOptions.useRandomInterval && timePassed >= repeaterRandomTimer)

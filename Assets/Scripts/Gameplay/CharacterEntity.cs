@@ -67,6 +67,8 @@ public class CharacterEntity : BaseEntity
     private bool isKnockback = false;
     private Coroutine knockbackRoutine;
 
+    public bool debug_isAttacking = false;
+
     // =======================
     // Unity Lifecycle
     // =======================
@@ -85,6 +87,8 @@ public class CharacterEntity : BaseEntity
 
     private void Update()
     {
+        debug_isAttacking = IsAttackAnimationPlaying();
+
         if (isKnockback)
         {
             HandleKnockbackUpdate();
@@ -105,8 +109,15 @@ public class CharacterEntity : BaseEntity
             return;
         }
 
+        if (IsAttackAnimationPlaying() && state == CharacterState.Attacking)
+        {
+            rb.linearVelocityX = 0f;
+            return;
+        }
+
         HandleMovement();
     }
+
 
     // =======================
     // Update Helpers
@@ -171,16 +182,33 @@ public class CharacterEntity : BaseEntity
         state = newState;
     }
 
-    private void AnimationUpdate()
+private void AnimationUpdate()
+{
+    bool inAttack = IsAttackAnimationPlaying();
+
+    // If we're attacking, force Running false so it doesn't blend into run/idle
+    if (inAttack)
     {
-        anim.SetBool("Running", state == CharacterState.Advancing);
+        anim.SetBool("Running", false);
+        return;
     }
+
+    anim.SetBool("Running", state == CharacterState.Advancing);
+}
+
 
     // =======================
     // Behavior / AI
     // =======================
     private void BehaviorUpdate()
     {
+        // If we're in the attack animation, don't change AI state
+        if (IsAttackAnimationPlaying() && state == CharacterState.Attacking)
+        {
+            // We let the current attack finish; no retargeting / switching to Advancing/None
+            return;
+        }
+
         var container = CharacterContainer.Instance;
         if (container == null)
         {
@@ -206,6 +234,7 @@ public class CharacterEntity : BaseEntity
             HandleEnemyPresent(enemy);
         }
     }
+
 
     private void HandleNoEnemy()
     {
@@ -293,6 +322,13 @@ public class CharacterEntity : BaseEntity
         }
     }
 
+    private bool IsAttackAnimationPlaying()
+    {
+        if (anim == null) return false;
+
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.IsTag("attack");   // uses the Tag we set in the Animator
+    }
 
     // =======================
     // Identity / Setup
@@ -480,6 +516,7 @@ public class CharacterEntity : BaseEntity
 
     private IEnumerator OnDeathKnock()
     {
+        anim.SetBool("Dead", true);
         yield return Knockback(characterInstance.baseData.knockbackDuration);
 
         if (CharacterContainer.Instance != null && CharacterContainer.Instance.deathObject != null)
