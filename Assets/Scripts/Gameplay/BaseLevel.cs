@@ -14,6 +14,8 @@ public class Level : ScriptableObject
     public List<Wave> unstartedWaves = new();
     public List<Wave> inprogressWaves = new();
 
+    public MapLength mapLength;
+
     public float initialDelay = 5.0f;
 
     [Header("Level Settings")]
@@ -33,7 +35,7 @@ public class Level : ScriptableObject
         timePassed = 0;
         unstartedWaves = new(waves);
 
-        while (!CharacterDatabase.Instance.IsReady)
+        while (!GameBoostrapper.Instance.DataLoaded)
         {
             await Task.Yield();
         }
@@ -56,6 +58,7 @@ public class Level : ScriptableObject
             characterData.Add(newInstance);
             i++;
         }
+
 
         ready = true;
     }
@@ -86,7 +89,7 @@ public class Level : ScriptableObject
                     if (wave.characterIndex < characterData.Count)
                     {
                         // Spawn For Enemy
-                        Debug.Log("Spawning");
+                        //Debug.Log("Spawning");
                         var spawnedActor = Instantiate(characterData[wave.characterIndex].baseData.unitPrefab);
                         spawnedActor.transform.position = MapController.Instance.spawnedEnemyBase.GetSpawnPoint();
                         Debug.Log(spawnedActor.transform.position);
@@ -106,6 +109,17 @@ public class Level : ScriptableObject
         timePassed += dt;
     }
 
+    public int GetAverageLevel()
+    {
+        int total = 0;
+        foreach (var l in characterLevels)
+        {
+            total += l;
+        }
+        int totalCount = (characterLevels.Count == 0 ? 1 : characterLevels.Count);
+        int average = Mathf.RoundToInt((float)total / totalCount);
+        return average;
+    }
 
 }
 

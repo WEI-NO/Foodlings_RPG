@@ -1,5 +1,6 @@
 using CustomLibrary.References;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum CollectionSortMode
@@ -52,10 +53,27 @@ public class CollectionDisplay : MonoBehaviour
     {
         ClearDisplay();
 
-        var l = PlayerCollection.Instance.GetSorted(sortMode);
-        foreach (var i in l)
+        var sortedList = PlayerCollection.Instance.GetSorted(sortMode);
+
+        // 1. Equipped characters (0–4), ordered by party slot
+        var equipped = sortedList
+            .Where(c => c.inPartyIndex >= 0)
+            .OrderBy(c => c.inPartyIndex);
+
+        // 2. Unequipped characters
+        var unequipped = sortedList
+            .Where(c => c.inPartyIndex < 0);
+
+        // 3. Display equipped first
+        foreach (var character in equipped)
         {
-            OnCharacterAdded(i);
+            OnCharacterAdded(character);
+        }
+
+        // 4. Then display the rest
+        foreach (var character in unequipped)
+        {
+            OnCharacterAdded(character);
         }
     }
 

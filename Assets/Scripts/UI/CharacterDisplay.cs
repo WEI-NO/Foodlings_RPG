@@ -1,3 +1,4 @@
+using CustomLibrary.References;
 using CustomLibrary.SpriteExtra;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,9 @@ public class CharacterDisplay : BaseDraggableCharacterDisplay
     [Header("References")]
     public GameObject equipSign;
 
+    public GameObject starObject;
+    public Transform starContent;
+    public TextMeshProUGUI rarityText;
 
     public override bool UpdateInfo()
     {
@@ -32,11 +36,30 @@ public class CharacterDisplay : BaseDraggableCharacterDisplay
             characterIcon.color = normalColor;
         }
 
-        if (levelText) levelText.text = $"Lv. {assignedInstance.level}";
+        if (levelText) levelText.text = $"{assignedInstance.level}";
         if (nameText) nameText.text = assignedInstance.baseData.displayName;
 
         if (summonCostText) summonCostText.text = $"{assignedInstance.baseData.summonCost}";
 
+        if (starContent && starObject)
+        {
+            int starCount = assignedInstance.rank.ToInt() + 1;
+
+            foreach (Transform child in starContent)
+            {
+                Destroy(child.gameObject);
+            }
+
+            for (int i = 0; i < starCount; i++)
+            {
+                var star = Instantiate(starObject, starContent);
+            }
+        }
+
+        if (rarityText)
+        {
+            rarityText.text = $"{assignedInstance.rank}";
+        }
         UpdateEquipSign();
         return true;
     }

@@ -12,46 +12,76 @@ public class GachaSystem : MonoBehaviour
 {
     public static GachaSystem Instance;
 
-    [Header("Gacha Pools")]
-    public GachaPool basicPool;
-    public GachaPool premiumPool;
+    public static int MaxRoleStage = 5;
 
-    public string pulledCurrency;
-    public int[] currencyUsage = new int[]
-    {
-        150,
-        300
-    };
+    public int CostPerStage = 50;
 
     private void Awake()
     {
         Initializer.SetInstance(this);
     }
 
-    public int GetCost(GachaType type, int amount)
+    public Vector3Int GetCraftCost(GachaRequest request)
     {
-        return currencyUsage[(int)type] * amount;
+        if (request == null) return new Vector3Int();
+
+        int f = request.GetStage(Role.Fighter);
+        int t = request.GetStage(Role.Tank);
+        int m = request.GetStage(Role.Magic);
+
+        return new Vector3Int(f * CostPerStage, t * CostPerStage, m * CostPerStage);
     }
 
-    public bool RollCharacters(GachaType type, int amount, out List<CharacterData> rolledDatas)
+    public bool AttemptCraft(GachaRequest request)
     {
-        rolledDatas = new();
+        var costs = GetCraftCost(request);
 
-        int cost = GetCost(type, amount);
-        if (PlayerInventory.HasItem("gem", cost))
+        if (PlayerInventory.HasItem("seared_core", costs.x) && PlayerInventory.HasItem("crusted_core", costs.y) && PlayerInventory.HasItem("infused_core", costs.z))
         {
-            for (int i = 0; i < amount; i++)
-            {
-                string rolled = type == GachaType.Basic ?
-                    basicPool.RollCharacter() :
-                    premiumPool.RollCharacter();
-
-                var data = CharacterDatabase.Instance.GetById(rolled);
-                rolledDatas.Add(data);
-            }
+            PlayerInventory.UseItem("seared_core", costs.x);
+            PlayerInventory.UseItem("crusted_core", costs.y);
+            PlayerInventory.UseItem("infused_core", costs.z);
+            return true;
         }
 
-        return rolledDatas.Count > 0;
+        return false;
     }
 
+}
+
+public class GachaRequest
+{
+    public int[] stages = new int[3];
+
+    public GachaRequest(int seared, int crusted, int infused)
+    {
+        stages[0] = Clamp(seared);
+        stages[1] = Clamp(crusted);
+        stages[2] = Clamp(infused);
+    }
+
+    public int GetStage(Role role)
+    {
+        if (role == Role.Support) return 0;
+
+        return stages[role.ToInt()];
+    }
+
+    public void ChangeStages(Role role, int amount)
+    {
+        if (role == Role.Support)
+        {
+            return;
+        }
+
+        int i = role.ToInt();
+
+        stages[i] = Clamp(stages[i] + amount);
+
+    }
+
+    private int Clamp(int value)
+    {
+        return Mathf.Clamp(value, 1, GachaSystem.MaxRoleStage);
+    }
 }

@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rankone_pool:
   - toast
-  ranktwo_pool: []
+  ranktwo_pool:
+  - coconut
   rankthree_pool: []
   rankfour_pool: []
   rankfive_pool: []
-  rankedChances: 6400000000000000000000000000000000000000
+  rankedChances: 640000001e000000000000000000000000000000
   chances:
   - 0
   - 0

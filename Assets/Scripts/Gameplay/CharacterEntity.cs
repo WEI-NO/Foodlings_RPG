@@ -44,12 +44,15 @@ public class CharacterEntity : BaseEntity
     // Combat
     // -----------------------
     [Header("Combat Settings")]
+    public AttackBehavior attackBehavior;
     [SerializeField] private float attackCooldownTimer = 0;
-    [SerializeField] private CharacterEntity attackTarget = null;
+    public CharacterEntity attackTarget = null;
     public bool targettingTower = false;
     public Tower targettedTower = null;
     public GameObject hitEffect;
     public bool towerInRange = false;
+
+    public float effectYOffset = 0.2f;
 
     // -----------------------
     // Health
@@ -68,6 +71,8 @@ public class CharacterEntity : BaseEntity
     private Coroutine knockbackRoutine;
 
     public bool debug_isAttacking = false;
+
+
 
     // =======================
     // Unity Lifecycle
@@ -117,7 +122,6 @@ public class CharacterEntity : BaseEntity
 
         HandleMovement();
     }
-
 
     // =======================
     // Update Helpers
@@ -171,6 +175,7 @@ public class CharacterEntity : BaseEntity
         MaxHealth = characterInstance.GetStat(CharacterStatType.HP);
         ResetHealth();
 
+        attackBehavior = characterInstance.baseData.behavior;
         attackCooldownTimer = 0.0f;
     }
 
@@ -182,7 +187,7 @@ public class CharacterEntity : BaseEntity
         state = newState;
     }
 
-private void AnimationUpdate()
+    private void AnimationUpdate()
 {
     bool inAttack = IsAttackAnimationPlaying();
 
@@ -235,7 +240,6 @@ private void AnimationUpdate()
         }
     }
 
-
     private void HandleNoEnemy()
     {
         // Target Enemy Tower Instead
@@ -258,15 +262,7 @@ private void AnimationUpdate()
             }
         }
 
-        if (attackCooldownTimer <= 0)
-        {
-            SwitchState(CharacterState.Advancing);
-        }
-        else
-        {
-            SwitchState(CharacterState.None);
-        }
-
+        AdvancingStateCheck();
         attackTarget = null;
     }
 
@@ -299,7 +295,7 @@ private void AnimationUpdate()
             }
             else
             {
-                SwitchState(CharacterState.Advancing);
+                AdvancingStateCheck();
             }
 
             return; // stop processing enemy
@@ -318,7 +314,19 @@ private void AnimationUpdate()
         }
         else
         {
+            AdvancingStateCheck();
+        }
+    }
+
+    private void AdvancingStateCheck()
+    {
+        if (attackCooldownTimer <= 0)
+        {
             SwitchState(CharacterState.Advancing);
+        }
+        else
+        {
+            SwitchState(CharacterState.None);
         }
     }
 
@@ -363,26 +371,40 @@ private void AnimationUpdate()
         }
     }
 
-    public void AttackTarget()
+    /// <summary>
+    /// Called by animation event on attack frame
+    /// </summary>
+    public void OnAttackFrame()
     {
-        if (attackTarget == null)
-        {
-            if (targettingTower && targettedTower != null && towerInRange)
-            {
-                targettedTower.Damage(characterInstance.GetStat(CharacterStatType.PAtk));
-                Instantiate(hitEffect,
-                    (Vector2)targettedTower.transform.position + RandomOffset(),
-                    Quaternion.identity);
-            }
-        }
-        else
-        {
-            attackTarget.Damage(characterInstance.GetStat(CharacterStatType.PAtk));
-            Instantiate(hitEffect,
-                (Vector2)attackTarget.transform.position + RandomOffset(),
-                Quaternion.identity);
-        }
+        if (attackBehavior == null)
+            return;
+
+        if (!attackBehavior.CanAttack(this))
+            return;
+
+        attackBehavior.Execute(this);
     }
+
+    //public void AttackTarget()
+    //{
+    //    if (attackTarget == null)
+    //    {
+    //        if (targettingTower && targettedTower != null && towerInRange)
+    //        {
+    //            targettedTower.Damage(characterInstance.GetStat(CharacterStatType.PAtk));
+    //            Instantiate(hitEffect,
+    //                (Vector2)targettedTower.transform.position + new Vector2(0, 1.0f) + RandomOffset(),
+    //                Quaternion.identity);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        attackTarget.Damage(characterInstance.GetStat(CharacterStatType.PAtk));
+    //        Instantiate(hitEffect,
+    //            (Vector2)attackTarget.transform.position + new Vector2(0, effectYOffset) + RandomOffset(),
+    //            Quaternion.identity);
+    //    }
+    //}
 
     public Vector2 RandomOffset()
     {
@@ -411,65 +433,54 @@ private void AnimationUpdate()
     private IEnumerator Knockback(float duration)
     {
         isKnockback = true;
+        anim.SetBool("Knocked", true);
         SwitchState(CharacterState.Knocked);
 
         float dir = GetKnockbackDirection();
         float distance = knockbackDistance;
         float height = knockbackHeight;
 
-        float segmentDuration = duration / 2f;
+        float bounceDuration = duration / 2f;
 
         for (int bounce = 0; bounce < 2; bounce++)
         {
-            yield return KnockbackBounce(dir, segmentDuration, distance, height);
-
-            // Shrink bounce height and distance for lighter second bounce
+            yield return KnockbackBounce(dir, bounceDuration, distance, height);
             distance *= 0.6f;
             height *= 0.8f;
         }
 
         isKnockback = false;
         knockbackRoutine = null;
-
-        // Resume AI
+        anim.SetBool("Knocked", false);
         SwitchState(CharacterState.None);
     }
 
-    private IEnumerator KnockbackBounce(float dir, float segmentDuration, float distance, float height)
+    private IEnumerator KnockbackBounce(float dir, float duration, float distance, float height)
     {
-        float segmentSplit = segmentDuration * 0.95f;
         float t = 0f;
 
-        float xStart = transform.position.x;
-        float yBase = transform.position.y;
+        Vector3 start = transform.position;
+        float x0 = start.x;
+        float y0 = start.y;
 
-        // ---- OUTWARD MOVEMENT (with upward hop) ----
-        while (t < segmentSplit)
+        while (t < duration)
         {
             t += Time.deltaTime;
-            float alpha = Mathf.Clamp01(t / segmentDuration);
+            float a = Mathf.Clamp01(t / duration);
 
-            // Horizontal
-            float xOffset = Mathf.Lerp(0f, distance, alpha);
-            float newX = xStart + dir * xOffset;
+            // Horizontal: smooth out
+            float x = x0 + dir * Mathf.Lerp(0f, distance, a);
 
-            // Vertical hop (parabola)
-            float verticalAlpha = alpha;
-            float yOffset = height * (1 - Mathf.Pow(2f * verticalAlpha - 1f, 2f));
-            float newY = yBase + yOffset;
+            // Vertical: smooth arc (0 at start/end, peak in middle)
+            // Sin(pi*a) gives 0 -> 1 -> 0 smoothly
+            float y = y0 + Mathf.Sin(Mathf.PI * a) * height;
 
-            transform.position = new Vector3(newX, newY, transform.position.z);
+            transform.position = new Vector3(x, y, start.z);
             yield return null;
         }
 
-        // ---- HOLD (return to ground) ----
-        t = 0f;
-        while (t < segmentDuration - segmentSplit)
-        {
-            t += Time.deltaTime;
-            transform.position = new Vector3(transform.position.x, yBase, transform.position.z);
-            yield return null;
-        }
+        // Ensure exact landing
+        transform.position = new Vector3(x0 + dir * distance, y0, start.z);
     }
 
     // =======================
@@ -517,6 +528,7 @@ private void AnimationUpdate()
     private IEnumerator OnDeathKnock()
     {
         anim.SetBool("Dead", true);
+        anim.SetTrigger("Knock");
         yield return Knockback(characterInstance.baseData.knockbackDuration);
 
         if (CharacterContainer.Instance != null && CharacterContainer.Instance.deathObject != null)
@@ -527,5 +539,29 @@ private void AnimationUpdate()
 
         base.OnDeath();
     }
+
+    public BaseEntity GetAttackTarget()
+    {
+        if (targettingTower)
+        {
+            return targettedTower;
+        }
+        return attackTarget;
+    }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (attackBehavior == null)
+            return;
+
+        // Only draw for MeleeAreaAttack
+        if (attackBehavior is MeleeAreaAttack areaAttack)
+        {
+            Gizmos.color = new Color(1f, 0f, 0f, 0.35f); // semi-transparent red
+            Gizmos.DrawWireSphere(transform.position + MidBodyOffset(), areaAttack.radius);
+        }
+    }
+#endif
 
 }

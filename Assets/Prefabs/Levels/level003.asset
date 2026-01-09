@@ -18,91 +18,127 @@ MonoBehaviour:
   characterData: []
   waves:
   - startSeconds: 0
+    characterIndex: 0
     single: 0
     burst: 0
-    burstAmount: 2
-    burstDelay: 0.5
-    characterIndex: 0
     repeater: 1
-    spawnOnStart: 0
-    interval: 3
-    duration: 10
+    burstOptions:
+      amount: 0
+      delay: 0
+    repeaterOptions:
+      spawnOnStart: 0
+      interval: 0
+      duration: 0
+      useRandomInterval: 0
+      randomInterval: {x: 0, y: 0}
     abort: 0
+    spawnedSoFar: 0
     timePassed: 0
   - startSeconds: 10
+    characterIndex: 0
     single: 0
     burst: 0
-    burstAmount: 2
-    burstDelay: 0.5
-    characterIndex: 0
     repeater: 1
-    spawnOnStart: 0
-    interval: 7
-    duration: 20
+    burstOptions:
+      amount: 0
+      delay: 0
+    repeaterOptions:
+      spawnOnStart: 0
+      interval: 0
+      duration: 0
+      useRandomInterval: 0
+      randomInterval: {x: 0, y: 0}
     abort: 0
+    spawnedSoFar: 0
     timePassed: 0
   - startSeconds: 40
+    characterIndex: 0
     single: 0
     burst: 0
-    burstAmount: 2
-    burstDelay: 0.5
-    characterIndex: 0
     repeater: 1
-    spawnOnStart: 0
-    interval: 5
-    duration: 30
+    burstOptions:
+      amount: 0
+      delay: 0
+    repeaterOptions:
+      spawnOnStart: 0
+      interval: 0
+      duration: 0
+      useRandomInterval: 0
+      randomInterval: {x: 0, y: 0}
     abort: 0
+    spawnedSoFar: 0
     timePassed: 0
   - startSeconds: 30
+    characterIndex: 0
     single: 0
     burst: 0
-    burstAmount: 2
-    burstDelay: 0.5
-    characterIndex: 0
     repeater: 1
-    spawnOnStart: 0
-    interval: 5
-    duration: 40
+    burstOptions:
+      amount: 0
+      delay: 0
+    repeaterOptions:
+      spawnOnStart: 0
+      interval: 0
+      duration: 0
+      useRandomInterval: 0
+      randomInterval: {x: 0, y: 0}
     abort: 0
+    spawnedSoFar: 0
     timePassed: 0
   - startSeconds: 70
+    characterIndex: 0
     single: 0
     burst: 0
-    burstAmount: 2
-    burstDelay: 0.5
-    characterIndex: 0
     repeater: 1
-    spawnOnStart: 0
-    interval: 4
-    duration: 70
+    burstOptions:
+      amount: 0
+      delay: 0
+    repeaterOptions:
+      spawnOnStart: 0
+      interval: 0
+      duration: 0
+      useRandomInterval: 0
+      randomInterval: {x: 0, y: 0}
     abort: 0
+    spawnedSoFar: 0
     timePassed: 0
   - startSeconds: 140
+    characterIndex: 0
     single: 0
     burst: 0
-    burstAmount: 2
-    burstDelay: 0.5
-    characterIndex: 0
     repeater: 1
-    spawnOnStart: 0
-    interval: 3
-    duration: 60
+    burstOptions:
+      amount: 0
+      delay: 0
+    repeaterOptions:
+      spawnOnStart: 0
+      interval: 0
+      duration: 0
+      useRandomInterval: 0
+      randomInterval: {x: 0, y: 0}
     abort: 0
+    spawnedSoFar: 0
     timePassed: 0
   - startSeconds: 200
+    characterIndex: 0
     single: 0
     burst: 0
-    burstAmount: 2
-    burstDelay: 0.5
-    characterIndex: 0
     repeater: 1
-    spawnOnStart: 0
-    interval: 2
-    duration: 1000
+    burstOptions:
+      amount: 0
+      delay: 0
+    repeaterOptions:
+      spawnOnStart: 0
+      interval: 0
+      duration: 0
+      useRandomInterval: 0
+      randomInterval: {x: 0, y: 0}
     abort: 0
+    spawnedSoFar: 0
     timePassed: 0
   unstartedWaves: []
   inprogressWaves: []
+  mapLength: 5
   initialDelay: 5
   LevelName: Forest Grove III
   timePassed: 0

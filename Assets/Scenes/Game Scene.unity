@@ -222,8 +222,10 @@ MonoBehaviour:
   summonButtons: []
   overrideSummonCharacter:
   - {fileID: 11400000, guid: dd9b47a4daedde6458da5271126838a7, type: 2}
-  overrideSummonCharacterLevel: 01000000
-  overrideCharacters: 0
+  - {fileID: 11400000, guid: 2eee4f3457cb58242a58f628526c382d, type: 2}
+  overrideSummonCharacterLevel: 0100000001000000
+  overrideCharacters: 1
+  summonPanelReady: 0
 --- !u!1 &103031204
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,8 +496,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -504208387
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 4996440803595423377, guid: c007537450037ef41a89a641b83ea694, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1549,6 +1551,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f63fc4aba937646bd38d6092b646d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MapLengths:
+  - 6
+  - 8
+  - 10
+  - 12
+  - 15
+  - 18
+  - 20
+  - 25
+  - 30
   mapLength: 20
   PlayerBase: {fileID: 6136301881448128723, guid: deb0e867bee1e1d4788a5dabab53ef10, type: 3}
   spawnedPlayerBase: {fileID: 0}
@@ -1563,6 +1575,7 @@ MonoBehaviour:
   foregroundYPosition: -8
   extraGroundPerSide: 4
   spawnY: -1.6
+  ready: 0
 --- !u!1 &615887129
 GameObject:
   m_ObjectHideFlags: 0
@@ -3522,8 +3535,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -504208387
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 4996440803595423377, guid: c007537450037ef41a89a641b83ea694, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3951,9 +3964,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 806135779}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 424}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 120}
   m_SizeDelta: {x: 428.2, y: 43.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617662957
@@ -4771,7 +4784,7 @@ MonoBehaviour:
   CurrentMoneyCap: 0
   BaseMoneySpeed: 7.5
   MoneySpeedCompoundPercentage: 0.15
-  CurrentMoneySpeed: 0
+  CurrentMoneySpeed: 50
   RoundMoney: 0
   kMultiplier: 0.6
   InprogressWave: []

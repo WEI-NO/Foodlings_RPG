@@ -1,11 +1,22 @@
 using CustomLibrary.References;
+using JetBrains.Annotations;
 using NUnit.Framework.Internal;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
+
+public enum MapLength
+{
+    Short_1, Short_2, Short_3,
+    Medium_1, Medium_2, Medium_3,
+    Long_1, Long_2, Long_3
+}
 
 public class MapController : MonoBehaviour
 {
     public static MapController Instance;
+
+    public float[] MapLengths = new float[] { 6, 8, 10, 12, 15, 18, 20, 25, 30 };
 
     [Header("Map Properties")]
     [SerializeField] private float mapLength = 10.0f; // With respect to the middle (0)
@@ -34,13 +45,30 @@ public class MapController : MonoBehaviour
     [Header("Spawning Settings")]
     [SerializeField] private float spawnY;
 
+    public bool ready = false;
+
     private void Awake()
     {
         Initializer.SetInstance(this);
     }
 
-    private void Start()
+    private async void Start()
     {
+        ready = false;
+
+        while (GameMatchManager.Instance.currentLevel == null)
+        {
+            await Task.Yield();
+        }
+
+        var currLevel = GameMatchManager.Instance.currentLevel;
+
+        if (currLevel)
+        {
+            mapLength = MapLengths[(int)currLevel.mapLength];
+        }
+
+        ready = true;
         StartGameSequence();
     }
 

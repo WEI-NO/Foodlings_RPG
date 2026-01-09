@@ -44,4 +44,5 @@ MonoBehaviour:
   healthThreshold: []
   unitPrefab: {fileID: 1333956205622021100, guid: 6c0043345c2c01b47b94a2c086b37600, type: 3}
   unitSprite: {fileID: 3542127132570728493, guid: 3229132376d0eae47990b4c544a06231, type: 3}
+  behavior: {fileID: 11400000, guid: 531909e941f0a0543808982321580ad2, type: 2}
   maxLevel: 30

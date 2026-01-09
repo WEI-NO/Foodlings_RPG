@@ -19,11 +19,14 @@ public class SummonPanel : MonoBehaviour
 
     public bool overrideCharacters = false;
 
+    public bool summonPanelReady = false;
+
     private async void Start()
     {
         party = PlayerParty.Instance;
+        summonPanelReady = false;
 
-        while (!CharacterDatabase.Instance.IsReady)
+        while (!GameBoostrapper.Instance.DataLoaded)
             await Task.Yield();
 
         foreach (Transform b in transform)
@@ -41,11 +44,13 @@ public class SummonPanel : MonoBehaviour
             var data = PlayerCollection.Instance.FindData(party.Party[i]);
             summonButtons[i].AssignUnit(data);
         }
+        summonPanelReady = true;
 
     }
 
     private void Update()
     {
+        if (!summonPanelReady) return;
         if (overrideCharacters)
         {
             for (int i = summonButtons.Count - 1; i >= 0; i--)

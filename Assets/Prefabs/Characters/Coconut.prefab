@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 10f7e285405eada489d02c6f8b10225e, type: 2}
+    - target: {fileID: 8207089339819138115, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
+      propertyPath: attackBehavior
+      value: 
+      objectReference: {fileID: 11400000, guid: 90ea84800134f2b4c81ff4679f144c62, type: 2}
     - target: {fileID: 8283804360114963105, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
       propertyPath: m_Name
       value: Coconut

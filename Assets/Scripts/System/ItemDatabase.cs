@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Items/Inventory Database")]
@@ -6,6 +7,26 @@ public class ItemDatabase : ScriptableObject
 {
     [Header("All item definitions in game")]
     public List<InventoryItem> items = new List<InventoryItem>();
+
+#if UNITY_EDITOR
+    [ContextMenu("Rebuild Database")]
+    public void Rebuild()
+    {
+        items.Clear();
+
+        string[] guids = AssetDatabase.FindAssets("t:InventoryItem");
+        foreach (string guid in guids)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            InventoryItem item = AssetDatabase.LoadAssetAtPath<InventoryItem>(path);
+            if (item != null)
+                items.Add(item);
+        }
+
+        EditorUtility.SetDirty(this);
+        Debug.Log($"ItemDatabase rebuilt. {items.Count} items found.");
+    }
+#endif
 
     // Runtime lookup table
     private Dictionary<string, InventoryItem> lookup;

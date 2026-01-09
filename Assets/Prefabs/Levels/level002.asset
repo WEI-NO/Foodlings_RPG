@@ -19,6 +19,7 @@ MonoBehaviour:
   waves: []
   unstartedWaves: []
   inprogressWaves: []
+  mapLength: 3
   initialDelay: 5
   LevelName: Forest Grove II
   timePassed: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PremiumPool
   m_EditorClassIdentifier: 
   rankone_pool:
-  - tiny_chef
+  - coconut
   ranktwo_pool: []
   rankthree_pool: []
   rankfour_pool: []

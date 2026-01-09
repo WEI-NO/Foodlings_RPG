@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using static UnityEngine.GraphicsBuffer;
 
-public enum UnitRank { UnderCooked, HomeCooked, WellCooked, ChefCooked, PremiumCooked, Count}
-public enum Faction { Fruit, Veggie, Utensil, Breakfast }
+public enum UnitRank { UnderCooked=0, HomeCooked, WellCooked, ChefCooked, PremiumCooked, Count}
+public enum Role { Fighter, Tank, Magic, Support }
 
 public enum CharacterStatType { HP, PAtk, MAtk, PDef, MDef, AtkRng, AtkSpe, Spe, CD }
 
@@ -71,7 +71,8 @@ public class CharacterData : ScriptableObject
     public string id;
     public string displayName;
     public UnitRank baseRank;
-    public CharacterTrait trait;
+    public Role role;
+    //public CharacterTrait trait;
 
     [Header("Economy")]
     public int summonCost;
@@ -99,6 +100,7 @@ public class CharacterData : ScriptableObject
     [Header("Assets (Addressables)")]
     public GameObject unitPrefab;
     public Sprite unitSprite;
+    public AttackBehavior behavior;
 
     [Header("Level Settings")]
     public int maxLevel = 30;

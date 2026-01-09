@@ -45,4 +45,5 @@ MonoBehaviour:
   - 0.5
   unitPrefab: {fileID: 4057219219921995394, guid: 72ed6e6c7560357418d3aef5500768e8, type: 3}
   unitSprite: {fileID: 21300000, guid: 1a860f95c58aa0f4182fcc5f78baee43, type: 3}
+  behavior: {fileID: 11400000, guid: b24d64ce85cb3c8449998e1687a4d2fa, type: 2}
   maxLevel: 30

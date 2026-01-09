@@ -2696,6 +2696,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Region001
       objectReference: {fileID: 0}
+    - target: {fileID: 3341744920248509682, guid: fb58f1ff45d472548a0515469319c644, type: 3}
+      propertyPath: assignedLevel
+      value: 
+      objectReference: {fileID: 11400000, guid: c8b497623e2f9d244847d2506f0a6482, type: 2}
     - target: {fileID: 5649026789472666678, guid: fb58f1ff45d472548a0515469319c644, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -12195,7 +12199,7 @@ PrefabInstance:
     - target: {fileID: 7893636967069508385, guid: fb58f1ff45d472548a0515469319c644, type: 3}
       propertyPath: level
       value: 
-      objectReference: {fileID: 11400000, guid: c8b497623e2f9d244847d2506f0a6482, type: 2}
+      objectReference: {fileID: 11400000, guid: 8d7f147220b5ac84296c4016b98050ec, type: 2}
     - target: {fileID: 7893636967069508385, guid: fb58f1ff45d472548a0515469319c644, type: 3}
       propertyPath: unlockRegionUponCompletion
       value: 1

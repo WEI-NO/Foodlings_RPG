@@ -715,6 +715,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1866280470}
   - component: {fileID: 1866280471}
+  - component: {fileID: 1866280472}
   m_Layer: 0
   m_Name: Persistent Gameplay
   m_TagString: Untagged
@@ -758,6 +759,20 @@ MonoBehaviour:
   loadingScreen: {fileID: 1790495530}
   isTransitioning: 0
   LoadInitialDelay: 1
+--- !u!114 &1866280472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866280469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acb0fe2d11ab08b4a9377a612baff1a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterDatabasePrefab: {fileID: 1586140055}
+  mainDatabasePrefab: {fileID: 1586140056}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

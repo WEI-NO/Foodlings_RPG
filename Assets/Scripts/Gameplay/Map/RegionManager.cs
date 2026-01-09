@@ -73,10 +73,6 @@ public class RegionManager : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.K))
-        //{
-        //    UnlockNextRegion();
-        //}
     }
 
     private void DisplayUnlocked()

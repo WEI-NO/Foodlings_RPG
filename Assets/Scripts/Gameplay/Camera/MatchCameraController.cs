@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -31,10 +31,9 @@ public class MatchCameraController : MonoBehaviour
         {
             await Task.Yield();
         }
-        
-        StartCoroutine(MoveFromRightToLeft(3f)); // pans over 3 seconds
 
-        cam = Camera.main;
+        while (!MapController.Instance.ready)
+            await Task.Yield();
 
         if (automaticAdjustMinMaxX)
         {
@@ -45,12 +44,16 @@ public class MatchCameraController : MonoBehaviour
                 maxX = m.GetBound_Right;
             }
         }
+
+
+        StartCoroutine(MoveFromRightToLeft(3f)); // pans over 3 seconds
+        cam = Camera.main;
         ready = true;
     }
 
     void Update()
     {
-        if (!ready) return;
+        if (!ready || GameMatchManager.Instance.GamePaused()) return;
         HandlePan();
         HandleZoom();
     }

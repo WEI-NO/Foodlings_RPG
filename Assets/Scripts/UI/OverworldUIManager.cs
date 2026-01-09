@@ -1,18 +1,24 @@
+using CustomLibrary.References;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class OverworldUIManager : MonoBehaviour
 {
+    public static OverworldUIManager Instance;
+
     [Header("Components")]
     public Dictionary<int, BaseUIPage> pages = new();
 
     private void Awake()
     {
+        Initializer.SetInstance(this);
+
         foreach (Transform t in transform)
         {
             if (t == null) continue;
             var page = t.GetComponent<BaseUIPage>();
             if (page == null) continue;
+            if (!page.enabled) continue;
 
             pages.Add(page.pageID, page);
         }

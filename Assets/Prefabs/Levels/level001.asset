@@ -17,11 +17,11 @@ MonoBehaviour:
   characterLevels: 01000000
   characterData: []
   waves:
-  - startSeconds: 0
+  - startSeconds: 5
     characterIndex: 0
-    single: 0
+    single: 1
     burst: 0
-    repeater: 1
+    repeater: 0
     burstOptions:
       amount: 0
       delay: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
     abort: 0
     spawnedSoFar: 0
     timePassed: 0
-  - startSeconds: 25
+  - startSeconds: 30
     characterIndex: 0
     single: 0
     burst: 0
@@ -47,11 +47,11 @@ MonoBehaviour:
       interval: 0
       duration: 20
       useRandomInterval: 1
-      randomInterval: {x: 2, y: 5}
+      randomInterval: {x: 3, y: 5}
     abort: 0
     spawnedSoFar: 0
     timePassed: 0
-  - startSeconds: 60
+  - startSeconds: 70
     characterIndex: 0
     single: 0
     burst: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
       interval: 0
       duration: 30
       useRandomInterval: 1
-      randomInterval: {x: 1, y: 5}
+      randomInterval: {x: 5, y: 10}
     abort: 0
     spawnedSoFar: 0
     timePassed: 0
@@ -81,12 +81,13 @@ MonoBehaviour:
       interval: 0
       duration: 1000
       useRandomInterval: 1
-      randomInterval: {x: 2, y: 6}
+      randomInterval: {x: 4, y: 9}
     abort: 0
     spawnedSoFar: 0
     timePassed: 0
   unstartedWaves: []
   inprogressWaves: []
+  mapLength: 3
   initialDelay: 5
   LevelName: Forest Grove I
   timePassed: 0
@@ -105,6 +106,6 @@ MonoBehaviour:
   clearRewards:
   - rewardID: toast_coin
     quantity: 300
-    useQuantityRange: 0
-    quantityRange: {x: 0, y: 0}
+    useQuantityRange: 1
+    quantityRange: {x: 400, y: 600}
     rolled: 0

@@ -63,7 +63,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Level Canvas/Level Text
+    path: Level Canvas/Level Text Bg
   m_FloatCurves: []
   m_PPtrCurves: []
   m_SampleRate: 60
@@ -92,7 +92,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 3869489138
+      path: 2223909883
       attribute: 3
       script: {fileID: 0}
       typeID: 4
@@ -265,7 +265,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: Level Canvas/Level Text
+    path: Level Canvas/Level Text Bg
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -286,7 +286,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: Level Canvas/Level Text
+    path: Level Canvas/Level Text Bg
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -307,7 +307,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: Level Canvas/Level Text
+    path: Level Canvas/Level Text Bg
     classID: 224
     script: {fileID: 0}
     flags: 0

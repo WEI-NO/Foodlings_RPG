@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2121905008950107794, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 823381888163138418, guid: c7e64db444c98fe4bb1168e0e29e0c44, type: 3}
     - target: {fileID: 3163177321917955028, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -56,6 +60,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 6694aebb654d21749894ce64ba4aaa0f, type: 2}
+    - target: {fileID: 8207089339819138115, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
+      propertyPath: height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207089339819138115, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
+      propertyPath: attackBehavior
+      value: 
+      objectReference: {fileID: 11400000, guid: f0b54960130ad204bb49069f9d3c04f7, type: 2}
     - target: {fileID: 8283804360114963105, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
       propertyPath: m_Name
       value: TinyChef

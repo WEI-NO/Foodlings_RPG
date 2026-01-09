@@ -5,6 +5,7 @@ public enum ItemCategory
 {
     Currency,
     Equipment,
+    Materials,
     Count
 }
 

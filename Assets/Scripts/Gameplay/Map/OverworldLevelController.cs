@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;   // ✅ Needed to detect UI hover
 [RequireComponent(typeof(Collider2D))]
 public class OverworldLevelController : MonoBehaviour
 {
+    const int LevelViewerUIID = 7;
+
     [Header("Components")]
     public Animator anim;
     public TextMeshProUGUI levelText;
@@ -98,15 +100,23 @@ public class OverworldLevelController : MonoBehaviour
         if (PointerOverUI()) return; 
         anim?.SetTrigger("Release");
 
-        // Only trigger game logic when not over UI
+
+        OverworldLevelViewerUIPage.Instance.SetLevel(this);
+        OverworldUIManager.Instance.OpenPageID(LevelViewerUIID);
+    }
+
+    public bool StartLevel()
+    {
+
         if (!PlayerParty.Instance.HasTeamMembers())
         {
             ErrorDisplayManager.ShowError("Please assign at least one foodling to your party!");
-            return;
+            return false;
         }
 
         GameMatchManager.SetLevel(level, unlockRegionUponCompletion, unlockRegionIndex);
         OverworldData.Instance.inprogressLevelIndex = regionIndex;
         SceneTransitor.Instance.TransitionTo("Game Scene");
+        return true;
     }
 }

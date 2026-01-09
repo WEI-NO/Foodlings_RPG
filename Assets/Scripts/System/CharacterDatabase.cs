@@ -12,37 +12,22 @@ public class CharacterDatabase : MonoBehaviour
     // Runtime indexes
     private readonly Dictionary<string, CharacterData> byId = new();
     private readonly Dictionary<UnitRank, List<CharacterData>> byRarity = new();
-    private readonly Dictionary<FlavorTrait, List<CharacterData>> byFlavor = new();
-    private readonly Dictionary<StyleTrait, List<CharacterData>> byStyle = new();
+    private readonly Dictionary<Role, List<CharacterData>> byRole = new();
 
     [Header("Addressables")]
     [SerializeField] private string unitsLabel = "Characters"; // label applied to all CharacterData assets
 
     public bool IsReady { get; private set; }
 
-    private async void Awake()
+    private void Awake()
     {
-        IsReady = false;
         Initializer.SetInstance(this); 
-        DontDestroyOnLoad(gameObject);
-        // (Optional but recommended in builds)
-        await Addressables.InitializeAsync().Task;
-
-        try
-        {
-            await InitializeAsync();
-            Debug.Log("CharacterDatabase ready.");
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogException(e);
-        }
     }
     public async Task InitializeAsync()
     {
         if (IsReady) return;
 
-        // Load all UnitData assets with a shared label (no Resources folder needed)
+        // Load all UnitData assets with a shared label
         AsyncOperationHandle<IList<CharacterData>> handle =
             Addressables.LoadAssetsAsync<CharacterData>(unitsLabel, null);
 
@@ -51,8 +36,7 @@ public class CharacterDatabase : MonoBehaviour
         // Build indexes
         byId.Clear();
         byRarity.Clear();
-        byFlavor.Clear();
-        byStyle.Clear();
+        byRole.Clear();
 
         foreach (var u in allUnits)
         {
@@ -65,13 +49,9 @@ public class CharacterDatabase : MonoBehaviour
                 byRarity[u.baseRank] = listR = new List<CharacterData>();
             listR.Add(u);
 
-            if (!byFlavor.TryGetValue(u.trait.PrimaryTrait(), out var listF))
-                byFlavor[u.trait.PrimaryTrait()] = listF = new List<CharacterData>();
+            if (!byRole.TryGetValue(u.role, out var listF))
+                byRole[u.role] = listF = new List<CharacterData>();
             listF.Add(u);
-
-            if (!byStyle.TryGetValue(u.trait.SecondaryTrait(), out var listS))
-                byStyle[u.trait.SecondaryTrait()] = listS = new List<CharacterData>();
-            listS.Add(u);
         }
 
         IsReady = true;
@@ -84,6 +64,6 @@ public class CharacterDatabase : MonoBehaviour
     public IReadOnlyList<CharacterData> GetByRarity(UnitRank r) =>
         byRarity.TryGetValue(r, out var list) ? list : System.Array.Empty<CharacterData>();
 
-    public IReadOnlyList<CharacterData> GetByFlavor(FlavorTrait f) =>
-        byFlavor.TryGetValue(f, out var list) ? list : System.Array.Empty<CharacterData>();
+    public IReadOnlyList<CharacterData> GetByRole(Role f) =>
+        byRole.TryGetValue(f, out var list) ? list : System.Array.Empty<CharacterData>();
 }

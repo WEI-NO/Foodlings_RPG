@@ -29,15 +29,17 @@ public class Tower : BaseEntity
 
     public Vector2 GetSpawnPoint()
     {
-        int step = Random.Range(0, yOffsetSteps);
-        float range = yOffsetRange.y - yOffsetRange.x;
-        float stepAmount = range / yOffsetSteps;
+        //int step = Random.Range(0, yOffsetSteps);
+        //float range = yOffsetRange.y - yOffsetRange.x;
+        //float stepAmount = range / yOffsetSteps;
 
-        float lowerBound = spawnPoint.position.y + yOffsetRange.x;
-        float yPosition = lowerBound + stepAmount * step;
+        //float lowerBound = spawnPoint.position.y + yOffsetRange.x;
+        //float yPosition = lowerBound + stepAmount * step;
 
 
-        return new Vector2(spawnPoint.position.x, yPosition);
+        //return new Vector2(spawnPoint.position.x, yPosition);
+        float randomY = spawnPoint.position.y + Random.Range(yOffsetRange.x, yOffsetRange.y);
+        return new Vector2(GetXPosition(), randomY);
     }
 
     public float GetXPosition()

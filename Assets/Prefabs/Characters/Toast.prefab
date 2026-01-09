@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8207089339819138115, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
+      propertyPath: attackBehavior
+      value: 
+      objectReference: {fileID: 11400000, guid: e3e0dd9bee90ccb449789be0dd0ae2cb, type: 2}
     - target: {fileID: 8283804360114963105, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
       propertyPath: m_Name
       value: Toast

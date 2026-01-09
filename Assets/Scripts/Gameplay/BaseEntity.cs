@@ -14,6 +14,14 @@ public class BaseEntity : MonoBehaviour
     public GameObject attackProjectile;
     protected bool isDead = false;
 
+    [Header("Effect Setting")]
+    public float height = 1.0f;
+
+    public Vector3 MidBodyOffset()
+    {
+        return new Vector3(0, height / 2.0f, 0);
+    }
+
     public void Damage(float damage)
     {
         CurrentHealth -= damage;
