@@ -163,10 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b49eaa72984bf41b0c554156690967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicPool: {fileID: 11400000, guid: bd69fd7d8110f65448a2e5a83138eafb, type: 2}
-  premiumPool: {fileID: 11400000, guid: 385b6ab6ea048a24abf32326451003f4, type: 2}
-  pulledCurrency: gem
-  currencyUsage: 960000002c010000
+  CostPerStage: 50
 --- !u!1 &404634253
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +376,7 @@ GameObject:
   - component: {fileID: 1227699929}
   - component: {fileID: 1227699930}
   - component: {fileID: 1227699931}
+  - component: {fileID: 1227699932}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -466,6 +464,19 @@ MonoBehaviour:
   - toast_coin
   - gem
   defaultAddItemQuantity: a0860100a0860100
+--- !u!114 &1227699932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227699926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc9c6cb4fffc4d4dbc2b33724e671f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentOvenSlot: 1
 --- !u!1 &1424977754
 GameObject:
   m_ObjectHideFlags: 0

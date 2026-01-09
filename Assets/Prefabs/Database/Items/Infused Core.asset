@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0341f9085928764e9932f59bb489dd1, type: 3}
   m_Name: Infused Core
   m_EditorClassIdentifier: 
-  id: seared_core
-  displayName: Seared Core
+  id: infused_core
+  displayName: Infused Core
   icon: {fileID: 392233518939393615, guid: 118cb70517ba6894ca85feeb0de5d40a, type: 3}
   maxStack: 999999
   description: 

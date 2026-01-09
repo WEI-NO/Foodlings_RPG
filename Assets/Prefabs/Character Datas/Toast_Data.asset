@@ -25,9 +25,7 @@ MonoBehaviour:
   id: toast
   displayName: Toast
   baseRank: 0
-  trait:
-    primaryTrait: 2
-    secondaryTrait: 0
+  role: 0
   summonCost: 40
   cooldownSec: 5
   healthPoint: 100

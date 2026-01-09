@@ -25,9 +25,7 @@ MonoBehaviour:
   id: coconut
   displayName: Coconut
   baseRank: 0
-  trait:
-    primaryTrait: 4
-    secondaryTrait: 6
+  role: 0
   summonCost: 140
   cooldownSec: 10
   healthPoint: 250
