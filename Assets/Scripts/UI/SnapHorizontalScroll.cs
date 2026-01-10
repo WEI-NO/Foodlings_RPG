@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,8 +16,8 @@ public class SnapHorizontalScroll : MonoBehaviour, IBeginDragHandler, IEndDragHa
     private bool isDragging = false;
 
     // Normalized positions for each page (0..1)
-    private float[] pagePositions;
-    private int pageCount;
+    public float[] pagePositions;
+    public int pageCount;
     private float targetPosition;       // target horizontalNormalizedPosition
     private int currentPageIndex = 0;   // tracked page index
 
@@ -28,23 +29,31 @@ public class SnapHorizontalScroll : MonoBehaviour, IBeginDragHandler, IEndDragHa
         // Optional but recommended so inertia doesn't fight the snapping:
         scrollRect.inertia = false;
 
-        SetupPages();
+        //SetupPages();
     }
 
-    private void OnEnable()
+    private async void OnEnable()
     {
+        await Task.Yield();
         SetupPages();
     }
 
     /// <summary>
     /// Precompute normalized positions for each page.
     /// </summary>
-    private void SetupPages()
+    public void SetupPages()
     {
         if (content == null)
             return;
 
         pageCount = content.childCount;
+
+        print("Setting up:");
+        foreach (Transform i in content)
+        {
+            print(i.name);
+        }
+
 
         if (pageCount <= 0)
         {

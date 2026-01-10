@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3df29ed0a64c048ad7c2552443e173, type: 3}
+  m_Name: Star Rarity Table
+  m_EditorClassIdentifier: 
+  rows:
+  - minTotal: 1
+    maxTotal: 2
+    oneStar: 95
+    twoStar: 5
+    threeStar: 0
+    fourStar: 0
+    fiveStar: 0
+    cookTime_s: 5
+  - minTotal: 3
+    maxTotal: 4
+    oneStar: 80
+    twoStar: 18
+    threeStar: 2
+    fourStar: 0
+    fiveStar: 0
+    cookTime_s: 5
+  - minTotal: 5
+    maxTotal: 6
+    oneStar: 65
+    twoStar: 28
+    threeStar: 7
+    fourStar: 0
+    fiveStar: 0
+    cookTime_s: 5
+  - minTotal: 7
+    maxTotal: 8
+    oneStar: 50
+    twoStar: 32
+    threeStar: 16
+    fourStar: 2
+    fiveStar: 0
+    cookTime_s: 5
+  - minTotal: 9
+    maxTotal: 10
+    oneStar: 38
+    twoStar: 34
+    threeStar: 22
+    fourStar: 5
+    fiveStar: 1
+    cookTime_s: 5
+  - minTotal: 11
+    maxTotal: 12
+    oneStar: 28
+    twoStar: 32
+    threeStar: 28
+    fourStar: 10
+    fiveStar: 2
+    cookTime_s: 5
+  - minTotal: 13
+    maxTotal: 14
+    oneStar: 20
+    twoStar: 28
+    threeStar: 32
+    fourStar: 16
+    fiveStar: 4
+    cookTime_s: 5
+  - minTotal: 15
+    maxTotal: 15
+    oneStar: 15
+    twoStar: 25
+    threeStar: 35
+    fourStar: 20
+    fiveStar: 5
+    cookTime_s: 5

@@ -5,28 +5,30 @@ public class GachaUI : BaseUIPage
     
     public CharacterObtainUIPage obtainUI;
 
-    public void PullBasic_Single()
+    public Transform content;
+    public OvenDisplay display;
+
+    public SnapHorizontalScroll snapScroller;
+
+    protected override void OnContentEnabled()
     {
-        PerformPull(GachaType.Basic, 1);
+        RefreshDisplay();
     }
 
-    public void PullBasic_Ten()
+    private void RefreshDisplay()
     {
-        PerformPull(GachaType.Basic, 5);
+        for (int i = content.childCount - 1; i >= 0; i--)
+        {
+            Destroy(content.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < PlayerGachaInfo.Instance.Ovens.Count; i++)
+        {
+            var dis = Instantiate(display, content);
+            dis.Initialize(i);
+        }
+
+        //snapScroller.SetupPages();
     }
 
-    public void PullPremium_Single()
-    {
-        PerformPull(GachaType.Premium, 1);
-    }
-
-    public void PullPremium_Ten()
-    {
-        PerformPull(GachaType.Premium, 5);
-    }
-
-    private void PerformPull(GachaType type, int amount)
-    {
-
-    }
 }

@@ -14,7 +14,10 @@ public class GachaSystem : MonoBehaviour
 
     public static int MaxRoleStage = 5;
 
-    public int CostPerStage = 50;
+    public readonly int[] CostPerStage = new int[6] { 0, 2, 4, 6, 8, 10 };
+
+    public StarRarityTable rarityTable;
+    public RoleBiasSettings roleBiasSettings;
 
     private void Awake()
     {
@@ -29,8 +32,18 @@ public class GachaSystem : MonoBehaviour
         int t = request.GetStage(Role.Tank);
         int m = request.GetStage(Role.Magic);
 
-        return new Vector3Int(f * CostPerStage, t * CostPerStage, m * CostPerStage);
+        return new Vector3Int(CostPerStage[f], CostPerStage[t], CostPerStage[m]);
     }
+
+    public int GetCraftCost(GachaRequest request, Role role)
+    {
+        if (request == null) return 0;
+
+        int cost = request.GetStage(role);
+
+        return CostPerStage[cost];
+    }
+
 
     public bool AttemptCraft(GachaRequest request)
     {
@@ -79,9 +92,25 @@ public class GachaRequest
         stages[i] = Clamp(stages[i] + amount);
 
     }
+    
+    public int Total()
+    {
+        int total = 0;
+        foreach (var s in stages)
+        {
+            total += s;
+        }
+        return total;
+    }
+
+    public bool Valid()
+    {
+        return Total() > 0;
+    }
 
     private int Clamp(int value)
     {
-        return Mathf.Clamp(value, 1, GachaSystem.MaxRoleStage);
+        return Mathf.Clamp(value, 0, GachaSystem.MaxRoleStage);
     }
+
 }

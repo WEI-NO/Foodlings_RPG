@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: seared_core
   displayName: Seared Core
-  icon: {fileID: 392233518939393615, guid: 118cb70517ba6894ca85feeb0de5d40a, type: 3}
+  icon: {fileID: 791382025818577539, guid: 13d6d0f83784446488f714d71f9a5c78, type: 3}
   maxStack: 999999
   description: 
   category: 2

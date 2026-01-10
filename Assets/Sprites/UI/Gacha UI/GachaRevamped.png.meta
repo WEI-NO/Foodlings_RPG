@@ -215,6 +215,138 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: GachaRevamped_5
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 240
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 781a63d6ec844294e97975ee890f302b
+      internalID: -369453221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GachaRevamped_6
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 304
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c46ad1371435b048b6b908afd4e2503
+      internalID: 1379698156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GachaRevamped_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 256
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc0763522f34f5f4282b2c189e4428dc
+      internalID: 1187780781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GachaRevamped_8
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 206
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b015b722dec9584e98caacdff989232
+      internalID: 465770539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GachaRevamped_9
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 206
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bce769676416474f9b3209e47a95e52
+      internalID: 238361510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GachaRevamped_10
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 160
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a74aaaf122c4d474ba954e6ba17edf02
+      internalID: 2108211621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -231,9 +363,15 @@ TextureImporter:
     nameFileIdTable:
       GachaRevamped_0: 8798892039974673426
       GachaRevamped_1: 3108757233837975822
+      GachaRevamped_10: 2108211621
       GachaRevamped_2: 739320452906377898
       GachaRevamped_3: 345850482
       GachaRevamped_4: 1371493276
+      GachaRevamped_5: -369453221
+      GachaRevamped_6: 1379698156
+      GachaRevamped_7: 1187780781
+      GachaRevamped_8: 465770539
+      GachaRevamped_9: 238361510
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

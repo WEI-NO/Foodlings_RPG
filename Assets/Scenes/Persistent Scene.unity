@@ -163,7 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b49eaa72984bf41b0c554156690967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CostPerStage: 50
+  rarityTable: {fileID: 11400000, guid: ec5566afc417d324f87608a8845da600, type: 2}
+  roleBiasSettings: {fileID: 11400000, guid: 5d0ad9bcacaf9b942bf962cdc0038363, type: 2}
 --- !u!1 &404634253
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,7 +464,10 @@ MonoBehaviour:
   defaultAddItem:
   - toast_coin
   - gem
-  defaultAddItemQuantity: a0860100a0860100
+  - seared_core
+  - crusted_core
+  - infused_core
+  defaultAddItemQuantity: a0860100a0860100f4010000f4010000f4010000
 --- !u!114 &1227699932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,7 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fc9c6cb4fffc4d4dbc2b33724e671f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentOvenSlot: 1
+  currentOvenSlot: 2
 --- !u!1 &1424977754
 GameObject:
   m_ObjectHideFlags: 0
