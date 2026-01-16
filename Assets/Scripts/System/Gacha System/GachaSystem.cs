@@ -1,4 +1,5 @@
 using CustomLibrary.References;
+using JetBrains.Annotations;
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,11 +14,14 @@ public class GachaSystem : MonoBehaviour
     public static GachaSystem Instance;
 
     public static int MaxRoleStage = 5;
+    public static string requiredPrimaryResource = "toast_coin";
 
     public readonly int[] CostPerStage = new int[6] { 0, 2, 4, 6, 8, 10 };
+    public readonly int[] PrimaryResPerStage = new int[6] { 0, 200, 500, 900, 1400, 1600 };
 
     public StarRarityTable rarityTable;
     public RoleBiasSettings roleBiasSettings;
+
 
     private void Awake()
     {
@@ -49,8 +53,16 @@ public class GachaSystem : MonoBehaviour
     {
         var costs = GetCraftCost(request);
 
+        var primaryRes = PrimaryResCost(request);
+
+        if (!PlayerInventory.HasItem(requiredPrimaryResource, primaryRes))
+        {
+            return false;
+        }
+
         if (PlayerInventory.HasItem("seared_core", costs.x) && PlayerInventory.HasItem("crusted_core", costs.y) && PlayerInventory.HasItem("infused_core", costs.z))
         {
+            PlayerInventory.UseItem(requiredPrimaryResource, primaryRes);
             PlayerInventory.UseItem("seared_core", costs.x);
             PlayerInventory.UseItem("crusted_core", costs.y);
             PlayerInventory.UseItem("infused_core", costs.z);
@@ -58,6 +70,13 @@ public class GachaSystem : MonoBehaviour
         }
 
         return false;
+    }
+
+    public int PrimaryResCost(GachaRequest request)
+    {
+        int cost = PrimaryResPerStage[request.stages[0]] + PrimaryResPerStage[request.stages[1]] + PrimaryResPerStage[request.stages[2]];
+
+        return cost;
     }
 
 }

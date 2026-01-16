@@ -1,8 +1,10 @@
 using CustomLibrary.References;
 using CustomLibrary.SpriteExtra;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CharacterDisplay : BaseDraggableCharacterDisplay
 {
@@ -17,6 +19,9 @@ public class CharacterDisplay : BaseDraggableCharacterDisplay
     public GameObject starObject;
     public Transform starContent;
     public TextMeshProUGUI rarityText;
+
+    public Image roleIcon;
+    public float iconRatio = 16.0f;
 
     public override bool UpdateInfo()
     {
@@ -60,6 +65,21 @@ public class CharacterDisplay : BaseDraggableCharacterDisplay
         {
             rarityText.text = $"{assignedInstance.rank}";
         }
+
+        if (roleIcon)
+        {
+            Role role = assignedInstance.baseData.role;
+            string iconID =
+                role == Role.Fighter ? "fighter_icon" :
+                role == Role.Tank ? "tank_icon" :
+                role == Role.Magic ? "magic_icon" :
+                role == Role.Support ? "support_icon" : "fighter_icon";
+            Sprite icon = MainDatabase.Instance.spriteDatabase.Get(iconID).sprite;
+            var deltaSize = SpriteExtra.DynamicDimension(icon, iconRatio);
+            roleIcon.rectTransform.sizeDelta = deltaSize;
+            roleIcon.sprite = icon;
+        }
+
         UpdateEquipSign();
         return true;
     }

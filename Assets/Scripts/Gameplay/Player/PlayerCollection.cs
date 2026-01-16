@@ -2,6 +2,7 @@ using CustomLibrary.References;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCollection : MonoBehaviour
@@ -18,6 +19,9 @@ public class PlayerCollection : MonoBehaviour
     public Action<CharacterInstance> OnCharacterRemoved;
     public Action<CharacterInstance, int> OnAddedToParty;
     public Action<CharacterInstance, int> OnRemovedFromParty;
+
+    [Header("Catalog")]
+    public Dictionary<string, CharacterInstance> CharacterCatalog = new();
 
     [Header("Debug Settings")]
     public List<CharacterData> debug_InitialCollection = new();
@@ -124,5 +128,15 @@ public class PlayerCollection : MonoBehaviour
         }
 
         return null;
+    }
+
+    public bool SeenInCatalog(string characterID)
+    {
+        return CharacterCatalog.ContainsKey(characterID);
+    }
+
+    public bool SeenInCatalog(CharacterData data)
+    {
+        return CharacterCatalog.ContainsKey(data.id);
     }
 }

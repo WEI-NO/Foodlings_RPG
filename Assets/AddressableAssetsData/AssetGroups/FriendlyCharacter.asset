@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Characters
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8721043376b12974e9c63c224a016b34
+    m_Address: Assets/Prefabs/Character Datas/CornCob_Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Characters
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bafa508b39cee21498148bdc3d040222
     m_Address: Assets/Prefabs/Character Datas/TinyChef_Data.asset
     m_ReadOnly: 0
@@ -29,6 +35,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dd9b47a4daedde6458da5271126838a7
     m_Address: Assets/Prefabs/Character Datas/Toast_Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Characters
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ddb959909fa56024998e425512266826
+    m_Address: Assets/Prefabs/Character Datas/Garlic_Data.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Characters

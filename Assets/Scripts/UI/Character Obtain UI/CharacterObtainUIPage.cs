@@ -16,11 +16,33 @@ public class CharacterObtainUIPage : BaseUIPage
     private Coroutine viewCoroutine;
     private bool spedUp = false;
 
+    public CharacterObtainViewer obtainViewer;
+    public UnseenCharacterUI unseenViewer;
+
+    public GameObject confirmButton;
+
+    private HashSet<string> seenCharacters = new();
+
+    [Header("Sequence Settings")]
+    public float Delay_ObtainViewerStartAnimation;
+    public float Delay_NewObtainedStep;
+    public float Delay_UnseenObtainedInitial;
+
+    public List<CharacterData> debug_list_simulation;
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.N)) 
+        {
+            StartView(debug_list_simulation);
+        }
+    }
+
     public void StartView(List<CharacterData> obtainedList)
     {
         currentList = new(obtainedList);
-        ClearDisplay();
         SetActive(true);
+        seenCharacters.Clear();
         if (viewCoroutine != null)
         {
             StopCoroutine(viewCoroutine);
@@ -36,33 +58,56 @@ public class CharacterObtainUIPage : BaseUIPage
 
     private IEnumerator ViewCoroutine()
     {
-        float localDelay = delayPerDisplay;
-        bool expedited = false;
-        yield return new WaitForSeconds(initialDelay);
+        // Initialize obtain and unseen viewer
+        obtainViewer.Init(currentList);
+        obtainViewer.StartAnimation();
+        // Delay until the full obtainViewer start animation is fully played
+        yield return InterruptableDelay(Delay_ObtainViewerStartAnimation);
 
-        for (int i = 0; i < currentList.Count; i++)
+        CharacterData nextData = obtainViewer.Step();
+        while (nextData != null)
         {
-            var newDisplay = Instantiate(displayPrefab, content, false);
-            newDisplay.AssignCharacter(currentList[i]);
-            yield return new WaitForSeconds(localDelay / 2);
+            // Spawn 1 Display Per Delay
+            obtainViewer.CreateDisplay(nextData);
 
-            if (spedUp && !expedited)
+            yield return new WaitForSeconds(Delay_UnseenObtainedInitial);
+            // If the first time unlocking this character
+            if (!PlayerCollection.Instance.SeenInCatalog(nextData) && !seenCharacters.Contains(nextData.id))
             {
-                localDelay /= 5;
-                expedited = true;
+                seenCharacters.Add(nextData.id);
+                unseenViewer.Init(nextData);
+
+                yield return unseenViewer.StartView();
             }
-
-            yield return new WaitForSeconds(localDelay / 2);
+            yield return InterruptableDelay(Delay_NewObtainedStep);
+            nextData = obtainViewer.Step();
         }
 
-        spedUp = false;
+        // obtainViewer.EndAnimation();
     }
 
-    private void ClearDisplay()
+    private IEnumerator InterruptableDelay(float seconds)
     {
-        for (int i = content.childCount - 1; i >= 0; i--)
+        float t = 0;
+        while (t < seconds)
         {
-            Destroy(content.GetChild(i).gameObject);
+            if (spedUp)
+            {
+                yield return null;
+            }
+            t  += Time.deltaTime;
+            yield return null;
         }
     }
+
+    public void EndAnimation()
+    {
+        obtainViewer.EndAnimation();
+        if (viewCoroutine != null)
+        {
+            StopCoroutine(viewCoroutine);
+            viewCoroutine = null;
+        }
+    }
+
 }

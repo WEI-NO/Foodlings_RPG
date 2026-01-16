@@ -13,7 +13,6 @@ public class BannerController : MonoBehaviour
     public TextMeshProUGUI stageCountText;
     public TextMeshProUGUI materialRequireCountText;
 
-
     public void Initialize(OvenDisplay parent)
     {
         owner = parent;
@@ -44,6 +43,7 @@ public class BannerController : MonoBehaviour
         {
             materialRequireCountText.text = $"{GachaSystem.Instance.GetCraftCost(owner.oven.request, coreRole)}";
         }
+
     }
 
     public void IncreaseStage()

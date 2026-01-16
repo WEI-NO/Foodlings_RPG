@@ -449,6 +449,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2eee4f3457cb58242a58f628526c382d, type: 2}
   - {fileID: 11400000, guid: 2eee4f3457cb58242a58f628526c382d, type: 2}
   - {fileID: 11400000, guid: 2eee4f3457cb58242a58f628526c382d, type: 2}
+  - {fileID: 11400000, guid: 8721043376b12974e9c63c224a016b34, type: 2}
+  - {fileID: 11400000, guid: 8721043376b12974e9c63c224a016b34, type: 2}
 --- !u!114 &1227699931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,6 +646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDatabase: {fileID: 11400000, guid: eff13032680eec2499df64e93a441912, type: 2}
   upgradeDatabase: {fileID: 11400000, guid: 6581149a32642f644b6182ee708059ef, type: 2}
+  spriteDatabase: {fileID: 11400000, guid: 931e4dc890513e94f886e87bba4e3a06, type: 2}
 --- !u!1 &1790495527
 GameObject:
   m_ObjectHideFlags: 0

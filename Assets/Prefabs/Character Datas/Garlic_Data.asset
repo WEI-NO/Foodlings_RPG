@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a18723090138840a7bd8758bd9dea5, type: 3}
+  m_Name: Garlic_Data
+  m_EditorClassIdentifier: 
+  debug_ShowMaxLevelStats: 1
+  debug_HP: 930
+  debug_PAtk: 15.5
+  debug_MAtk: 77.5
+  debug_PDef: 19.375
+  debug_MDef: 19.375
+  debug_AtkRng: 4
+  debug_AtkSpe: 0.15
+  debug_Spe: 17
+  debug_CD: 7.5
+  id: gagrlic
+  displayName: Garlic
+  baseRank: 1
+  role: 2
+  summonCost: 10
+  cooldownSec: 7.5
+  healthPoint: 60
+  physicalDamage: 1
+  magicDamage: 5
+  attackRate: 0.15
+  moveSpeed: 17
+  attackRange: 4
+  physicalDefense: 1.25
+  magicDefense: 1.25
+  growth: 1
+  growthSteepness: 0.5
+  knockbackDuration: 1.25
+  healthThreshold:
+  - 0.5
+  unitPrefab: {fileID: 8909930768644662140, guid: 363a1436f10206343ab738f385e419d4, type: 3}
+  unitSprite: {fileID: 21300000, guid: 67b4fe1ae30a2c0499a126a70b9d4434, type: 3}
+  behavior: {fileID: 11400000, guid: a7cbeaeaacfb38843bc508e4928552b7, type: 2}
+  maxLevel: 30

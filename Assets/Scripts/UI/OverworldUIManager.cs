@@ -19,7 +19,7 @@ public class OverworldUIManager : MonoBehaviour
             var page = t.GetComponent<BaseUIPage>();
             if (page == null) continue;
             if (!page.enabled) continue;
-
+            if (pages.ContainsKey(page.pageID)) continue;
             pages.Add(page.pageID, page);
         }
     }

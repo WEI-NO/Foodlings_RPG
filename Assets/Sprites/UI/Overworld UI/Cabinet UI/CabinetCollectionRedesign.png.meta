@@ -312,7 +312,7 @@ TextureImporter:
         width: 9
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -321,6 +321,116 @@ TextureImporter:
       bones: []
       spriteID: 889275c47374161468e631edd18aa1dd
       internalID: -1424956290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CabinetCollectionRedesign_6
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 497
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0822e9421068b5a42b6329fe0ec70db4
+      internalID: -43618684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CabinetCollectionRedesign_11
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 320
+        width: 48
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb8faae912b9abc46be92fd946bc0061
+      internalID: 361815575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CabinetCollectionRedesign_12
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 350
+        width: 36
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a8274e4a6cf02b458a9e41c0bc823e6
+      internalID: 935318689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CabinetCollectionRedesign_13
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 318
+        width: 48
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 375d8f50c74ae894399650240272a9ed
+      internalID: -1813150164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CabinetCollectionRedesign_14
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 376
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd7afcba5c0e17f4ab9e9e9d0b687fc3
+      internalID: 1579935716
       vertices: []
       indices: 
       edges: []
@@ -342,6 +452,10 @@ TextureImporter:
       CabinetCollectionRedesign_0: 725857215055063899
       CabinetCollectionRedesign_1: 9002372633551523274
       CabinetCollectionRedesign_10: 765714908
+      CabinetCollectionRedesign_11: 361815575
+      CabinetCollectionRedesign_12: 935318689
+      CabinetCollectionRedesign_13: -1813150164
+      CabinetCollectionRedesign_14: 1579935716
       CabinetCollectionRedesign_2: -6643792508722901271
       CabinetCollectionRedesign_3: 1045293391
       CabinetCollectionRedesign_4: 1881759763

@@ -20,14 +20,13 @@ public class RangedAreaAttack : AttackBehavior
             Quaternion.identity
         );
 
-        //AreaProjectile proj = projectile.GetComponent<AreaProjectile>();
-        //proj.Init(
-        //    attacker.attackTarget.Position,
-        //    attacker.characterInstance.GetStat(CharacterStatType.PAtk),
-        //    explosionRadius,
-        //    projectileSpeed,
-        //    attacker.team,
-        //    targetMask
-        //);
+        BaseProjectile proj = projectile.GetComponent<BaseProjectile>();
+        proj.Init(
+            attacker,
+            attacker.attackTarget,
+            attacker.characterInstance.GetStat(CharacterStatType.PAtk),
+            projectileSpeed,
+            attacker.team
+        );
     }
 }

@@ -4,25 +4,27 @@ using UnityEngine;
 public class RangedSingleAttack : AttackBehavior
 {
     public GameObject projectilePrefab;
-    public float projectileSpeed = 8f;
+    public float spawnYOffset = 0.0f;
+    public float projectileSpeed = 2f;
 
     public override void Execute(CharacterEntity attacker)
     {
-        if (attacker.attackTarget == null || projectilePrefab == null)
+        if ((attacker.attackTarget == null && !attacker.targettingTower) || projectilePrefab == null)
             return;
 
         GameObject projectile = Instantiate(
             projectilePrefab,
-            attacker.transform.position,
+            attacker.transform.position + new Vector3(0, spawnYOffset, 0),
             Quaternion.identity
         );
 
-        //Projectile proj = projectile.GetComponent<Projectile>();
-        //proj.Init(
-        //    attacker.attackTarget,
-        //    attacker.characterInstance.GetStat(CharacterStatType.PAtk),
-        //    projectileSpeed,
-        //    attacker.team
-        //);
+        BaseProjectile proj = projectile.GetComponent<BaseProjectile>();
+        proj.Init(
+            attacker,
+            attacker.targettingTower ? attacker.targettedTower : attacker.attackTarget,
+            attacker.characterInstance.GetStat(CharacterStatType.PAtk),
+            projectileSpeed,
+            attacker.team
+        );
     }
 }

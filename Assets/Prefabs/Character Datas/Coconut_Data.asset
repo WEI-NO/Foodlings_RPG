@@ -25,7 +25,7 @@ MonoBehaviour:
   id: coconut
   displayName: Coconut
   baseRank: 0
-  role: 0
+  role: 1
   summonCost: 140
   cooldownSec: 10
   healthPoint: 250
@@ -42,5 +42,5 @@ MonoBehaviour:
   healthThreshold: []
   unitPrefab: {fileID: 1333956205622021100, guid: 6c0043345c2c01b47b94a2c086b37600, type: 3}
   unitSprite: {fileID: 3542127132570728493, guid: 3229132376d0eae47990b4c544a06231, type: 3}
-  behavior: {fileID: 11400000, guid: 531909e941f0a0543808982321580ad2, type: 2}
+  behavior: {fileID: 11400000, guid: b24d64ce85cb3c8449998e1687a4d2fa, type: 2}
   maxLevel: 30

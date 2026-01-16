@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class BaseEntity : MonoBehaviour
@@ -16,6 +17,9 @@ public class BaseEntity : MonoBehaviour
 
     [Header("Effect Setting")]
     public float height = 1.0f;
+    [Header("Hurt Effect")]
+    public SpriteRenderer spriteRenderer;
+    private Coroutine hitFlashRoutine;
 
     public Vector3 MidBodyOffset()
     {
@@ -26,6 +30,7 @@ public class BaseEntity : MonoBehaviour
     {
         CurrentHealth -= damage;
         OnDamage_Internal(damage);
+        PlayHitFlash();
 
         if (CurrentHealth  <= 0)
         {
@@ -56,4 +61,42 @@ public class BaseEntity : MonoBehaviour
     {
         CurrentHealth = MaxHealth;
     }
+
+    protected void PlayHitFlash()
+    {
+        if (spriteRenderer == null)
+            return;
+
+        if (hitFlashRoutine != null)
+            StopCoroutine(hitFlashRoutine);
+
+        hitFlashRoutine = StartCoroutine(HitFlashCoroutine());
+    }
+
+    private IEnumerator HitFlashCoroutine()
+    {
+        Color hitColor = new Color(150 / 255f, 50 / 255f, 40 / 255f, 1.0f);
+        Color originalColor = Color.white;
+
+        // Instantly go to hit color
+        spriteRenderer.color = hitColor;
+
+        float duration = 0.1f;
+        float elapsed = 0f;
+
+        // Gradually fade back to white
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            spriteRenderer.color = Color.Lerp(hitColor, originalColor, t);
+            yield return null;
+        }
+
+        // Ensure final color is restored
+        spriteRenderer.color = originalColor;
+        hitFlashRoutine = null;
+    }
+
 }

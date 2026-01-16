@@ -70,6 +70,7 @@ public class Oven
 
     public UnitRank savedRanked;
     public Role savedRole;
+    public string savedCharacterID;
 
     public Action OnOvenStart;
     public Action OnOvenEnd;
@@ -96,6 +97,26 @@ public class Oven
             savedRanked = GachaSystem.Instance.rarityTable.RollStar(request.Total());
             currentSeconds = GachaSystem.Instance.rarityTable.GetCookTime(request.Total());
             savedRole = GachaSystem.Instance.roleBiasSettings.Calculate(request);
+
+            var charactersInRole = CharacterDatabase.Instance.GetByRole(savedRole);
+
+            List<CharacterData> filteredByRank = new List<CharacterData>();
+
+            foreach (var character in charactersInRole)
+            {
+                if (character == null) continue;
+
+                if (character.baseRank == savedRanked)
+                {
+                    filteredByRank.Add(character);
+                }
+            }
+            if (filteredByRank.Count > 0)
+            {
+                var randomIndex = UnityEngine.Random.Range(0, filteredByRank.Count);
+                savedCharacterID = filteredByRank[randomIndex].id;
+            }
+
             SetState(OvenState.InProgress);
             OnOvenStart?.Invoke();
             return true;
@@ -113,6 +134,11 @@ public class Oven
         {
             SetState(OvenState.Ready);
             SetState(OvenState.Idle); // WIP Placeholder
+            var data = CharacterDatabase.Instance.GetById(savedCharacterID);
+            if (data != null)
+            {
+                PlayerCollection.Instance.AddCharacter(data);
+            }
             OnOvenEnd?.Invoke();
             return true;
         }

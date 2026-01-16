@@ -7,6 +7,7 @@ public class MainDatabase : MonoBehaviour
 
     public ItemDatabase itemDatabase;
     public UpgradeDatabase upgradeDatabase;
+    public SpriteDatabase spriteDatabase;
 
     private void Awake()
     {

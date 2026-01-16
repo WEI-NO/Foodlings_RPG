@@ -25,6 +25,17 @@ public class GameStartSequence : MonoBehaviour
         titleText.text = GameMatchManager.Instance.currentLevel.LevelName;
     }
 
+    public void Update()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            anim.speed = 3.0f;
+        } else
+        {
+            anim.speed = 1.0f;
+        }
+    }
+
     public void StartGame()
     {
         GameMatchManager.Instance.SetGameState(true);

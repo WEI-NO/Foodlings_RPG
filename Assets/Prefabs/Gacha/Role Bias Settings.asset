@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca223077d1d4cf4189190215ab876a7, type: 3}
   m_Name: Role Bias Settings
   m_EditorClassIdentifier: 
-  supportChance: 0.1
+  supportChance: 0.025
   baseWeight: 1
