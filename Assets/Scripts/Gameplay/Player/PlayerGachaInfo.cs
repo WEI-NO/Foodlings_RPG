@@ -133,12 +133,6 @@ public class Oven
         if (currentSeconds <= 0)
         {
             SetState(OvenState.Ready);
-            SetState(OvenState.Idle); // WIP Placeholder
-            var data = CharacterDatabase.Instance.GetById(savedCharacterID);
-            if (data != null)
-            {
-                PlayerCollection.Instance.AddCharacter(data);
-            }
             OnOvenEnd?.Invoke();
             return true;
         }
@@ -153,6 +147,20 @@ public class Oven
     private void SetState(OvenState state)
     {
         this.state = state;
+    }
+
+    public void Claim()
+    {
+        if (!StateIs(OvenState.Ready))
+        {
+            return;
+        }
+
+        SetState(OvenState.Idle);
+        var data = CharacterDatabase.Instance.GetById(savedCharacterID, true);
+        if (data == null) return;
+        CharacterObtainUIPage.Instance.StartView(new(){ data });
+        PlayerCollection.Instance.AddCharacter(data);
     }
 
 }

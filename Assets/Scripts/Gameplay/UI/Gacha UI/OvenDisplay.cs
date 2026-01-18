@@ -15,6 +15,7 @@ public class OvenDisplay : MonoBehaviour
     public Color[] enable_disable = new Color[2];
 
     public GameObject inprogressDisplay;
+    public GameObject claimButton;
     public TextMeshProUGUI inprogressTimerText;
 
     private void OnDestroy()
@@ -41,30 +42,37 @@ public class OvenDisplay : MonoBehaviour
         }
 
         UpdatePrimaryRes();
-        ToggleInProgress(oven.StateIs(OvenState.InProgress));
+        ToggleInProgress(ShouldDisplayProgress());
         oven.OnOvenEnd += OnOvenEnd;
         oven.OnOvenStart += OnOvenStart;
     }
 
     private void Update()
     {
-        if (oven != null && oven.StateIs(OvenState.InProgress))
+        if (oven != null && ShouldDisplayProgress())
         {
-            if (oven.StateIs(OvenState.InProgress))
+            if (ShouldDisplayProgress())
             {
                 print($"Oven: {oven.currentSeconds}");
                 if (inprogressTimerText)
                 {
-                    inprogressTimerText.text = $"{TimeFormatter.TimeToDisplay(oven.currentSeconds)}";
+                    inprogressTimerText.text = $"{TimeFormatter.TimeToDisplay(Mathf.Clamp(oven.currentSeconds, 0, oven.currentSeconds))}";
                 }
             }
         } 
     }
 
+    private bool ShouldDisplayProgress()
+    {
+        return oven.StateIs(OvenState.Ready) || oven.StateIs(OvenState.InProgress);
+    }
+
     private void OnOvenEnd()
     {
-        print($"Rolled |  Star: {oven.savedRanked} Role: {oven.savedRole}");
-        ToggleInProgress(false);
+        if (claimButton)
+        {
+            claimButton.SetActive(true);
+        }
     }
 
     private void OnOvenStart()
@@ -113,5 +121,16 @@ public class OvenDisplay : MonoBehaviour
         {
             inprogressDisplay.SetActive(state);
         }
+
+        if (claimButton)
+        {
+            claimButton.SetActive(oven.StateIs(OvenState.Ready));
+        }
+    }
+
+    public void OnClaim()
+    {
+        ToggleInProgress(false);
+        oven.Claim();
     }
 }

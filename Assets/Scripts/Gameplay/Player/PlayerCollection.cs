@@ -56,6 +56,10 @@ public class PlayerCollection : MonoBehaviour
 
         // Callback
         OnCharacterAdded?.Invoke(newInstance);
+        if (!CharacterCatalog.ContainsKey(data.id))
+        {
+            CharacterCatalog.Add(data.id, newInstance);
+        }
     }
 
     public void RemoveCharacter(string instanceID)

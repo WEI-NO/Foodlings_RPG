@@ -20,6 +20,7 @@ public class UnseenCharacterUI : MonoBehaviour
     public KeyCode skipKeyCode;
     public bool InProgress = false;
     public float animationDurationDelay = 3.5f;
+    public float animationEndingDelay = 2.0f;
 
     private void Awake()
     {
@@ -54,6 +55,7 @@ public class UnseenCharacterUI : MonoBehaviour
         InProgress = true;
         while (InProgress)
         {
+            yield return new WaitForSeconds(animationEndingDelay);
             yield return null;
         }
     }

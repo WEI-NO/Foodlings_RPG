@@ -48,7 +48,6 @@ public class SnapHorizontalScroll : MonoBehaviour, IBeginDragHandler, IEndDragHa
 
         pageCount = content.childCount;
 
-        print("Setting up:");
         foreach (Transform i in content)
         {
             print(i.name);

@@ -1,3 +1,5 @@
+using CustomLibrary.References;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +7,8 @@ using UnityEngine.UI;
 
 public class CharacterObtainUIPage : BaseUIPage
 {
+    public static CharacterObtainUIPage Instance;
+
     public List<CharacterData> currentList = new();
 
     public Transform content;
@@ -22,15 +26,22 @@ public class CharacterObtainUIPage : BaseUIPage
     public GameObject confirmButton;
 
     private HashSet<string> seenCharacters = new();
+    private HashSet<string> unregisteredCharacters = new();
 
     [Header("Sequence Settings")]
-    public float Delay_ObtainViewerStartAnimation;
-    public float Delay_NewObtainedStep;
-    public float Delay_UnseenObtainedInitial;
+    public float Delay_ObtainViewerStartAnimation; // Initial delay at the start
+    public float Delay_NewObtainedStep;  // Delay between each character display.
+    public float Delay_AfterCreatingDisplay_Default; // How long to wait for the NewObtainedCharacterDisplay animation
+    public float Delay_AfterCreatingDisplay_Unseen; // How long to wait for the NewObtainedCharacterDisplay animation
 
     public List<CharacterData> debug_list_simulation;
 
-    public void Update()
+    protected override void OnAwake()
+    {
+        Initializer.SetInstance(this);
+    }
+
+    protected override void OnUpdate()
     {
         if (Input.GetKeyDown(KeyCode.N)) 
         {
@@ -40,6 +51,14 @@ public class CharacterObtainUIPage : BaseUIPage
 
     public void StartView(List<CharacterData> obtainedList)
     {
+        foreach (var d in obtainedList)
+        {
+            if (!PlayerCollection.Instance.SeenInCatalog(d))
+            {
+                unregisteredCharacters.Add(d.id);
+            }
+        }
+
         currentList = new(obtainedList);
         SetActive(true);
         seenCharacters.Clear();
@@ -61,6 +80,8 @@ public class CharacterObtainUIPage : BaseUIPage
         // Initialize obtain and unseen viewer
         obtainViewer.Init(currentList);
         obtainViewer.StartAnimation();
+        obtainViewer.SetConfirmButton(false);
+
         // Delay until the full obtainViewer start animation is fully played
         yield return InterruptableDelay(Delay_ObtainViewerStartAnimation);
 
@@ -68,22 +89,47 @@ public class CharacterObtainUIPage : BaseUIPage
         while (nextData != null)
         {
             // Spawn 1 Display Per Delay
-            obtainViewer.CreateDisplay(nextData);
+            var display = obtainViewer.CreateDisplay(nextData, Seen(nextData));
 
-            yield return new WaitForSeconds(Delay_UnseenObtainedInitial);
+
+            if (display == null)
+            {
+                Debug.LogError($"{gameObject.name} : failed to create a new display via obtainViewer.CreateDisplay(nextData);");
+                continue;
+            }
+
+            // If unseen, start a different default animation
+            if (!Seen(nextData))
+            {
+                display.RunAnimation_Seen();
+                yield return InterruptableDelay(Delay_AfterCreatingDisplay_Unseen);
+            } else
+            {
+                display.RunAnimation_Default();
+                yield return InterruptableDelay(Delay_AfterCreatingDisplay_Default);
+            }
+
             // If the first time unlocking this character
-            if (!PlayerCollection.Instance.SeenInCatalog(nextData) && !seenCharacters.Contains(nextData.id))
+            if (!Seen(nextData))
             {
                 seenCharacters.Add(nextData.id);
                 unseenViewer.Init(nextData);
 
                 yield return unseenViewer.StartView();
+
+                display.RunAnimation_Continuation();
             }
+
             yield return InterruptableDelay(Delay_NewObtainedStep);
             nextData = obtainViewer.Step();
         }
 
-        // obtainViewer.EndAnimation();
+        obtainViewer.SetConfirmButton(true);
+    }
+
+    public bool Seen(CharacterData data)
+    {
+        return !unregisteredCharacters.Contains(data.id) || seenCharacters.Contains(data.id);
     }
 
     private IEnumerator InterruptableDelay(float seconds)
@@ -103,6 +149,7 @@ public class CharacterObtainUIPage : BaseUIPage
     public void EndAnimation()
     {
         obtainViewer.EndAnimation();
+        obtainViewer.SetConfirmButton(false);
         if (viewCoroutine != null)
         {
             StopCoroutine(viewCoroutine);

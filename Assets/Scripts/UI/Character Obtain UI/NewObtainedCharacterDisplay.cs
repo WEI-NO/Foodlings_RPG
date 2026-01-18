@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class NewObtainedCharacterDisplay : MonoBehaviour
 {
+    private Animator anim;
+
     [Header("UI References")]
     public CharacterRankDisplay rankDisplay;
     public TextMeshProUGUI nameText;
@@ -16,7 +18,12 @@ public class NewObtainedCharacterDisplay : MonoBehaviour
     [Header("References")]
     public CharacterData characterData;
 
-    public void Init(CharacterData data)
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
+    public void Init(CharacterData data, bool seen)
     {
         if (data == null) return;
 
@@ -29,7 +36,25 @@ public class NewObtainedCharacterDisplay : MonoBehaviour
         characterIcon.sprite = data.unitSprite;
         //characterIcon.SetNativeSize();
         roleIcon.sprite = MainDatabase.Instance.spriteDatabase.Get(SpriteDatabase.GetRoleID(data.role)).sprite;
-        unseenIndicator.SetActive(!PlayerCollection.Instance.SeenInCatalog(data.id));
+        unseenIndicator.SetActive(!seen);
+    }
+
+    public void RunAnimation_Default()
+    {
+        if (anim == null) return;
+        anim.SetTrigger("DefaultReveal");
+    }
+
+    public void RunAnimation_Seen()
+    {
+        if (anim == null) return;
+        anim.SetTrigger("NewReveal");
+    }
+
+    public void RunAnimation_Continuation()
+    {
+        if (anim == null) return;
+        anim.SetTrigger("Continuation");
     }
 
 }

@@ -7,6 +7,8 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class CharacterDatabase : MonoBehaviour
 {
+    public const string DefaultFallback = "toast";
+
     public static CharacterDatabase Instance;
 
     // Runtime indexes
@@ -58,7 +60,23 @@ public class CharacterDatabase : MonoBehaviour
     }
 
     // O(1) lookup
-    public CharacterData GetById(string id) => byId.TryGetValue(id, out var u) ? u : null;
+    public CharacterData GetById(string id, bool fallback = false)
+    {
+        if (id != null)
+        {
+            if (byId.TryGetValue(id, out var value))
+            {
+                return value;
+            }
+        }
+
+        if (fallback)
+        {
+            return byId[DefaultFallback];
+        }
+
+        return null;
+    }
 
     // Fast queries
     public IReadOnlyList<CharacterData> GetByRarity(UnitRank r) =>

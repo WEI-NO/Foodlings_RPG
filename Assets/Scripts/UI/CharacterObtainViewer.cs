@@ -8,6 +8,7 @@ public class CharacterObtainViewer : MonoBehaviour
     [Header("UI References")]
     public Transform content;
     public NewObtainedCharacterDisplay obtainDisplay;
+    public GameObject confirmButton;
 
     private List<CharacterData> InternalList;
     private int stepIndex = 0;
@@ -39,13 +40,14 @@ public class CharacterObtainViewer : MonoBehaviour
             anim.SetTrigger("End");
         }
     }
-    public void CreateDisplay(CharacterData data)
+    public NewObtainedCharacterDisplay CreateDisplay(CharacterData data, bool seen)
     {
-        if (data == null || obtainDisplay == null) return;
+        if (data == null || obtainDisplay == null) return null;
 
         var display = Instantiate(obtainDisplay, content);
 
-        display.Init(data);
+        display.Init(data, seen);
+        return display;
     }
 
     public CharacterData Step()
@@ -63,5 +65,12 @@ public class CharacterObtainViewer : MonoBehaviour
         {
             Destroy(content.GetChild(i).gameObject);
         }
+    }
+
+    public void SetConfirmButton(bool state)
+    {
+        if (confirmButton == null) return;
+
+        confirmButton.SetActive(state);
     }
 }
