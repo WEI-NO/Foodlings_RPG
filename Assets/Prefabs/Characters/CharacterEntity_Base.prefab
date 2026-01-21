@@ -465,6 +465,7 @@ MonoBehaviour:
   effectYOffset: 0.2
   currentHP: 0
   knockbackIndex: 0
+  knockbackDuration: 0.5
   debug_isAttacking: 0
 --- !u!50 &6791652285148318673
 Rigidbody2D:

@@ -38,7 +38,6 @@ MonoBehaviour:
   magicDefense: 1.25
   growth: 1
   growthSteepness: 0.5
-  knockbackDuration: 1.25
   healthThreshold:
   - 0.5
   unitPrefab: {fileID: 8909930768644662140, guid: 363a1436f10206343ab738f385e419d4, type: 3}

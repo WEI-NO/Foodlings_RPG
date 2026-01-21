@@ -94,7 +94,6 @@ public class CharacterData : ScriptableObject
     [Range(0.01f, 2.0f)] public float growthSteepness = 0.9f;
 
     [Header("Knockback Settings")]
-    public float knockbackDuration = 1.2f;
     public float[] healthThreshold = new float[] { 0.5f };
 
     [Header("Assets (Addressables)")]

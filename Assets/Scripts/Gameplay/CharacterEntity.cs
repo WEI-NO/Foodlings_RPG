@@ -65,8 +65,10 @@ public class CharacterEntity : BaseEntity
     // Knockback
     // -----------------------
     [Header("Knockback Settings")]
-    private float knockbackDistance = 1.2f;   // how far the first bounce goes
+    private float knockbackDistance = 1.5f;   // how far the first bounce goes
     private float knockbackHeight = 0.35f;    // how high the first bounce goes
+
+    public float knockbackDuration = 1.2f;
     private bool isKnockback = false;
     private Coroutine knockbackRoutine;
 
@@ -165,7 +167,7 @@ public class CharacterEntity : BaseEntity
         float threshold = MaxHealth * characterInstance.baseData.healthThreshold[knockbackIndex];
         if (CurrentHealth <= threshold)
         {
-            StartKnockback(characterInstance.baseData.knockbackDuration);
+            StartKnockback(knockbackDuration);
             knockbackIndex++;
         }
     }
@@ -437,23 +439,27 @@ public class CharacterEntity : BaseEntity
         SwitchState(CharacterState.Knocked);
 
         float dir = GetKnockbackDirection();
-        float distance = knockbackDistance;
-        float height = knockbackHeight;
 
-        float bounceDuration = duration / 2f;
+        float elapsed = 0f;
+        float startSpeed = knockbackDistance / Mathf.Max(0.01f, duration);
 
-        for (int bounce = 0; bounce < 2; bounce++)
+        while (elapsed < duration)
         {
-            yield return KnockbackBounce(dir, bounceDuration, distance, height);
-            distance *= 0.6f;
-            height *= 0.8f;
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            // Ease-out curve (fast → slow)
+            float speed = Mathf.Lerp(startSpeed, 0f, t);
+
+            transform.position += new Vector3(dir * speed * Time.deltaTime, 0f, 0f);
+            yield return null;
         }
 
         isKnockback = false;
-        knockbackRoutine = null;
         anim.SetBool("Knocked", false);
         SwitchState(CharacterState.None);
     }
+
 
     private IEnumerator KnockbackBounce(float dir, float duration, float distance, float height)
     {
@@ -529,7 +535,7 @@ public class CharacterEntity : BaseEntity
     {
         anim.SetBool("Dead", true);
         anim.SetTrigger("Knock");
-        yield return Knockback(characterInstance.baseData.knockbackDuration);
+        yield return Knockback(knockbackDuration);
 
         if (CharacterContainer.Instance != null && CharacterContainer.Instance.deathObject != null)
         {
