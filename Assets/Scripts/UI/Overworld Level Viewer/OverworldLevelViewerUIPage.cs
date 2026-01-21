@@ -6,7 +6,7 @@ public class OverworldLevelViewerUIPage : BaseUIPage
 {
     public static OverworldLevelViewerUIPage Instance;
 
-    public OverworldLevelController level;
+    public LevelStone levelStone;
 
     [Header("Components")]
     public TextMeshProUGUI levelName;
@@ -17,20 +17,23 @@ public class OverworldLevelViewerUIPage : BaseUIPage
         Initializer.SetInstance(this);
     }
 
-    public void SetLevel(OverworldLevelController level)
+    public void SetLevel(LevelStone levelStone)
     {
-        this.level = level;
+        this.levelStone = levelStone;
+        if (levelStone == null) return;
+
+        var level = LevelDatabase.GetLevel(levelStone.region, levelStone.assignedIndex);
 
         if (level == null) return;
 
         if (levelName)
         {
-            levelName.text = level.level.LevelName;
+            levelName.text = level.LevelName;
         }
 
         if (monsterLevelText)
         {
-            monsterLevelText.text = $"{level.level.GetAverageLevel()}";
+            monsterLevelText.text = $"{level.GetAverageLevel()}";
         }
     }
 
@@ -41,17 +44,17 @@ public class OverworldLevelViewerUIPage : BaseUIPage
 
     protected override void OnContentDisabled()
     {
-        level = null;
+        levelStone = null;
     }
 
     public void StartBattle()
     {
-        if (level == null)
+        if (levelStone == null)
         {
             ErrorDisplayManager.ShowError("Level is invalid");
             return;
         }
 
-        level.StartLevel();
+        levelStone.StartLevel();
     }
 }

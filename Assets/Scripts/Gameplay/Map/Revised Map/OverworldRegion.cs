@@ -12,8 +12,12 @@ public class OverworldRegion : MonoBehaviour
     public DirectedLevelGraph directedGraph;
 
     [Header("Level Stones")]
-    public GameObject levelStonePrefab;
+    public LevelStone levelStonePrefab;
     public Transform levelStoneContainer;
+
+    [Header("Level Structure")]
+    public RegionLevelList levelList;
+    public RegionName region;
 
     public Vector3 levelStoneOffset = new Vector3(0.25f, 0.25f, 0.0f);
 
@@ -40,12 +44,14 @@ public class OverworldRegion : MonoBehaviour
         {
             LevelNode node = pair.Value;
 
-            GameObject stone = Instantiate(
+            LevelStone stone = Instantiate(
                 levelStonePrefab,
                 node.worldPosition + levelStoneOffset,
                 Quaternion.identity,
                 levelStoneContainer
             );
+
+            stone.Init(region, node.levelIndex);
 
             stone.name = $"LevelStone_{node.levelIndex}";
         }

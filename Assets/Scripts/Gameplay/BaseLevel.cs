@@ -8,11 +8,11 @@ public class Level : ScriptableObject
 {
     public List<string> charactersInLevel = new();
     public List<int> characterLevels = new();
-    public List<CharacterInstance> characterData = new();
+    [HideInInspector] public List<CharacterInstance> characterInstances = new();
     public List<Wave> waves = new();
 
-    public List<Wave> unstartedWaves = new();
-    public List<Wave> inprogressWaves = new();
+    [HideInInspector] public List<Wave> unstartedWaves = new();
+    [HideInInspector] public List<Wave> inprogressWaves = new();
 
     public MapLength mapLength;
 
@@ -20,10 +20,9 @@ public class Level : ScriptableObject
 
     [Header("Level Settings")]
     public string LevelName;
-    [SerializeField] private float timePassed;
-    
+    private float timePassed;
 
-    public bool ready = false;
+    [HideInInspector] public bool ready = false;
 
     [Header("Level Reward")]
     public List<RewardEntry> firstClearRewards = new();
@@ -55,7 +54,7 @@ public class Level : ScriptableObject
             CharacterInstance newInstance = new CharacterInstance();
             newInstance.ResetCharacter(data);
             newInstance.SetLevel(characterLevels[i]);
-            characterData.Add(newInstance);
+            characterInstances.Add(newInstance);
             i++;
         }
 
@@ -67,46 +66,51 @@ public class Level : ScriptableObject
     {
         if (!ready) return;
 
-        if (timePassed >= initialDelay)
-        {
-            // Unstarted Waves
-            for (int i = unstartedWaves.Count - 1; i >= 0; i--)
-            {
-                var wave = unstartedWaves[i];
-                if (wave.startSeconds <= timePassed)
-                {
-                    inprogressWaves.Add(wave);
-                    unstartedWaves.RemoveAt(i);
-                }
-            }
+        timePassed += dt;
 
-            // Inprogress Waves
-            for (int i = inprogressWaves.Count - 1; i >= 0; i--)
+        if (timePassed <= initialDelay)
+        {
+            return;
+        }
+
+        // Scan Through Unstarted Waves
+        for (int i = unstartedWaves.Count - 1;  i >= 0; i--)
+        {
+            var wave = unstartedWaves[i];
+            if (wave.startTime <= timePassed)
             {
-                var wave = inprogressWaves[i];
-                if (wave.UpdateWave(dt))
-                {
-                    if (wave.characterIndex < characterData.Count)
-                    {
-                        // Spawn For Enemy
-                        //Debug.Log("Spawning");
-                        var spawnedActor = Instantiate(characterData[wave.characterIndex].baseData.unitPrefab);
-                        spawnedActor.transform.position = MapController.Instance.spawnedEnemyBase.GetSpawnPoint();
-                        Debug.Log(spawnedActor.transform.position);
-                        var entity = spawnedActor.GetComponent<CharacterEntity>();
-                        entity.SetTeam(Team.Hostile);
-                        entity.SetCharacterInstance(characterData[wave.characterIndex]);
-                        CharacterContainer.Instance.RegisterUnit(entity);
-                    }
-                }
-                if (wave.abort)
-                {
-                    inprogressWaves.RemoveAt(i);
-                }
+                inprogressWaves.Add(wave);
+                unstartedWaves.RemoveAt(i);
             }
         }
 
-        timePassed += dt;
+        // Inprogress Waves
+        for (int i = inprogressWaves.Count - 1; i >= 0; i--)
+        {
+            var wave = inprogressWaves[i];
+
+            if (!wave.Active())
+            {
+                inprogressWaves.RemoveAt(i);
+                continue;
+            }
+
+            if (wave.UpdateWave(dt))
+            {
+                if (wave.characterIndex < characterInstances.Count)
+                {
+                    // Spawn For Enemy
+                    var spawnedActor = Instantiate(characterInstances[wave.characterIndex].baseData.unitPrefab);
+                    // Set up actor
+                    spawnedActor.transform.position = MapController.Instance.spawnedEnemyBase.GetSpawnPoint();
+                    var entity = spawnedActor.GetComponent<CharacterEntity>();
+                    entity.SetTeam(Team.Hostile);
+                    entity.SetCharacterInstance(characterInstances[wave.characterIndex]);
+                    CharacterContainer.Instance.RegisterUnit(entity);
+                    wave.RegisterUnit(entity);
+                }
+            }
+        }
     }
 
     public int GetAverageLevel()
@@ -121,140 +125,6 @@ public class Level : ScriptableObject
         return average;
     }
 
-}
-
-[System.Serializable]
-public class Wave
-{
-    [Header("Timeline Settings")]
-    public float startSeconds;
-
-    [Header("Spawn Settings")]
-    public int characterIndex;
-
-    [Header("Mode Toggles")]
-    public bool single;
-    public bool burst;
-    public bool repeater;
-
-    [System.Serializable]
-    public struct BurstOptions
-    {
-        public int amount;
-        public float delay;
-    }
-    public BurstOptions burstOptions;
-
-    [System.Serializable]
-    public struct RepeaterOptions
-    {
-        public bool spawnOnStart;
-        public float interval;
-        public float duration;
-        public bool useRandomInterval;
-        public Vector2 randomInterval;
-    }
-    public RepeaterOptions repeaterOptions;
-    private float repeaterRandomTimer = 0.0f;
-    private bool repeaterRandomSpawn = false;
-
-
-    // Internal runtime fields (hidden in inspector)
-    [HideInInspector] public bool abort = false;
-    [HideInInspector] public int spawnedSoFar = 0;
-    [HideInInspector] public float timePassed = 0;
-
-    public Wave()
-    {
-        repeaterRandomTimer = 0.0f;
-    }
-
-    public bool UpdateWave(float dt)
-    {
-        if (abort) return false;
-
-        if (single) return SingleUpdate(dt);
-        if (burst) return BurstUpdate(dt);
-        if (repeater) return RepeaterUpdate(dt);
-
-        timePassed += dt;
-        return false;
-    }
-
-    bool SingleUpdate(float dt)
-    {
-        abort = true;
-        timePassed += dt;
-        return true;
-    }
-
-    bool RepeaterUpdate(float dt)
-    {
-        if (timePassed >= repeaterOptions.duration)
-        {
-            abort = true;
-            return false;
-        }
-
-        // Spawn On Start
-        if (timePassed == 0 && repeaterOptions.spawnOnStart)
-        {
-            timePassed += dt;
-            return true;
-        }
-
-        
-        float threshold = (spawnedSoFar + 1) * repeaterOptions.interval;
-
-        // Random Interval
-        if (repeaterOptions.useRandomInterval && !repeaterRandomSpawn)
-        {
-            float randomInterval = Random.Range(repeaterOptions.randomInterval.x, repeaterOptions.randomInterval.y);
-            repeaterRandomTimer += randomInterval;
-            repeaterRandomSpawn = true;
-        }
-
-        if (repeaterOptions.useRandomInterval && timePassed >= repeaterRandomTimer)
-        {
-            repeaterRandomSpawn = false;
-            timePassed += dt;
-            spawnedSoFar++;
-            return true;
-        }
-
-
-        if (timePassed >= threshold && !repeaterOptions.useRandomInterval)
-        {
-            timePassed += dt;
-            spawnedSoFar++;
-            return true;
-        }
-
-        timePassed += dt;
-        return false;
-    }
-
-    bool BurstUpdate(float dt)
-    {
-        float threshold = (spawnedSoFar + 1) * burstOptions.delay;
-
-        if (spawnedSoFar >= burstOptions.amount)
-        {
-            abort = true;
-            timePassed += dt;
-            return false;
-        }
-
-        if (timePassed >= threshold)
-        {
-            timePassed += dt;
-            spawnedSoFar++;
-            return true;
-        }
-
-        timePassed += dt;
-        return false;
-    }
 }
 
 [System.Serializable]

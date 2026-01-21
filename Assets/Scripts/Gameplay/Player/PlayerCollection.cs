@@ -85,7 +85,7 @@ public class PlayerCollection : MonoBehaviour
         switch (mode)
         {
             case CollectionSortMode.Level:
-                // Highest level first, fallback to acquired order
+                // Highest levelStone first, fallback to acquired order
                 result.Sort((a, b) => b.level.CompareTo(a.level));
                 break;
 

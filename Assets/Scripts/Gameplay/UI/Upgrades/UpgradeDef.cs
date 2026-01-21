@@ -18,10 +18,10 @@ public class UpgradeDef : ScriptableObject
     public FormulaCurve CostCurve = new FormulaCurve
     {
         type = CurveType.Exponential,
-        useNormalized = false,   // exponential cost usually uses raw level
+        useNormalized = false,   // exponential cost usually uses raw levelStone
         baseValue = 100f,        // base cost
         scale = 100f,            // scales contribution of the exp part
-        growth = 1.08f           // +8% per level
+        growth = 1.08f           // +8% per levelStone
     };
 
     [Header("Value Curve (formula-based, no AnimationCurve)")]
@@ -87,7 +87,7 @@ public class FormulaCurve
     public float midpoint = 0.5f;
 
     /// <summary>
-    /// Evaluate curve at a given level (1..maxLevel).
+    /// Evaluate curve at a given levelStone (1..maxLevel).
     /// </summary>
     public float Evaluate(int level, int maxLevel)
     {
@@ -96,7 +96,7 @@ public class FormulaCurve
 
         float x = useNormalized
             ? Mathf.InverseLerp(1f, maxLevel, level)        // t in [0..1]
-            : (float)level;                                  // raw level
+            : (float)level;                                  // raw levelStone
 
         float y = 0f;
 
@@ -114,12 +114,12 @@ public class FormulaCurve
 
             case CurveType.Exponential:
                 // f(x) = growth^x - 1
-                // If normalized, x in [0..1] gives smooth early growth; if raw, it grows quickly per level.
+                // If normalized, x in [0..1] gives smooth early growth; if raw, it grows quickly per levelStone.
                 y = Mathf.Pow(Mathf.Max(1.000001f, growth), x) - 1f;
                 break;
 
             case CurveType.Step:
-                // f(x) = floor(level/stepEvery) * stepAmount   (if useNormalized, map back to level count)
+                // f(x) = floor(levelStone/stepEvery) * stepAmount   (if useNormalized, map back to levelStone count)
                 float lvl = useNormalized ? Mathf.Lerp(1f, maxLevel, x) : x;
                 y = Mathf.Floor(lvl / Mathf.Max(1, stepEvery)) * stepAmount;
                 break;

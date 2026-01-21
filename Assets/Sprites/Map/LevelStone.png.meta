@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: -9171591521998891814
     second: LevelStone_1
+  - first:
+      213: 5387840660181893047
+    second: LevelStone_2
+  - first:
+      213: -1068260175248424022
+    second: LevelStone_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,12 +112,12 @@ TextureImporter:
       name: LevelStone_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
+        x: 2
+        y: 98
+        width: 27
+        height: 27
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -128,12 +134,12 @@ TextureImporter:
       name: LevelStone_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
+        x: 37
+        y: 108
+        width: 21
+        height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -146,11 +152,77 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: LevelStone_2
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 108
+        width: 21
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bf3c80d88475ca40800000000000000
+      internalID: 5387840660181893047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LevelStone_3
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 108
+        width: 21
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa30f9ec707cc21f0800000000000000
+      internalID: -1068260175248424022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LevelStone_4
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 79
+        width: 27
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecf7ece219fcad6488caa27dd3dcbce6
+      internalID: 886849962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6c2214c0016c3f042a2299be5bd98437
+    spriteID: 53eece907e49dd34bba90016344800bf
     internalID: 0
     vertices: []
     indices: 
@@ -162,6 +234,9 @@ TextureImporter:
     nameFileIdTable:
       LevelStone_0: 1399071544777122549
       LevelStone_1: -9171591521998891814
+      LevelStone_2: 5387840660181893047
+      LevelStone_3: -1068260175248424022
+      LevelStone_4: 886849962
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

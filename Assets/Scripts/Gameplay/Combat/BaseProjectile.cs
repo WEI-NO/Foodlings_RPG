@@ -81,13 +81,13 @@ public abstract class BaseProjectile : MonoBehaviour
     public virtual void Init(
         CharacterEntity owner,
         BaseEntity target,
-        float damage,
+        float pdamage,
         float speed,
         Team team)
     {
         this.owner = owner;
         this.target = target;
-        this.damage = damage;
+        this.damage = pdamage;
         this.speed = speed;
         this.team = team;
         PenetratedCount = 0;
@@ -131,6 +131,15 @@ public abstract class BaseProjectile : MonoBehaviour
                 BaseEntity entity = hit.GetComponentInParent<BaseEntity>();
                 if (entity == null) continue;
                 if (!CanHit(entity)) continue;
+
+                float damage = this.damage;
+
+                if (entity.GetComponent<Tower>())
+                {
+                    damage *= Tower.MagicDamageReduction;
+
+                    print("New Damage: " + damage * Tower.MagicDamageReduction);
+                }
 
                 entity.Damage(damage);
 

@@ -4866,7 +4866,7 @@ MonoBehaviour:
   RoundMoney: 0
   kMultiplier: 0.6
   InprogressWave: []
-  defaultLevel: {fileID: 11400000, guid: c8b497623e2f9d244847d2506f0a6482, type: 2}
+  defaultLevel: {fileID: 11400000, guid: ccf09fbb40639234193af3aa4b2ae5e7, type: 2}
   currentLevel: {fileID: 0}
 --- !u!1 &2029130057
 GameObject:

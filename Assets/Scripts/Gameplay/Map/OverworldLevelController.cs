@@ -2,7 +2,7 @@
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;   // ✅ Needed to detect UI hover
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Collider2D))]
 public class OverworldLevelController : MonoBehaviour
@@ -101,7 +101,7 @@ public class OverworldLevelController : MonoBehaviour
         anim?.SetTrigger("Release");
 
 
-        OverworldLevelViewerUIPage.Instance.SetLevel(this);
+        //OverworldLevelViewerUIPage.Instance.SetLevel(this);
         OverworldUIManager.Instance.OpenPageID(LevelViewerUIID);
     }
 

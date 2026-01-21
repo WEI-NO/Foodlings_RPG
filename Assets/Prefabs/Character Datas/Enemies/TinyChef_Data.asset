@@ -25,9 +25,7 @@ MonoBehaviour:
   id: tiny_chef
   displayName: Tiny Chef
   baseRank: 4
-  trait:
-    primaryTrait: 2
-    secondaryTrait: 0
+  role: 0
   summonCost: 50
   cooldownSec: 1
   healthPoint: 80

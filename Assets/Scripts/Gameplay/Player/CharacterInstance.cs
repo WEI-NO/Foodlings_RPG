@@ -110,9 +110,9 @@ public class CharacterInstance
         if (addExp <= 0 || baseData == null) return;
 
         int lastLevel = level;
-        // Determine max level (fallback to 100 if your CharacterData doesn't expose one)
+        // Determine max levelStone (fallback to 100 if your CharacterData doesn't expose one)
         int maxLevel = 100;
-        // If your CharacterData has a max level field/property, prefer that:
+        // If your CharacterData has a max levelStone field/property, prefer that:
         // maxLevel = Mathf.Max(1, baseData.maxLevel);
 
         accumulatedExp = Mathf.Clamp(accumulatedExp + addExp, int.MinValue, int.MaxValue);
@@ -131,10 +131,10 @@ public class CharacterInstance
         // Add to current-progress EXP
         long current = exp + carry;
 
-        // Consume EXP while enough to level up
+        // Consume EXP while enough to levelStone up
         while (level < maxLevel)
         {
-            int need = GetExpRequired(); // EXP needed from current level to next
+            int need = GetExpRequired(); // EXP needed from current levelStone to next
 
             // Defensive: if your curve ever returns <= 0, break to avoid infinite loop
             if (need <= 0)
@@ -157,7 +157,7 @@ public class CharacterInstance
             return;
         }
 
-        // Otherwise keep leftover toward the next level (fits your segmented curve)
+        // Otherwise keep leftover toward the next levelStone (fits your segmented curve)
         exp = (int)Mathf.Clamp(current, 0, int.MaxValue);
 
         if (level != lastLevel)

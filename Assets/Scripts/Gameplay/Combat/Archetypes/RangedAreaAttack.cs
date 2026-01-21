@@ -24,7 +24,7 @@ public class RangedAreaAttack : AttackBehavior
         proj.Init(
             attacker,
             attacker.attackTarget,
-            attacker.characterInstance.GetStat(CharacterStatType.PAtk),
+            attacker.characterInstance.GetStat(CharacterStatType.MAtk),
             projectileSpeed,
             attacker.team
         );

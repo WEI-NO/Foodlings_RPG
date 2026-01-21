@@ -29,7 +29,7 @@ public class CharacterData : ScriptableObject
 
 #if UNITY_EDITOR
     /// <summary>
-    /// Recalculate and cache debug stats at max level.
+    /// Recalculate and cache debug stats at max levelStone.
     /// Only used by the custom editor.
     /// </summary>
     public void UpdateDebugStats()
@@ -82,7 +82,7 @@ public class CharacterData : ScriptableObject
     public float healthPoint = 100f;
     public float physicalDamage = 10f;
     public float magicDamage = 10f;
-    public float attackRate = 1.0f;  // attacks per second at level 1
+    public float attackRate = 1.0f;  // attacks per second at levelStone 1
     public float moveSpeed = 3.5f;
     public float attackRange = 1.5f;
     public float physicalDefense = 1.5f;

@@ -25,7 +25,7 @@ public class CharacterDataEditor : Editor
         // Toggle: Show Max Level Stats
         EditorGUILayout.PropertyField(debug_ShowMaxLevelStatsProp, new GUIContent("Show Max Level Stats"));
 
-        // If toggled on, compute and display max-level stats
+        // If toggled on, compute and display max-levelStone stats
         if (data.debug_ShowMaxLevelStats)
         {
             // Recalculate whenever inspector is drawn

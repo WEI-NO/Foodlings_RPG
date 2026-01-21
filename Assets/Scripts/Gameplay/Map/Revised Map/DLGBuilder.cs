@@ -10,9 +10,10 @@ public static class DLGBuilder
         var nodes = new Dictionary<int, LevelNode>();
 
         // 1) Create all nodes
+        int posIndex = 0;
         foreach (var data in graphData.nodes)
         {
-            if (!levelPositions.TryGetValue(data.levelIndex, out var pos))
+            if (!levelPositions.TryGetValue(posIndex++, out var pos))
             {
                 Debug.LogError($"No world position provided for levelIndex {data.levelIndex}.");
                 pos = Vector3.zero;

@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 using UnityEditor;
 #endif
 
+// Scans the levelStone marker tilemap and sort them based on x position (ascending, in a tie, compares y)
 public class LevelMarkerScanner : MonoBehaviour
 {
     [Header("Tilemap Reference")]
@@ -23,6 +24,7 @@ public class LevelMarkerScanner : MonoBehaviour
 
         List<Vector3Int> markerCells = new List<Vector3Int>();
 
+        // Get all cells from tilemap
         foreach (var cell in markerTilemap.cellBounds.allPositionsWithin)
         {
             if (markerTilemap.HasTile(cell))
@@ -35,16 +37,19 @@ public class LevelMarkerScanner : MonoBehaviour
         {
             return levelPositions;
         }
-
+        
+        // Sort it by x (ascending)
         markerCells.Sort((a, b) =>
         {
             int xCompare = a.x.CompareTo(b.x);
             if (xCompare != 0)
                 return xCompare;
 
+            // Comparing Y if x pos is the same
             return a.y.CompareTo(b.y);
         });
 
+        // Set the positions of each levelStone
         for (int i = 0; i < markerCells.Count; i++)
         {
             Vector3 worldPosition = markerTilemap.GetCellCenterWorld(markerCells[i]);

@@ -8,9 +8,12 @@ public class MainDatabase : MonoBehaviour
     public ItemDatabase itemDatabase;
     public UpgradeDatabase upgradeDatabase;
     public SpriteDatabase spriteDatabase;
+    public LevelDatabase levelDatabase;
+
 
     private void Awake()
     {
         Initializer.SetInstance(this);
+        levelDatabase.Init();
     }
 }

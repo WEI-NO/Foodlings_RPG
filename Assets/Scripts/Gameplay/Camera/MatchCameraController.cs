@@ -95,7 +95,7 @@ public class MatchCameraController : MonoBehaviour
             // Adjust zoom (orthographic size)
             cam.orthographicSize -= scrollInput * zoomSpeed;
 
-            // Clamp zoom level
+            // Clamp zoom levelStone
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minZoom, maxZoom);
         }
     }

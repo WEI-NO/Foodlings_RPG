@@ -1,104 +1,86 @@
-using UnityEditor;
-using UnityEngine;
+//using UnityEditor;
+//using UnityEngine;
+//using System;
+//using System.Linq;
 
-[CustomPropertyDrawer(typeof(Wave))]
-public class WaveDrawer : PropertyDrawer
-{
-    private bool showBurst;
-    private bool showRepeater;
+//[CustomPropertyDrawer(typeof(Wave))]
+//public class WaveDrawer : PropertyDrawer
+//{
+//    Type[] spawnModeTypes;
 
-    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-    {
-        // Default drawer height calculation
-        return EditorGUI.GetPropertyHeight(property, true) - 6f;
-        // ^ reduce height slightly to remove unwanted gap
-    }
+//    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+//    {
+//        Debug.Log("WaveDrawer OnGUI called");
 
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    {
-        EditorGUI.BeginProperty(position, label, property);
+//        EditorGUI.BeginProperty(position, label, property);
 
-        // --- Reduce the gap before the box ---
-        GUILayout.Space(-6f); // perfect sweet spot (adjust to taste: -4f to -8f)
+//        position.height = EditorGUIUtility.singleLineHeight;
 
-        SerializedProperty startSeconds = property.FindPropertyRelative("startSeconds");
-        SerializedProperty characterIndex = property.FindPropertyRelative("characterIndex");
+//        var startTimeProp = property.FindPropertyRelative("startTime");
+//        var characterIndexProp = property.FindPropertyRelative("characterIndex");
+//        var spawnModeProp = property.FindPropertyRelative("spawnMode");
 
-        SerializedProperty single = property.FindPropertyRelative("single");
-        SerializedProperty burst = property.FindPropertyRelative("burst");
-        SerializedProperty repeater = property.FindPropertyRelative("repeater");
+//        EditorGUI.PropertyField(position, startTimeProp);
+//        position.y += position.height + 2;
 
-        SerializedProperty burstOptions = property.FindPropertyRelative("burstOptions");
-        SerializedProperty repeaterOptions = property.FindPropertyRelative("repeaterOptions");
+//        EditorGUI.PropertyField(position, characterIndexProp);
+//        position.y += position.height + 4;
 
-        // Draw box for readability
-        EditorGUILayout.BeginVertical("box");
+//        EnsureSpawnModeTypes();
 
-        EditorGUILayout.LabelField("Wave Settings", EditorStyles.boldLabel);
-        EditorGUILayout.PropertyField(startSeconds);
-        EditorGUILayout.PropertyField(characterIndex);
+//        string[] options = spawnModeTypes.Select(t => t.Name).ToArray();
 
-        EditorGUILayout.Space(4);
+//        int currentIndex = -1;
+//        if (spawnModeProp.managedReferenceValue != null)
+//        {
+//            Type currentType = spawnModeProp.managedReferenceValue.GetType();
+//            currentIndex = Array.IndexOf(spawnModeTypes, currentType);
+//        }
 
-        EditorGUILayout.LabelField("Spawn Mode", EditorStyles.boldLabel);
+//        int selected = EditorGUI.Popup(position, "Spawn Mode", currentIndex, options);
 
-        DrawModeToggle(single, burst, repeater, "Single");
-        DrawModeToggle(burst, single, repeater, "Burst");
-        DrawModeToggle(repeater, single, burst, "Repeater");
+//        if (selected != currentIndex && selected >= 0)
+//        {
+//            spawnModeProp.managedReferenceValue =
+//                Activator.CreateInstance(spawnModeTypes[selected]);
+//        }
 
-        EditorGUILayout.Space(4);
+//        position.y += position.height + 4;
 
-        if (single.boolValue)
-        {
-            EditorGUILayout.HelpBox("Spawns a single entity at the start time.", MessageType.Info);
-        }
+//        if (spawnModeProp.managedReferenceValue != null)
+//        {
+//            EditorGUI.indentLevel++;
+//            float spawnModeHeight = EditorGUI.GetPropertyHeight(spawnModeProp, true);
+//            Rect spawnRect = new Rect(position.x, position.y, position.width, spawnModeHeight);
+//            EditorGUI.PropertyField(spawnRect, spawnModeProp, true);
+//            EditorGUI.indentLevel--;
+//        }
 
-        if (burst.boolValue)
-        {
-            showBurst = EditorGUILayout.Foldout(showBurst, "Burst Settings");
+//        EditorGUI.EndProperty();
+//    }
 
-            if (showBurst)
-            {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(burstOptions.FindPropertyRelative("amount"), new GUIContent("Burst Amount"));
-                EditorGUILayout.PropertyField(burstOptions.FindPropertyRelative("delay"), new GUIContent("Burst Delay"));
-                EditorGUI.indentLevel--;
-            }
-        }
+//    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+//    {
+//        float height = 0f;
+//        height += EditorGUIUtility.singleLineHeight * 3;
 
-        if (repeater.boolValue)
-        {
-            showRepeater = EditorGUILayout.Foldout(showRepeater, "Repeater Settings");
+//        var spawnModeProp = property.FindPropertyRelative("spawnMode");
+//        if (spawnModeProp.managedReferenceValue != null)
+//        {
+//            height += EditorGUI.GetPropertyHeight(spawnModeProp, true) + 4;
+//        }
 
-            if (showRepeater)
-            {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(repeaterOptions.FindPropertyRelative("spawnOnStart"));
-                EditorGUILayout.PropertyField(repeaterOptions.FindPropertyRelative("interval"));
-                EditorGUILayout.PropertyField(repeaterOptions.FindPropertyRelative("duration"));
-                EditorGUILayout.PropertyField(repeaterOptions.FindPropertyRelative("useRandomInterval"));
-                EditorGUILayout.PropertyField(repeaterOptions.FindPropertyRelative("randomInterval"));
-                EditorGUI.indentLevel--;
-            }
-        }
+//        return height;
+//    }
 
-        EditorGUILayout.EndVertical();
-        EditorGUI.EndProperty();
-    }
+//    void EnsureSpawnModeTypes()
+//    {
+//        if (spawnModeTypes != null)
+//            return;
 
-    private void DrawModeToggle(SerializedProperty current, SerializedProperty other1, SerializedProperty other2, string label)
-    {
-        bool newValue = EditorGUILayout.ToggleLeft(label, current.boolValue);
-
-        if (newValue)
-        {
-            current.boolValue = true;
-            other1.boolValue = false;
-            other2.boolValue = false;
-        }
-        else
-        {
-            current.boolValue = false;
-        }
-    }
-}
+//        spawnModeTypes = TypeCache
+//            .GetTypesDerivedFrom<SpawnMode>()
+//            .Where(t => !t.IsAbstract)
+//            .ToArray();
+//    }
+//}

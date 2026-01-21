@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class Tower : BaseEntity
 {
+    public static float MagicDamageReduction = 0.1f;
+
     [Header("Spawn Position")]
     public Transform spawnPoint;
     public Vector2 yOffsetRange;
@@ -13,6 +15,10 @@ public class Tower : BaseEntity
     public TextMeshProUGUI healthText;
     public Image healthFillBar;
     public Team team;
+
+    [Header("Spawn Quantization")]
+    public float minSpawnStep = 0.1f; // minimum distance between possible spawn points
+
 
     private void Start()
     {
@@ -29,15 +35,6 @@ public class Tower : BaseEntity
 
     public Vector2 GetSpawnPoint()
     {
-        //int step = Random.Range(0, yOffsetSteps);
-        //float range = yOffsetRange.y - yOffsetRange.x;
-        //float stepAmount = range / yOffsetSteps;
-
-        //float lowerBound = spawnPoint.position.y + yOffsetRange.x;
-        //float yPosition = lowerBound + stepAmount * step;
-
-
-        //return new Vector2(spawnPoint.position.x, yPosition);
         float randomY = spawnPoint.position.y + Random.Range(yOffsetRange.x, yOffsetRange.y);
         return new Vector2(GetXPosition(), randomY);
     }

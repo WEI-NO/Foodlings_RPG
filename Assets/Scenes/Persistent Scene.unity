@@ -647,6 +647,7 @@ MonoBehaviour:
   itemDatabase: {fileID: 11400000, guid: eff13032680eec2499df64e93a441912, type: 2}
   upgradeDatabase: {fileID: 11400000, guid: 6581149a32642f644b6182ee708059ef, type: 2}
   spriteDatabase: {fileID: 11400000, guid: 931e4dc890513e94f886e87bba4e3a06, type: 2}
+  levelDatabase: {fileID: 11400000, guid: 41c41e3670635704d8c9b35cfb41ee3f, type: 2}
 --- !u!1 &1790495527
 GameObject:
   m_ObjectHideFlags: 0

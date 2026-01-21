@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66d83d99d6ce48409c5586474f279dc, type: 3}
+  m_Name: Level_1-1
+  m_EditorClassIdentifier: 
+  charactersInLevel:
+  - tiny_chef
+  characterLevels: 00000000
+  characterInstances: []
+  waves:
+  - Notes: Spawn 1 enemy
+    startTime: 0
+    duration: 1
+    spawnOnStart: 1
+    characterIndex: 0
+    maxDeployed: 1
+    spawnIntervalRange: {x: 0, y: 0}
+  - Notes: Spawn multiple up to 5
+    startTime: 10
+    duration: 200
+    spawnOnStart: 0
+    characterIndex: 0
+    maxDeployed: 5
+    spawnIntervalRange: {x: 3, y: 5}
+  unstartedWaves: []
+  inprogressWaves: []
+  mapLength: 2
+  initialDelay: 3
+  LevelName: Training Ground
+  ready: 0
+  firstClearRewards:
+  - rewardID: seared_core
+    quantity: 5
+    useQuantityRange: 0
+    quantityRange: {x: 0, y: 0}
+    rolled: 0
+  - rewardID: toast_coin
+    quantity: 1000
+    useQuantityRange: 0
+    quantityRange: {x: 0, y: 0}
+    rolled: 0
+  clearRewards:
+  - rewardID: toast_coin
+    quantity: 0
+    useQuantityRange: 1
+    quantityRange: {x: 400, y: 800}
+    rolled: 0
