@@ -21,14 +21,14 @@ MonoBehaviour:
   debug_AtkRng: 0.8
   debug_AtkSpe: 0.6
   debug_Spe: 20
-  debug_CD: 5
+  debug_CD: 7.5
   id: toast
   displayName: Toast
   baseRank: 0
   role: 0
   onlyMoveWhenAttackReady: 0
   summonCost: 40
-  cooldownSec: 5
+  cooldownSec: 7.5
   healthPoint: 100
   physicalDamage: 8
   magicDamage: 8

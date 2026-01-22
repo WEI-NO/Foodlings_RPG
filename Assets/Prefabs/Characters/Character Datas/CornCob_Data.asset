@@ -21,14 +21,14 @@ MonoBehaviour:
   debug_AtkRng: 2.5
   debug_AtkSpe: 0.2
   debug_Spe: 15
-  debug_CD: 7.5
+  debug_CD: 10
   id: corncob
   displayName: Corn Cob
   baseRank: 0
   role: 0
   onlyMoveWhenAttackReady: 0
-  summonCost: 10
-  cooldownSec: 7.5
+  summonCost: 80
+  cooldownSec: 10
   healthPoint: 80
   physicalDamage: 10
   magicDamage: 0
@@ -40,7 +40,8 @@ MonoBehaviour:
   growth: 1
   growthSteepness: 0.5
   healthThreshold:
-  - 0.5
+  - 0.33
+  - 0.66
   unitPrefab: {fileID: 7117213010433560467, guid: 7ff5751c793c1024e8baa1a305f45b3f, type: 3}
   unitSprite: {fileID: -1960546628078278901, guid: 3229132376d0eae47990b4c544a06231, type: 3}
   behavior: {fileID: 11400000, guid: b834e7cad5d9fa24b9ce7a16fd783e87, type: 2}

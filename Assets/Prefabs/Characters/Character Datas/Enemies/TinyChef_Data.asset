@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug_ShowMaxLevelStats: 1
   debug_HP: 1240
-  debug_PAtk: 77.5
+  debug_PAtk: 108.5
   debug_MAtk: 155
   debug_PDef: 23.25
   debug_MDef: 23.25
-  debug_AtkRng: 0.5
-  debug_AtkSpe: 0.8
+  debug_AtkRng: 0.6
+  debug_AtkSpe: 0.75
   debug_Spe: 20
   debug_CD: 1
   id: tiny_chef
@@ -30,11 +30,11 @@ MonoBehaviour:
   summonCost: 50
   cooldownSec: 1
   healthPoint: 80
-  physicalDamage: 5
+  physicalDamage: 7
   magicDamage: 10
-  attackRate: 0.8
+  attackRate: 0.75
   moveSpeed: 20
-  attackRange: 0.5
+  attackRange: 0.6
   physicalDefense: 1.5
   magicDefense: 1.5
   growth: 1

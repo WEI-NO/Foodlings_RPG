@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a18723090138840a7bd8758bd9dea5, type: 3}
+  m_Name: FatChef_Data
+  m_EditorClassIdentifier: 
+  debug_ShowMaxLevelStats: 1
+  debug_HP: 3100
+  debug_PAtk: 310
+  debug_MAtk: 155
+  debug_PDef: 23.25
+  debug_MDef: 23.25
+  debug_AtkRng: 0.45
+  debug_AtkSpe: 0.25
+  debug_Spe: 20
+  debug_CD: 1
+  id: fat_chef
+  displayName: Fat Chef
+  baseRank: 4
+  role: 1
+  onlyMoveWhenAttackReady: 0
+  summonCost: 50
+  cooldownSec: 1
+  healthPoint: 200
+  physicalDamage: 20
+  magicDamage: 10
+  attackRate: 0.25
+  moveSpeed: 20
+  attackRange: 0.45
+  physicalDefense: 1.5
+  magicDefense: 1.5
+  growth: 1
+  growthSteepness: 0.5
+  healthThreshold: []
+  unitPrefab: {fileID: 5756161629207259482, guid: 99052ee111959884a9db51030440dfb3, type: 3}
+  unitSprite: {fileID: 21300000, guid: 1979e48ab78a8c741994933f0675de72, type: 3}
+  behavior: {fileID: 11400000, guid: b24d64ce85cb3c8449998e1687a4d2fa, type: 2}
+  maxLevel: 30

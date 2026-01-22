@@ -14,26 +14,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactersInLevel:
   - tiny_chef
-  characterLevels: 01000000
+  - fat_chef
+  characterLevels: 0100000001000000
   characterInstances: []
   waves:
   - Notes: Spawn 1 enemy
     startTime: 0
     duration: 1
     spawnOnStart: 1
-    characterIndex: 0
+    characterIndex: 1
     maxDeployed: 1
     spawnIntervalRange: {x: 0, y: 0}
-  - Notes: Spawn multiple up to 5
+  - Notes: Spawn 0 up to 5
     startTime: 10
-    duration: 50
+    duration: 80
     spawnOnStart: 0
     characterIndex: 0
-    maxDeployed: 5
+    maxDeployed: 10
+    spawnIntervalRange: {x: 5, y: 10}
+  - Notes: Spawn 1 Up to 5
+    startTime: 10
+    duration: 80
+    spawnOnStart: 0
+    characterIndex: 1
+    maxDeployed: 3
     spawnIntervalRange: {x: 3, y: 5}
   - Notes: Slight delay until more spawns
     startTime: 70
     duration: 50
+    spawnOnStart: 0
+    characterIndex: 1
+    maxDeployed: 5
+    spawnIntervalRange: {x: 4, y: 8}
+  - Notes: Slight delay until more spawns
+    startTime: 130
+    duration: 0
     spawnOnStart: 0
     characterIndex: 0
     maxDeployed: 15
@@ -45,6 +60,13 @@ MonoBehaviour:
     characterIndex: 0
     maxDeployed: 25
     spawnIntervalRange: {x: 5, y: 10}
+  - Notes: Slight delay until more spawns
+    startTime: 130
+    duration: 0
+    spawnOnStart: 0
+    characterIndex: 1
+    maxDeployed: 5
+    spawnIntervalRange: {x: 4, y: 9}
   unstartedWaves: []
   inprogressWaves: []
   mapLength: 2

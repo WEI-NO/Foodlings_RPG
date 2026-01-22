@@ -27,7 +27,7 @@ MonoBehaviour:
   baseRank: 0
   role: 1
   onlyMoveWhenAttackReady: 0
-  summonCost: 140
+  summonCost: 100
   cooldownSec: 10
   healthPoint: 250
   physicalDamage: 5

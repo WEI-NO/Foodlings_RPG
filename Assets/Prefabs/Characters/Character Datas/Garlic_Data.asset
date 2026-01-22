@@ -21,14 +21,14 @@ MonoBehaviour:
   debug_AtkRng: 4
   debug_AtkSpe: 0.15
   debug_Spe: 17
-  debug_CD: 7.5
+  debug_CD: 10
   id: gagrlic
   displayName: Garlic
   baseRank: 1
   role: 2
   onlyMoveWhenAttackReady: 0
-  summonCost: 10
-  cooldownSec: 7.5
+  summonCost: 120
+  cooldownSec: 10
   healthPoint: 60
   physicalDamage: 1
   magicDamage: 5
@@ -40,7 +40,8 @@ MonoBehaviour:
   growth: 1
   growthSteepness: 0.5
   healthThreshold:
-  - 0.5
+  - 0.33
+  - 0.66
   unitPrefab: {fileID: 8909930768644662140, guid: 363a1436f10206343ab738f385e419d4, type: 3}
   unitSprite: {fileID: 21300000, guid: 67b4fe1ae30a2c0499a126a70b9d4434, type: 3}
   behavior: {fileID: 11400000, guid: a7cbeaeaacfb38843bc508e4928552b7, type: 2}
