@@ -28,8 +28,7 @@ public class LevelStone : MonoBehaviour
     public Sprite[] spriteStages;
     public SpriteRenderer sr;
 
-    public RegionName region;
-    public int assignedIndex = 0;
+    public LevelDefinition levelDef;
 
     protected virtual void Awake()
     {
@@ -51,8 +50,8 @@ public class LevelStone : MonoBehaviour
 
     public void Init(RegionName region, int levelIndex)
     {
-        assignedIndex = levelIndex;
-        this.region = region;
+        levelDef = new LevelDefinition(region, levelIndex);
+        RefreshInfo();
     }
 
     void HandleHover()
@@ -120,7 +119,6 @@ public class LevelStone : MonoBehaviour
         // Mouse entered
         // Example: highlight
         print("entered");
-        RefreshInfo();
         SetState(LevelStoneState.Highlight);
     }
 
@@ -172,7 +170,7 @@ public class LevelStone : MonoBehaviour
 
     public bool StartLevel()
     {
-        var level = LevelDatabase.GetLevel(region, assignedIndex);
+        var level = LevelDatabase.GetLevel(levelDef);
 
         if (level == null)
         {
@@ -184,26 +182,27 @@ public class LevelStone : MonoBehaviour
             return false;
         }
 
-        GameMatchManager.SetLevel(level);
-        OverworldData.Instance.inprogressLevelIndex = assignedIndex;
+        
+
+        GameMatchManager.SetLevel(level, levelDef);
         SceneTransitor.Instance.TransitionTo("Game Scene");
         return true;
     }
 
     public void RefreshInfo()
     {
-        var level = LevelDatabase.GetLevel(region, assignedIndex);
+        var level = LevelDatabase.GetLevel(levelDef);
 
         if (level == null) return;
 
         enemyLevelText.text = $"{level.GetAverageLevel()}";
         levelNameText.text = $"{level.LevelName}";
-        chapterText.text = $"{ChapterTitleText(region, assignedIndex)}";
+        chapterText.text = $"{ChapterTitleText(levelDef)}";
     }
 
-    private static string ChapterTitleText(RegionName region, int levelIndex)
+    private static string ChapterTitleText(LevelDefinition levelDef)
     {
-        return $"Chapter {region.ToInt() + 1} - {levelIndex + 1}";
+        return $"Chapter {levelDef.region.ToInt() + 1} - {levelDef.index + 1}";
     }
 
 }

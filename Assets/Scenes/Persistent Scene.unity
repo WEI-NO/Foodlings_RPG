@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 1227699930}
   - component: {fileID: 1227699931}
   - component: {fileID: 1227699932}
+  - component: {fileID: 1227699933}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -451,6 +452,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2eee4f3457cb58242a58f628526c382d, type: 2}
   - {fileID: 11400000, guid: 8721043376b12974e9c63c224a016b34, type: 2}
   - {fileID: 11400000, guid: 8721043376b12974e9c63c224a016b34, type: 2}
+  debug_initialLevels: 14000000140000001400000014000000
 --- !u!114 &1227699931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,6 +485,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentOvenSlot: 2
+--- !u!114 &1227699933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227699926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bfc1cf3c29309c449f6b7f507a70824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1424977754
 GameObject:
   m_ObjectHideFlags: 0

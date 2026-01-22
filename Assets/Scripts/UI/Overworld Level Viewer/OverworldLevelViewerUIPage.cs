@@ -22,7 +22,7 @@ public class OverworldLevelViewerUIPage : BaseUIPage
         this.levelStone = levelStone;
         if (levelStone == null) return;
 
-        var level = LevelDatabase.GetLevel(levelStone.region, levelStone.assignedIndex);
+        var level = LevelDatabase.GetLevel(levelStone.levelDef);
 
         if (level == null) return;
 

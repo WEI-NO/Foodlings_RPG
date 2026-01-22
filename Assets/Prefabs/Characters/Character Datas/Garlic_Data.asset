@@ -26,6 +26,7 @@ MonoBehaviour:
   displayName: Garlic
   baseRank: 1
   role: 2
+  onlyMoveWhenAttackReady: 0
   summonCost: 10
   cooldownSec: 7.5
   healthPoint: 60

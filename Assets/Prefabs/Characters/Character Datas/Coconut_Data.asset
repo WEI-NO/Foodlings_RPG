@@ -26,6 +26,7 @@ MonoBehaviour:
   displayName: Coconut
   baseRank: 0
   role: 1
+  onlyMoveWhenAttackReady: 0
   summonCost: 140
   cooldownSec: 10
   healthPoint: 250

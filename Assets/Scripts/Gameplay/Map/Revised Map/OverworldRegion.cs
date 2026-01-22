@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class OverworldRegion : MonoBehaviour
     [Header("Level Stones")]
     public LevelStone levelStonePrefab;
     public Transform levelStoneContainer;
+    public List<LevelStone> orderedLevelStone; // A list of levelstone ordered by level index
 
     [Header("Level Structure")]
     public RegionLevelList levelList;
@@ -40,6 +42,16 @@ public class OverworldRegion : MonoBehaviour
             return;
         }
 
+        // Create a new list for orderedLevelStone
+        orderedLevelStone = new();
+
+        // Get Player Progression Data
+        var pp = PlayerProgression.Instance;
+        int unlockedIndex = pp.ProgressedIndex(region); // Up to but not including this level is unlocked
+        // Clamp to 1 to always allow level 1
+        unlockedIndex = Mathf.Clamp(unlockedIndex, 1, unlockedIndex);
+
+        // Loop through each pair (
         foreach (var pair in regionNodes)
         {
             LevelNode node = pair.Value;
@@ -51,8 +63,12 @@ public class OverworldRegion : MonoBehaviour
                 levelStoneContainer
             );
 
-            stone.Init(region, node.levelIndex);
+            orderedLevelStone.Add(stone);
 
+            // Disable if it is locked
+            stone.gameObject.SetActive(pair.Key < unlockedIndex);
+
+            stone.Init(region, node.levelIndex);
             stone.name = $"LevelStone_{node.levelIndex}";
         }
     }

@@ -70,6 +70,7 @@ public class Wave
     
     public bool Active()
     {
+        if (duration == 0) return true;
         return lifetimer < duration;
     }
     

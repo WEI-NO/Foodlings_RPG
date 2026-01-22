@@ -73,7 +73,7 @@ public class CharacterEntity : BaseEntity
     private bool isKnockback = false;
     private Coroutine knockbackRoutine;
 
-    public bool debug_isAttacking = false;
+    public bool inAttackAnimation = false;
 
 
 
@@ -95,7 +95,7 @@ public class CharacterEntity : BaseEntity
 
     private void Update()
     {
-        debug_isAttacking = IsAttackAnimationPlaying();
+        inAttackAnimation = IsAttackAnimationPlaying();
 
         if (isKnockback)
         {
@@ -323,6 +323,12 @@ public class CharacterEntity : BaseEntity
 
     private void AdvancingStateCheck()
     {
+        if (inAttackAnimation)
+        {
+            SwitchState(CharacterState.None);
+            return;
+        }
+
         if (characterInstance.baseData.onlyMoveWhenAttackReady)
         {
             if (attackCooldownTimer <= 0)

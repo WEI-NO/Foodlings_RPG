@@ -26,6 +26,7 @@ MonoBehaviour:
   displayName: Toast
   baseRank: 0
   role: 0
+  onlyMoveWhenAttackReady: 0
   summonCost: 40
   cooldownSec: 5
   healthPoint: 100
@@ -38,7 +39,6 @@ MonoBehaviour:
   magicDefense: 1.5
   growth: 1
   growthSteepness: 0.5
-  knockbackDuration: 1.25
   healthThreshold:
   - 0.5
   unitPrefab: {fileID: 4057219219921995394, guid: 72ed6e6c7560357418d3aef5500768e8, type: 3}

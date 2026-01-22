@@ -11,7 +11,7 @@ public class RangedAreaAttack : AttackBehavior
 
     public override void Execute(CharacterEntity attacker)
     {
-        if (attacker.attackTarget == null || projectilePrefab == null)
+        if ((attacker.attackTarget == null && !attacker.targettingTower) || projectilePrefab == null)
             return;
 
         GameObject projectile = Instantiate(

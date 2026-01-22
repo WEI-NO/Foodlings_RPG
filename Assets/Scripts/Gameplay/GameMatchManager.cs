@@ -9,6 +9,7 @@ public class GameMatchManager : MonoBehaviour
     public static GameMatchManager Instance;
 
     public static Level CurrentSelectedLevel;
+    public static LevelDefinition CurrentLevelDef;
 
     public Action OnFriendlyWin;
     public Action OnEnemyWin;
@@ -49,17 +50,10 @@ public class GameMatchManager : MonoBehaviour
 
     public Level defaultLevel = null;
 
-    public static void SetLevel(Level level, bool unlockUponCompletion = false, List<int> unlockRegion = null)
+    public static void SetLevel(Level level, LevelDefinition levelDef)
     {
-        if (unlockUponCompletion)
-        {
-            UnlockUponCompletion = true;
-            UnlockRegion = unlockRegion;
-        } else
-        {
-            UnlockRegion = null;
-        }
         CurrentSelectedLevel = level;
+        CurrentLevelDef = levelDef;
     }
 
     public Level currentLevel;
@@ -151,19 +145,19 @@ public class GameMatchManager : MonoBehaviour
             {
                 var rewards = currentLevel.clearRewards;
                 // First Clear
-                if (!OverworldData.Instance.CompletedLevel(currentLevel))
+                if (!PlayerProgression.Instance.IsLevelComplete(CurrentLevelDef))
                 {
                     rewards = currentLevel.firstClearRewards;
                 }
 
                 GiveLevelRewards(rewards);
             }
-
-            OverworldData.Instance.CompleteLevel(UnlockUponCompletion, UnlockRegion);
         } else
         {
             OnEnemyWin?.Invoke();
         }
+
+        PlayerProgression.Instance.OnCompleteLevel(CurrentLevelDef);
         SetGameState(true);
     }
 

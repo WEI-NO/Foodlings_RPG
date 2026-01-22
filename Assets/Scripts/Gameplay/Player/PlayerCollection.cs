@@ -1,8 +1,6 @@
 using CustomLibrary.References;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCollection : MonoBehaviour
@@ -25,6 +23,7 @@ public class PlayerCollection : MonoBehaviour
 
     [Header("Debug Settings")]
     public List<CharacterData> debug_InitialCollection = new();
+    public List<int> debug_initialLevels = new();
 
     private void Awake()
     {
@@ -34,21 +33,37 @@ public class PlayerCollection : MonoBehaviour
     private void Start()
     {
         // Debug Test
+
+        // Ensure the characters have levels.
+        int diffInSize = debug_InitialCollection.Count - debug_initialLevels.Count;
+        for (int j = 0; j < diffInSize; j++)
+        {
+            debug_initialLevels.Add(1);
+        }
+        int i_level = 0;
+
         foreach (var i in debug_InitialCollection)
         {
-            if (i == null) continue;
+            if (i == null)
+            {
+                i_level++;
+                continue;
+            }
 
-            AddCharacter(i);
+            AddCharacter(i, debug_initialLevels[i_level]);
+            i_level++;
         }
     }
 
-    public void AddCharacter(CharacterData data)
+    public void AddCharacter(CharacterData data, int initialLevel = 1)
     {
         CharacterInstance newInstance = new CharacterInstance();
         if (!newInstance.ResetCharacter(data))
         {
             return;
         }
+
+        newInstance.SetLevel(initialLevel);
 
         // Storage
         CollectionByID.Add(newInstance.instanceId, newInstance);

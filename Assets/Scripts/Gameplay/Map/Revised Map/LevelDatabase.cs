@@ -23,17 +23,36 @@ public class LevelDatabase : ScriptableObject
         masterlist[RegionName.Twinreach_Isle.ToInt()] = new List<Level>(region_1);
     }
 
-    public static Level GetLevel(RegionName region, int lvlIndex)
+    public static int GetTotalLevels(RegionName region)
     {
-        var rIndex = region.ToInt();
+        var lvlDatabase = MainDatabase.Instance.levelDatabase;
+
+        return MainDatabase.Instance.levelDatabase.masterlist[region.ToInt()].Count;
+    }
+
+    public static Level GetLevel(LevelDefinition levelDef)
+    {
+        var rIndex = levelDef.region.ToInt();
         var lvlDatabase = MainDatabase.Instance.levelDatabase;
 
         if (rIndex >= lvlDatabase.masterlist.Length)
             return null;
 
-        if (lvlIndex >= lvlDatabase.masterlist[rIndex].Count)
+        if (levelDef.index>= lvlDatabase.masterlist[rIndex].Count)
             return null;
 
-        return MainDatabase.Instance.levelDatabase.masterlist[region.ToInt()][lvlIndex];
+        return MainDatabase.Instance.levelDatabase.masterlist[levelDef.region.ToInt()][levelDef.index];
+    }
+}
+
+public class LevelDefinition
+{
+    public RegionName region;
+    public int index;
+
+    public LevelDefinition(RegionName r, int l)
+    {
+        region = r;
+        index = l;
     }
 }
