@@ -20,7 +20,7 @@ MonoBehaviour:
   debug_MDef: 23.25
   debug_AtkRng: 0.45
   debug_AtkSpe: 0.25
-  debug_Spe: 20
+  debug_Spe: 12.5
   debug_CD: 1
   id: fat_chef
   displayName: Fat Chef
@@ -33,7 +33,7 @@ MonoBehaviour:
   physicalDamage: 20
   magicDamage: 10
   attackRate: 0.25
-  moveSpeed: 20
+  moveSpeed: 12.5
   attackRange: 0.45
   physicalDefense: 1.5
   magicDefense: 1.5

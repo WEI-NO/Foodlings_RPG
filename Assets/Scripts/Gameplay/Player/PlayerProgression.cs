@@ -1,5 +1,6 @@
 using CustomLibrary.References;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class PlayerProgression : MonoBehaviour
@@ -22,7 +23,6 @@ public class PlayerProgression : MonoBehaviour
     public bool IsLevelComplete(LevelDefinition def)
     {
         int progressed = ProgressedIndex(def.region);
-
         return def.index < progressed;
     }
 
@@ -69,7 +69,8 @@ public class RegionProgression
     // Increments progressedIndex and return the next index
     public int IncrementProgression()
     {
-        progressedIndex = Mathf.Clamp(progressedIndex + 1, 0, GetMaxLevels());
+        var maxLevel = GetMaxLevels();
+        progressedIndex = Mathf.Clamp(progressedIndex + 1, 0, maxLevel);
 
         return progressedIndex;
     }

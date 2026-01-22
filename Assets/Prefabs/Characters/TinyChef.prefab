@@ -59,7 +59,7 @@ PrefabInstance:
     - target: {fileID: 8031596155625945328, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 22100000, guid: 6694aebb654d21749894ce64ba4aaa0f, type: 2}
+      objectReference: {fileID: 22100000, guid: eb60544d83068d840b765e27d7e6d002, type: 2}
     - target: {fileID: 8207089339819138115, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
       propertyPath: height
       value: 1
@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: 8207089339819138115, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
       propertyPath: attackBehavior
       value: 
-      objectReference: {fileID: 11400000, guid: f0b54960130ad204bb49069f9d3c04f7, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 8283804360114963105, guid: 5231298b1b5ae414690b10cbbbf3012e, type: 3}
       propertyPath: m_Name
       value: TinyChef

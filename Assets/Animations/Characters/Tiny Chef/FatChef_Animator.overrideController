@@ -6,7 +6,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TinyChef_Animator
+  m_Name: FatChef_Animator
   m_Controller: {fileID: 9100000, guid: ba3e96069e50a734b9e3dcd330ea8460, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 38e9a0b431823bf498aad303db9a1ae7, type: 2}

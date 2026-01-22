@@ -49,9 +49,9 @@ public class OverworldRegion : MonoBehaviour
         var pp = PlayerProgression.Instance;
         int unlockedIndex = pp.ProgressedIndex(region); // Up to but not including this level is unlocked
         // Clamp to 1 to always allow level 1
-        unlockedIndex = Mathf.Clamp(unlockedIndex, 1, unlockedIndex);
+        //unlockedIndex = Mathf.Clamp(unlockedIndex, 1, unlockedIndex);
 
-        // Loop through each pair (
+        // Loop through each pair 
         foreach (var pair in regionNodes)
         {
             LevelNode node = pair.Value;
@@ -66,7 +66,7 @@ public class OverworldRegion : MonoBehaviour
             orderedLevelStone.Add(stone);
 
             // Disable if it is locked
-            stone.gameObject.SetActive(pair.Key < unlockedIndex);
+            stone.gameObject.SetActive(pair.Key <= unlockedIndex);
 
             stone.Init(region, node.levelIndex);
             stone.name = $"LevelStone_{node.levelIndex}";
