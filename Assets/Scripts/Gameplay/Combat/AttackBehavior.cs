@@ -26,4 +26,10 @@ public abstract class AttackBehavior : ScriptableObject
     {
         return true;
     }
+
+    protected BaseEntity FindTarget(CharacterEntity attacker)
+    {
+        if (attacker == null) return null;
+        return attacker.targettingTower ? attacker.targettedTower : attacker.attackTarget;
+    }
 }

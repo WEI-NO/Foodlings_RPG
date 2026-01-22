@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum Team
 {
@@ -212,7 +213,7 @@ public class CharacterEntity : BaseEntity
         // If we're in the attack animation, don't change AI state
         if (IsAttackAnimationPlaying() && state == CharacterState.Attacking)
         {
-            // We let the current attack finish; no retargeting / switching to Advancing/None
+            // Waiting for attack
             return;
         }
 
@@ -322,14 +323,21 @@ public class CharacterEntity : BaseEntity
 
     private void AdvancingStateCheck()
     {
-        if (attackCooldownTimer <= 0)
+        if (characterInstance.baseData.onlyMoveWhenAttackReady)
         {
-            SwitchState(CharacterState.Advancing);
+            if (attackCooldownTimer <= 0)
+            {
+                SwitchState(CharacterState.Advancing);
+                return;
+            }
         }
         else
         {
-            SwitchState(CharacterState.None);
+            SwitchState(CharacterState.Advancing);
+            return;
         }
+
+        SwitchState(CharacterState.None);
     }
 
     private bool IsAttackAnimationPlaying()

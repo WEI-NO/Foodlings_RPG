@@ -21,7 +21,7 @@ public class RangedSingleAttack : AttackBehavior
         BaseProjectile proj = projectile.GetComponent<BaseProjectile>();
         proj.Init(
             attacker,
-            attacker.targettingTower ? attacker.targettedTower : attacker.attackTarget,
+            FindTarget(attacker),
             attacker.characterInstance.GetStat(CharacterStatType.PAtk),
             projectileSpeed,
             attacker.team

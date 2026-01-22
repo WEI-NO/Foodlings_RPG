@@ -120,6 +120,7 @@ public class LevelStone : MonoBehaviour
         // Mouse entered
         // Example: highlight
         print("entered");
+        RefreshInfo();
         SetState(LevelStoneState.Highlight);
     }
 
@@ -188,4 +189,21 @@ public class LevelStone : MonoBehaviour
         SceneTransitor.Instance.TransitionTo("Game Scene");
         return true;
     }
+
+    public void RefreshInfo()
+    {
+        var level = LevelDatabase.GetLevel(region, assignedIndex);
+
+        if (level == null) return;
+
+        enemyLevelText.text = $"{level.GetAverageLevel()}";
+        levelNameText.text = $"{level.LevelName}";
+        chapterText.text = $"{ChapterTitleText(region, assignedIndex)}";
+    }
+
+    private static string ChapterTitleText(RegionName region, int levelIndex)
+    {
+        return $"Chapter {region.ToInt() + 1} - {levelIndex + 1}";
+    }
+
 }

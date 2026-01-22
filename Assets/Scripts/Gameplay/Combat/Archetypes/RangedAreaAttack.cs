@@ -23,7 +23,7 @@ public class RangedAreaAttack : AttackBehavior
         BaseProjectile proj = projectile.GetComponent<BaseProjectile>();
         proj.Init(
             attacker,
-            attacker.attackTarget,
+            FindTarget(attacker),
             attacker.characterInstance.GetStat(CharacterStatType.MAtk),
             projectileSpeed,
             attacker.team

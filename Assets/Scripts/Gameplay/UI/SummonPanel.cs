@@ -18,6 +18,7 @@ public class SummonPanel : MonoBehaviour
     private List<CharacterInstance> temporaryCharacterInstance = new();
 
     public bool overrideCharacters = false;
+    private bool hasPartyMembers = false;
 
     public bool summonPanelReady = false;
 
@@ -43,6 +44,7 @@ public class SummonPanel : MonoBehaviour
             }
             var data = PlayerCollection.Instance.FindData(party.Party[i]);
             summonButtons[i].AssignUnit(data);
+            hasPartyMembers = true;
         }
         summonPanelReady = true;
 
@@ -51,7 +53,7 @@ public class SummonPanel : MonoBehaviour
     private void Update()
     {
         if (!summonPanelReady) return;
-        if (overrideCharacters)
+        if (overrideCharacters && !hasPartyMembers)
         {
             for (int i = summonButtons.Count - 1; i >= 0; i--)
             {
@@ -67,6 +69,7 @@ public class SummonPanel : MonoBehaviour
                 instance.SetLevel(overrideSummonCharacterLevel[i]);
                 temporaryCharacterInstance.Add(instance);
                 summonButtons[i].AssignUnit(instance);
+                hasPartyMembers = true;
             }
 
 

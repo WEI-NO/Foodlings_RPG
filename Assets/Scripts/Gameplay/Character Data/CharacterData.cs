@@ -74,6 +74,9 @@ public class CharacterData : ScriptableObject
     public Role role;
     //public CharacterTrait trait;
 
+    [Header("Behaviors")]
+    public bool onlyMoveWhenAttackReady = false; // Only move when attack is ready
+
     [Header("Economy")]
     public int summonCost;
     public float cooldownSec;

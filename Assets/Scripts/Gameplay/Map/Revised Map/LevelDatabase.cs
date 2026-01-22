@@ -1,6 +1,7 @@
 using CustomLibrary.References;
 using NUnit.Framework;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum RegionName
@@ -24,6 +25,15 @@ public class LevelDatabase : ScriptableObject
 
     public static Level GetLevel(RegionName region, int lvlIndex)
     {
+        var rIndex = region.ToInt();
+        var lvlDatabase = MainDatabase.Instance.levelDatabase;
+
+        if (rIndex >= lvlDatabase.masterlist.Length)
+            return null;
+
+        if (lvlIndex >= lvlDatabase.masterlist[rIndex].Count)
+            return null;
+
         return MainDatabase.Instance.levelDatabase.masterlist[region.ToInt()][lvlIndex];
     }
 }
