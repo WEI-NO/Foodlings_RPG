@@ -14,23 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug_ShowMaxLevelStats: 1
   debug_HP: 1240
-  debug_PAtk: 155
+  debug_PAtk: 387.5
   debug_MAtk: 0
   debug_PDef: 19.375
   debug_MDef: 19.375
   debug_AtkRng: 2.5
   debug_AtkSpe: 0.2
   debug_Spe: 15
-  debug_CD: 10
+  debug_CD: 15
   id: corncob
   displayName: Corn Cob
   baseRank: 0
   role: 0
   onlyMoveWhenAttackReady: 0
   summonCost: 80
-  cooldownSec: 10
+  cooldownSec: 15
   healthPoint: 80
-  physicalDamage: 10
+  physicalDamage: 25
   magicDamage: 0
   attackRate: 0.2
   moveSpeed: 15

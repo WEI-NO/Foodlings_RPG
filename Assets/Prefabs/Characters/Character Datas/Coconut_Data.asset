@@ -14,23 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug_ShowMaxLevelStats: 1
   debug_HP: 3875
-  debug_PAtk: 77.5
+  debug_PAtk: 155
   debug_MAtk: 77.5
   debug_PDef: 77.5
   debug_MDef: 77.5
   debug_AtkRng: 0.4
   debug_AtkSpe: 0.3
   debug_Spe: 20
-  debug_CD: 10
+  debug_CD: 15
   id: coconut
   displayName: Coconut
   baseRank: 0
   role: 1
   onlyMoveWhenAttackReady: 0
   summonCost: 100
-  cooldownSec: 10
+  cooldownSec: 15
   healthPoint: 250
-  physicalDamage: 5
+  physicalDamage: 10
   magicDamage: 5
   attackRate: 0.3
   moveSpeed: 20

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: FatChef_Data
   m_EditorClassIdentifier: 
   debug_ShowMaxLevelStats: 1
-  debug_HP: 3100
-  debug_PAtk: 310
+  debug_HP: 4650
+  debug_PAtk: 465
   debug_MAtk: 155
   debug_PDef: 23.25
   debug_MDef: 23.25
@@ -29,8 +29,8 @@ MonoBehaviour:
   onlyMoveWhenAttackReady: 0
   summonCost: 50
   cooldownSec: 1
-  healthPoint: 200
-  physicalDamage: 20
+  healthPoint: 300
+  physicalDamage: 30
   magicDamage: 10
   attackRate: 0.25
   moveSpeed: 12.5

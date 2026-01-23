@@ -14,25 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug_ShowMaxLevelStats: 1
   debug_HP: 1550
-  debug_PAtk: 124
+  debug_PAtk: 310
   debug_MAtk: 124
   debug_PDef: 23.25
   debug_MDef: 23.25
   debug_AtkRng: 0.8
-  debug_AtkSpe: 0.6
+  debug_AtkSpe: 0.5
   debug_Spe: 20
-  debug_CD: 7.5
+  debug_CD: 10
   id: toast
   displayName: Toast
   baseRank: 0
   role: 0
   onlyMoveWhenAttackReady: 0
   summonCost: 40
-  cooldownSec: 7.5
+  cooldownSec: 10
   healthPoint: 100
-  physicalDamage: 8
+  physicalDamage: 20
   magicDamage: 8
-  attackRate: 0.6
+  attackRate: 0.5
   moveSpeed: 20
   attackRange: 0.8
   physicalDefense: 1.5

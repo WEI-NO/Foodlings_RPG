@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: Garlic_Data
   m_EditorClassIdentifier: 
   debug_ShowMaxLevelStats: 1
-  debug_HP: 930
+  debug_HP: 1162.5
   debug_PAtk: 15.5
-  debug_MAtk: 77.5
+  debug_MAtk: 232.5
   debug_PDef: 19.375
   debug_MDef: 19.375
   debug_AtkRng: 4
   debug_AtkSpe: 0.15
   debug_Spe: 17
-  debug_CD: 10
+  debug_CD: 20
   id: gagrlic
   displayName: Garlic
   baseRank: 1
   role: 2
   onlyMoveWhenAttackReady: 0
   summonCost: 120
-  cooldownSec: 10
-  healthPoint: 60
+  cooldownSec: 20
+  healthPoint: 75
   physicalDamage: 1
-  magicDamage: 5
+  magicDamage: 15
   attackRate: 0.15
   moveSpeed: 17
   attackRange: 4

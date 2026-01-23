@@ -384,6 +384,8 @@ public class CharacterEntity : BaseEntity
         {
             anim.SetTrigger("Attack");
             attackCooldownTimer = 1 / characterInstance.GetStat(CharacterStatType.AtkSpe);
+            // Random Offset
+            attackCooldownTimer += UnityEngine.Random.Range(0f, 0.1f);
         }
     }
 
