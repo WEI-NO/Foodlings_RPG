@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TinyChef_Animator
+  m_Controller: {fileID: 9100000, guid: ba3e96069e50a734b9e3dcd330ea8460, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 38e9a0b431823bf498aad303db9a1ae7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f61c05b8e27f87d4b9d0a3170336d52e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 84c49c5843ed81b4197360cc0b85cbbe, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 98c6492b256d7d64c969dc26845dd993, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 603c9ee6d759df84fb63d2b50aa3f340, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2e8bf04b7fbeaa4409b7f6ee3d4ced84, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e3fa573c4e4a02242afec5b02d1e35eb, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d1929731b6288334ead9ffb34cd1169a, type: 2}

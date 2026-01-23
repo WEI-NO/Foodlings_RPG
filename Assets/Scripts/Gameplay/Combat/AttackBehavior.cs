@@ -1,3 +1,5 @@
+using CustomLibrary.Math.Vector;
+using System.Collections.Specialized;
 using UnityEngine;
 
 public abstract class AttackBehavior : ScriptableObject
@@ -28,5 +30,13 @@ public abstract class AttackBehavior : ScriptableObject
     {
         if (attacker == null) return null;
         return attacker.targettingTower ? attacker.targettedTower : attacker.attackTarget;
+    }
+
+    public static Vector3 ConvertOffset(CharacterEntity owner, Vector3 normalizedOffset)
+    {
+        var team = owner.team;
+        var offset_x = normalizedOffset.x * (team == Team.Friendly ? 1.0f : -1.0f);
+
+        return Vector3Extension.ValueSwap(normalizedOffset, CustomLibrary.Math.iVector3.x, offset_x);
     }
 }

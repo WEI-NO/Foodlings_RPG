@@ -14,26 +14,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactersInLevel:
   - tiny_chef
-  characterLevels: 01000000
+  - fat_chef
+  - tall_chef
+  characterLevels: 020000000200000001000000
   characterInstances: []
   waves:
-  - Notes: Spawn 1 enemy
+  - Notes: Wave 0 Tiny
     startTime: 0
-    duration: 1
+    duration: 5
     spawnOnStart: 1
     characterIndex: 0
-    maxDeployed: 1
-    spawnIntervalRange: {x: 0, y: 0}
-  - Notes: Spawn multiple up to 5
-    startTime: 10
-    duration: 200
+    maxDeployed: 2
+    spawnIntervalRange: {x: 5, y: 5}
+  - Notes: Wave 1 (Tiny)
+    startTime: 20
+    duration: 20
+    spawnOnStart: 1
+    characterIndex: 0
+    maxDeployed: 15
+    spawnIntervalRange: {x: 4, y: 10}
+  - Notes: Wave 2 (Tall)
+    startTime: 60
+    duration: 40
+    spawnOnStart: 1
+    characterIndex: 2
+    maxDeployed: 3
+    spawnIntervalRange: {x: 5, y: 10}
+  - Notes: Wave 2 (Fat)
+    startTime: 60
+    duration: 30
     spawnOnStart: 0
     characterIndex: 0
     maxDeployed: 5
-    spawnIntervalRange: {x: 3, y: 5}
+    spawnIntervalRange: {x: 5, y: 15}
+  - Notes: Wave 2 (Tiny)
+    startTime: 60
+    duration: 70
+    spawnOnStart: 0
+    characterIndex: 0
+    maxDeployed: 8
+    spawnIntervalRange: {x: 8, y: 15}
+  - Notes: Wave Finale (Tiny)
+    startTime: 150
+    duration: 0
+    spawnOnStart: 0
+    characterIndex: 0
+    maxDeployed: 15
+    spawnIntervalRange: {x: 10, y: 20}
+  - Notes: Wave Finale (Fat)
+    startTime: 150
+    duration: 0
+    spawnOnStart: 0
+    characterIndex: 1
+    maxDeployed: 3
+    spawnIntervalRange: {x: 15, y: 25}
+  - Notes: Wave Finale (Tall)
+    startTime: 140
+    duration: 0
+    spawnOnStart: 0
+    characterIndex: 2
+    maxDeployed: 3
+    spawnIntervalRange: {x: 15, y: 25}
   unstartedWaves: []
   inprogressWaves: []
-  mapLength: 2
+  mapLength: 5
   initialDelay: 3
   LevelName: Training Ground III
   ready: 0

@@ -80,6 +80,7 @@ public class Level : ScriptableObject
             if (wave.startTime <= timePassed)
             {
                 inprogressWaves.Add(wave);
+                wave.ResetWave();
                 unstartedWaves.RemoveAt(i);
             }
         }

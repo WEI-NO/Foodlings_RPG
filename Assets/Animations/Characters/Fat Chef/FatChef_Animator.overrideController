@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FatChef_Animator
+  m_Controller: {fileID: 9100000, guid: ba3e96069e50a734b9e3dcd330ea8460, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 38e9a0b431823bf498aad303db9a1ae7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 26bf04af39ad38d4a9fff80ad7fd005d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 84c49c5843ed81b4197360cc0b85cbbe, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d7939ebad8703f24ca1ed097917d3eca, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 603c9ee6d759df84fb63d2b50aa3f340, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3e0a9c490d43b2641b6478ad247b5915, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e3fa573c4e4a02242afec5b02d1e35eb, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 378c912adeb6cc74f9f9a4001e8f298a, type: 2}

@@ -613,7 +613,9 @@ public class CharacterEntity : BaseEntity
         if (attackBehavior is MeleeAreaAttack areaAttack)
         {
             Gizmos.color = new Color(1f, 0f, 0f, 0.35f); // semi-transparent red
-            Gizmos.DrawWireSphere(transform.position + MidBodyOffset(), areaAttack.radius);
+            var offset_team = AttackBehavior.ConvertOffset(this, areaAttack.offset);
+
+            Gizmos.DrawWireSphere(transform.position + MidBodyOffset() + offset_team, areaAttack.radius);
         }
     }
 #endif

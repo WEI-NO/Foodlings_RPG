@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a18723090138840a7bd8758bd9dea5, type: 3}
+  m_Name: TallChef_Data
+  m_EditorClassIdentifier: 
+  debug_ShowMaxLevelStats: 1
+  debug_HP: 2712.5
+  debug_PAtk: 0
+  debug_MAtk: 232.5
+  debug_PDef: 23.25
+  debug_MDef: 23.25
+  debug_AtkRng: 1
+  debug_AtkSpe: 0.2
+  debug_Spe: 25
+  debug_CD: 1
+  id: tall_chef
+  displayName: Tall Chef
+  baseRank: 4
+  role: 2
+  onlyMoveWhenAttackReady: 0
+  summonCost: 50
+  cooldownSec: 1
+  healthPoint: 175
+  physicalDamage: 0
+  magicDamage: 15
+  attackRate: 0.2
+  moveSpeed: 25
+  attackRange: 1
+  physicalDefense: 1.5
+  magicDefense: 1.5
+  growth: 1
+  growthSteepness: 0.5
+  healthThreshold:
+  - 0.2
+  - 0.4
+  - 0.6
+  - 0.8
+  unitPrefab: {fileID: 1315060603585161773, guid: 324df52d05205e442ab36c389d3a7980, type: 3}
+  unitSprite: {fileID: 1003712972359251819, guid: 4abb78ef7cf9b8a488d739d1a06b69c2, type: 3}
+  behavior: {fileID: 11400000, guid: 531909e941f0a0543808982321580ad2, type: 2}
+  maxLevel: 30

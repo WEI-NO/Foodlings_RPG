@@ -25,26 +25,26 @@ MonoBehaviour:
     maxDeployed: 1
     spawnIntervalRange: {x: 0, y: 0}
   - Notes: Spawn multiple up to 5
-    startTime: 15
+    startTime: 20
     duration: 40
     spawnOnStart: 0
     characterIndex: 0
     maxDeployed: 5
-    spawnIntervalRange: {x: 3, y: 5}
+    spawnIntervalRange: {x: 5, y: 10}
   - Notes: Slight delay until more spawns
-    startTime: 65
+    startTime: 70
     duration: 50
     spawnOnStart: 0
     characterIndex: 0
     maxDeployed: 15
-    spawnIntervalRange: {x: 4, y: 8}
+    spawnIntervalRange: {x: 7, y: 15}
   - Notes: Slight delay until more spawns
     startTime: 130
     duration: 0
     spawnOnStart: 0
     characterIndex: 0
     maxDeployed: 25
-    spawnIntervalRange: {x: 4, y: 9}
+    spawnIntervalRange: {x: 2, y: 15}
   unstartedWaves: []
   inprogressWaves: []
   mapLength: 2

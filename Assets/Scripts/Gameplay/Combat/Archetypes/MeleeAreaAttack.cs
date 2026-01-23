@@ -4,12 +4,14 @@ using UnityEngine;
 public class MeleeAreaAttack : AttackBehavior
 {
     public float radius = 1.5f;
+    public Vector3 offset = new();
     public LayerMask targetMask;
 
     public override void Execute(CharacterEntity attacker)
     {
+        var offset_team = ConvertOffset(attacker, offset);
         Collider2D[] hits = Physics2D.OverlapCircleAll(
-            attacker.transform.position + attacker.MidBodyOffset(),
+            attacker.transform.position + attacker.MidBodyOffset() + offset_team,
             radius,
             targetMask
         );

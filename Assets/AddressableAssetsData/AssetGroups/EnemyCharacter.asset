@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: EnemyCharacter
+  m_EditorClassIdentifier: 
+  m_GroupName: EnemyCharacter
+  m_GUID: 22e832e667ff6684a88324e72b00c8f9
+  m_SerializeEntries:
+  - m_GUID: 05235f1595bafc246800fbf28955e528
+    m_Address: Assets/Prefabs/Characters/Character Datas/Enemies/FatChef_Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Characters
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: acb08c137e6a8f94c89d8f2fe7dacf32
+    m_Address: Assets/Prefabs/Characters/Character Datas/Enemies/TallChef_Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Characters
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bafa508b39cee21498148bdc3d040222
+    m_Address: Assets/Prefabs/Character Datas/TinyChef_Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Characters
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 64f796676b94eab4c837885594b4b962, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b6c5f4ee588c64740b945926146bef02, type: 2}
+    - {fileID: 11400000, guid: 0cb955848ecfb1643830326901a64d4b, type: 2}

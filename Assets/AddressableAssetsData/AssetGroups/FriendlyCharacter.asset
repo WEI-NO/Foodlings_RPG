@@ -15,12 +15,6 @@ MonoBehaviour:
   m_GroupName: FriendlyCharacter
   m_GUID: 7aa9b335700ec9e4f8feb297c6a57ff1
   m_SerializeEntries:
-  - m_GUID: 05235f1595bafc246800fbf28955e528
-    m_Address: Assets/Prefabs/Characters/Character Datas/Enemies/FatChef_Data.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Characters
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2eee4f3457cb58242a58f628526c382d
     m_Address: Assets/Prefabs/Character Datas/Coconut_Data.asset
     m_ReadOnly: 0
@@ -29,12 +23,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8721043376b12974e9c63c224a016b34
     m_Address: Assets/Prefabs/Character Datas/CornCob_Data.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Characters
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bafa508b39cee21498148bdc3d040222
-    m_Address: Assets/Prefabs/Character Datas/TinyChef_Data.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Characters
