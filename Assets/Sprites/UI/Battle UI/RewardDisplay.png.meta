@@ -121,6 +121,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: RewardDisplay_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f2a8fbbf366fd9489f1992170ac8d08
+      internalID: 1582290514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -136,6 +158,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       RewardDisplay_0: -6056306013979899317
+      RewardDisplay_1: 1582290514
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

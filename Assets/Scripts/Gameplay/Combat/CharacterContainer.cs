@@ -40,9 +40,16 @@ public class CharacterContainer : MonoBehaviour
     {
         var t = GetTeam(team);
 
-        if (t.Count > 0)
+        int i = 0;
+        while (i < t.Count)
         {
-            return t[0];
+            if (t[i].state == CharacterState.Knocked)
+            {
+                i++;
+                continue;
+            }
+
+            return t[i];
         }
 
         return null;

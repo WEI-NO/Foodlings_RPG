@@ -152,12 +152,12 @@ public class GameMatchManager : MonoBehaviour
 
                 GiveLevelRewards(rewards);
             }
+            PlayerProgression.Instance.OnCompleteLevel(CurrentLevelDef);
         } else
         {
             OnEnemyWin?.Invoke();
         }
 
-        PlayerProgression.Instance.OnCompleteLevel(CurrentLevelDef);
         SetGameState(true);
     }
 

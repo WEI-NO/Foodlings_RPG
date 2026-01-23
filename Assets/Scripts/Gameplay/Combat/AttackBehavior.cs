@@ -19,9 +19,6 @@ public abstract class AttackBehavior : ScriptableObject
         }
     }
 
-    /// <summary>
-    /// Optional hook for validation / debug.
-    /// </summary>
     public virtual bool CanAttack(CharacterEntity attacker)
     {
         return true;

@@ -444,15 +444,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug_InitialCollection:
   - {fileID: 11400000, guid: dd9b47a4daedde6458da5271126838a7, type: 2}
-  - {fileID: 11400000, guid: dd9b47a4daedde6458da5271126838a7, type: 2}
-  - {fileID: 11400000, guid: bafa508b39cee21498148bdc3d040222, type: 2}
-  - {fileID: 11400000, guid: dd9b47a4daedde6458da5271126838a7, type: 2}
   - {fileID: 11400000, guid: 2eee4f3457cb58242a58f628526c382d, type: 2}
-  - {fileID: 11400000, guid: 2eee4f3457cb58242a58f628526c382d, type: 2}
+  - {fileID: 11400000, guid: ddb959909fa56024998e425512266826, type: 2}
+  - {fileID: 11400000, guid: 8721043376b12974e9c63c224a016b34, type: 2}
+  - {fileID: 11400000, guid: dd9b47a4daedde6458da5271126838a7, type: 2}
+  - {fileID: 11400000, guid: dd9b47a4daedde6458da5271126838a7, type: 2}
   - {fileID: 11400000, guid: 2eee4f3457cb58242a58f628526c382d, type: 2}
   - {fileID: 11400000, guid: 8721043376b12974e9c63c224a016b34, type: 2}
-  - {fileID: 11400000, guid: 8721043376b12974e9c63c224a016b34, type: 2}
-  debug_initialLevels: 14000000140000001400000014000000
+  - {fileID: 11400000, guid: 2eee4f3457cb58242a58f628526c382d, type: 2}
+  debug_initialLevels: 
 --- !u!114 &1227699931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,7 +471,7 @@ MonoBehaviour:
   - seared_core
   - crusted_core
   - infused_core
-  defaultAddItemQuantity: a0860100a0860100f4010000f4010000f4010000
+  defaultAddItemQuantity: f4010000f4010000640000006400000064000000
 --- !u!114 &1227699932
 MonoBehaviour:
   m_ObjectHideFlags: 0

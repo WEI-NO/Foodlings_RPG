@@ -25,14 +25,14 @@ MonoBehaviour:
     maxDeployed: 1
     spawnIntervalRange: {x: 0, y: 0}
   - Notes: Spawn multiple up to 5
-    startTime: 10
-    duration: 50
+    startTime: 15
+    duration: 40
     spawnOnStart: 0
     characterIndex: 0
     maxDeployed: 5
     spawnIntervalRange: {x: 3, y: 5}
   - Notes: Slight delay until more spawns
-    startTime: 70
+    startTime: 65
     duration: 50
     spawnOnStart: 0
     characterIndex: 0
@@ -44,12 +44,12 @@ MonoBehaviour:
     spawnOnStart: 0
     characterIndex: 0
     maxDeployed: 25
-    spawnIntervalRange: {x: 5, y: 10}
+    spawnIntervalRange: {x: 4, y: 9}
   unstartedWaves: []
   inprogressWaves: []
   mapLength: 2
   initialDelay: 3
-  LevelName: Training Ground
+  LevelName: Training Ground I
   ready: 0
   firstClearRewards:
   - rewardID: seared_core

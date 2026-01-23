@@ -15,7 +15,7 @@ MonoBehaviour:
   charactersInLevel:
   - tiny_chef
   - fat_chef
-  characterLevels: 0100000001000000
+  characterLevels: 0200000001000000
   characterInstances: []
   waves:
   - Notes: Spawn 1 enemy
@@ -26,61 +26,61 @@ MonoBehaviour:
     maxDeployed: 1
     spawnIntervalRange: {x: 0, y: 0}
   - Notes: Spawn 0 up to 5
-    startTime: 10
+    startTime: 25
     duration: 80
     spawnOnStart: 0
     characterIndex: 0
     maxDeployed: 10
     spawnIntervalRange: {x: 5, y: 10}
   - Notes: Spawn 1 Up to 5
-    startTime: 10
+    startTime: 25
     duration: 80
     spawnOnStart: 0
     characterIndex: 1
     maxDeployed: 3
     spawnIntervalRange: {x: 3, y: 5}
   - Notes: Slight delay until more spawns
-    startTime: 70
-    duration: 50
+    startTime: 105
+    duration: 20
+    spawnOnStart: 0
+    characterIndex: 0
+    maxDeployed: 10
+    spawnIntervalRange: {x: 3, y: 5}
+  - Notes: Slight delay until more spawns
+    startTime: 125
+    duration: 20
     spawnOnStart: 0
     characterIndex: 1
     maxDeployed: 5
-    spawnIntervalRange: {x: 4, y: 8}
+    spawnIntervalRange: {x: 4, y: 6}
   - Notes: Slight delay until more spawns
-    startTime: 130
+    startTime: 145
     duration: 0
     spawnOnStart: 0
     characterIndex: 0
-    maxDeployed: 15
-    spawnIntervalRange: {x: 4, y: 8}
+    maxDeployed: 12
+    spawnIntervalRange: {x: 6, y: 12}
   - Notes: Slight delay until more spawns
-    startTime: 130
-    duration: 0
-    spawnOnStart: 0
-    characterIndex: 0
-    maxDeployed: 25
-    spawnIntervalRange: {x: 5, y: 10}
-  - Notes: Slight delay until more spawns
-    startTime: 130
+    startTime: 145
     duration: 0
     spawnOnStart: 0
     characterIndex: 1
-    maxDeployed: 5
-    spawnIntervalRange: {x: 4, y: 9}
+    maxDeployed: 3
+    spawnIntervalRange: {x: 7, y: 15}
   unstartedWaves: []
   inprogressWaves: []
-  mapLength: 2
+  mapLength: 4
   initialDelay: 3
-  LevelName: Training Ground
+  LevelName: Training Ground II
   ready: 0
   firstClearRewards:
-  - rewardID: seared_core
+  - rewardID: crusted_core
     quantity: 5
     useQuantityRange: 0
     quantityRange: {x: 0, y: 0}
     rolled: 0
   - rewardID: toast_coin
-    quantity: 1000
+    quantity: 1250
     useQuantityRange: 0
     quantityRange: {x: 0, y: 0}
     rolled: 0

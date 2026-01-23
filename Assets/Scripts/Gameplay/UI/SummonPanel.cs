@@ -44,7 +44,8 @@ public class SummonPanel : MonoBehaviour
             }
             var data = PlayerCollection.Instance.FindData(party.Party[i]);
             summonButtons[i].AssignUnit(data);
-            hasPartyMembers = true;
+            if (data != null)
+                hasPartyMembers = true;
         }
         summonPanelReady = true;
 

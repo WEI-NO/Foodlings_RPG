@@ -38,7 +38,7 @@ public class CharacterEntity : BaseEntity
     public Orientation orientation;
 
     [Header("State")]
-    [SerializeField] private CharacterState state;
+    [SerializeField] public CharacterState state;
     public bool debug = false;
 
     // -----------------------
@@ -191,18 +191,18 @@ public class CharacterEntity : BaseEntity
     }
 
     private void AnimationUpdate()
-{
-    bool inAttack = IsAttackAnimationPlaying();
-
-    // If we're attacking, force Running false so it doesn't blend into run/idle
-    if (inAttack)
     {
-        anim.SetBool("Running", false);
-        return;
-    }
+        bool inAttack = IsAttackAnimationPlaying();
 
-    anim.SetBool("Running", state == CharacterState.Advancing);
-}
+        // If we're attacking, force Running false so it doesn't blend into run/idle
+        if (inAttack)
+        {
+            anim.SetBool("Running", false);
+            return;
+        }
+
+        anim.SetBool("Running", state == CharacterState.Advancing);
+    }
 
 
     // =======================
@@ -231,7 +231,7 @@ public class CharacterEntity : BaseEntity
             return;
         }
 
-        var enemy = container.GetFrontMost(team == Team.Friendly ? Team.Hostile : Team.Friendly);
+        var enemy = container.GetFrontMost(OpposingTeam());
 
         if (enemy == null)
         {
@@ -281,7 +281,7 @@ public class CharacterEntity : BaseEntity
             : MapController.Instance.spawnedPlayerBase;
 
         // ============================
-        // NEW: If enemy is behind tower → ignore enemy, target tower instead
+        // NEW: If enemy is behind tower - ignore enemy, target tower instead
         // ============================
         if (IsEnemyBehindTower(enemy, myTower))
         {
@@ -394,6 +394,19 @@ public class CharacterEntity : BaseEntity
     {
         if (attackBehavior == null)
             return;
+
+        // Knocked
+        if (!ValidTarget())
+        {
+            attackTarget = CharacterContainer.Instance.GetFrontMost(OpposingTeam());
+            if (attackTarget == null) return;
+            var enemyDist = Mathf.Abs(transform.position.x - attackTarget.transform.position.x);
+            if (enemyDist > characterInstance.GetStat(CharacterStatType.AtkRng))
+            {
+                attackTarget = null;
+                return;
+            }
+        }
 
         if (!attackBehavior.CanAttack(this))
             return;
@@ -567,6 +580,25 @@ public class CharacterEntity : BaseEntity
             return targettedTower;
         }
         return attackTarget;
+    }
+
+    private bool ValidTarget()
+    {
+        var target = GetAttackTarget();
+        if (target is CharacterEntity)
+        {
+            var ce = target as CharacterEntity;
+            if (ce.state == CharacterState.Knocked)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Team OpposingTeam()
+    {
+        return team == Team.Friendly ? Team.Hostile : Team.Friendly;
     }
 
 #if UNITY_EDITOR

@@ -217,6 +217,9 @@ public abstract class BaseProjectile : MonoBehaviour
         if (entity is CharacterEntity character)
             return character.team != team;
 
+        if (entity is Tower tower)
+            return tower.team != team;
+
         return true;
     }
 

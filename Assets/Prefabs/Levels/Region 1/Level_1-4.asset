@@ -35,7 +35,7 @@ MonoBehaviour:
   inprogressWaves: []
   mapLength: 2
   initialDelay: 3
-  LevelName: Training Ground
+  LevelName: Training Ground IV
   ready: 0
   firstClearRewards:
   - rewardID: seared_core

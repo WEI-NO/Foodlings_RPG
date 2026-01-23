@@ -155,6 +155,10 @@ public class RewardEntry
 
     public int GetQuantity()
     {
+        if (useQuantityRange && !rolled)
+        {
+            Roll();
+        }
         return quantity;
     }
 
