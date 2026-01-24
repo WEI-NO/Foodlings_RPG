@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug_ShowMaxLevelStats: 1
   debug_HP: 1395
-  debug_PAtk: 155
+  debug_PAtk: 232.5
   debug_MAtk: 155
   debug_PDef: 23.25
   debug_MDef: 23.25
@@ -30,7 +30,7 @@ MonoBehaviour:
   summonCost: 50
   cooldownSec: 1
   healthPoint: 90
-  physicalDamage: 10
+  physicalDamage: 15
   magicDamage: 10
   attackRate: 0.7
   moveSpeed: 20

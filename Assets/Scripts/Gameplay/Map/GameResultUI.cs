@@ -26,6 +26,6 @@ public class GameResultUI : MonoBehaviour
 
     public void ReturnToOverworld()
     {
-        SceneTransitor.Instance.TransitionTo("Main Scene");
+        SceneTransitor.Instance.TransitionTo(SceneType.GameScene);
     }
 }

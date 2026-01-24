@@ -9,10 +9,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Persistent Scene.unity
     guid: fd7a30c06a5c80d4e8a7f5d505307162
   - enabled: 1
-    path: Assets/Scenes/Main Scene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/Main Menu.unity
+    guid: cb2a363bcf239d3408d121d795327e91
   - enabled: 1
     path: Assets/Scenes/Game Scene.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Battle Scene.unity
     guid: 1f6808850db69074eb8c0945551b03d7
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 6051a030c2e29214c8f6b733a8ba07a1, type: 2}

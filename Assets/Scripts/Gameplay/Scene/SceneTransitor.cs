@@ -5,8 +5,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+public enum SceneType
+{
+    MainMenu,
+    GameScene,
+    BattleScene,
+    Count
+}
+
 public class SceneTransitor : MonoBehaviour
 {
+    public static string[] SceneNames = new string[] { "Main Menu", "Game Scene", "Battle Scene" };
+
     public static SceneTransitor Instance;
 
     [Header("Settings")]
@@ -28,14 +38,13 @@ public class SceneTransitor : MonoBehaviour
     {
         Initializer.SetInstance(this);
         DontDestroyOnLoad(gameObject);
-
     }
 
     /// <summary>
     /// Call this to transition to another scene.
     /// Example: SceneTransitor.Instance.TransitionTo("Overworld");
     /// </summary>
-    public void TransitionTo(string sceneName)
+    public void TransitionTo(SceneType type)
     {
 
         if (isTransitioning)
@@ -44,12 +53,11 @@ public class SceneTransitor : MonoBehaviour
             return;
         }
 
-        StartCoroutine(PerformTransition(sceneName));
+        StartCoroutine(PerformTransition(SceneNames[type.ToInt()]));
     }
 
     private IEnumerator PerformTransition(string sceneName)
     {
-
         isTransitioning = true;
         OnSceneTransitionStarted?.Invoke(sceneName); // Notify subscribers that transition has begun
 

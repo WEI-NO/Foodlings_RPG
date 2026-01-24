@@ -280,9 +280,7 @@ public class CharacterEntity : BaseEntity
             ? MapController.Instance.spawnedEnemyBase
             : MapController.Instance.spawnedPlayerBase;
 
-        // ============================
-        // NEW: If enemy is behind tower - ignore enemy, target tower instead
-        // ============================
+
         if (IsEnemyBehindTower(enemy, myTower))
         {
             targettedTower = myTower;
@@ -563,7 +561,6 @@ public class CharacterEntity : BaseEntity
     private IEnumerator OnDeathKnock()
     {
         anim.SetBool("Dead", true);
-        anim.SetTrigger("Knock");
         yield return Knockback(knockbackDuration);
 
         if (CharacterContainer.Instance != null && CharacterContainer.Instance.deathObject != null)
@@ -577,7 +574,7 @@ public class CharacterEntity : BaseEntity
 
     public BaseEntity GetAttackTarget()
     {
-        if (targettingTower)
+        if (targettingTower && towerInRange)
         {
             return targettedTower;
         }

@@ -185,7 +185,7 @@ public class LevelStone : MonoBehaviour
         
 
         GameMatchManager.SetLevel(level, levelDef);
-        SceneTransitor.Instance.TransitionTo("Game Scene");
+        SceneTransitor.Instance.TransitionTo(SceneType.BattleScene);
         return true;
     }
 
